@@ -1,0 +1,10 @@
+
+{
+  "name": "dgwltd/dgwltd-blocks",
+  "type": "wordpress-plugin",
+  "description": "Plugin for custom blocks",
+  "license": "MIT", 
+  "require": {
+      "composer/installers": "^1.4",
+  }
+}

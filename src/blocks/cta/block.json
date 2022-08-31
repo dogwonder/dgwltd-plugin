@@ -1,0 +1,23 @@
+{
+    "name": "acf/dgwltd-cta",
+    "title": "DGW.ltd CTA",
+    "description": "Call to action block",
+    "style": "file:./cta.css",
+    "category": "theme",
+    "icon": "schedule",
+    "apiVersion": 2,
+    "supports": {
+        "jsx": true, 
+        "align": false, 
+        "color": {
+            "text": true,
+            "background": true,
+            "link": true
+        }
+    },
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "cta.php"
+    },
+    "align": "full"
+}

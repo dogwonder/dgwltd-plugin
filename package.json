@@ -1,0 +1,36 @@
+{
+  "name": "dgwltd",
+  "version": "0.0.1",
+  "description": "## Requirements",
+  "main": "gulpfile.js",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "clean:theme:css": "trash \"./public/css/**\"",
+    "clean:admin:css": "trash \"./admin/css/**\"",
+    "clean:scripts": "trash \"./public/scripts/**/*\"",
+    "css:theme": "sass ./src/scss/dgwltd-blocks-theme.scss ./public/css/dgwltd-blocks-theme.css",
+    "css:editor": "sass ./src/scss/dgwltd-blocks-editor.scss ./admin/css/dgwltd-blocks-editor.css",
+    "postcss:theme": "postcss ./public/css/dgwltd-blocks-theme.css --use autoprefixer postcss-custom-properties cssnano --map --verbose --dir ./public/css/",
+    "postcss:editor": "postcss ./admin/css/dgwltd-blocks-editor.css --use autoprefixer postcss-custom-properties cssnano --map --verbose --dir ./admin/css/",
+    "scripts:concat": "concat ./src/vendor/lite-vimeo-embed.js ./src/vendor/lite-youtube-embed.js ./src/scripts/dgwltd-blocks.js -o ./public/scripts/dgwltd-blocks.js",
+    "scripts:minify": "uglifyjs ./public/scripts/dgwltd-blocks.js --compress --output ./public/scripts/dgwltd-blocks.min.js",
+    "watch": "onchange \"**/*.scss\" -- npm run css:* --silent",
+    "build": "NODE_ENV=production run-p clean:* && NODE_ENV=production run-s css:* postcss:* && NODE_ENV=production && run-s scripts:*"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.5",
+    "concat": "^1.0.3",
+    "concurrently": "^5.3.0",
+    "cssnano": "^5.0.8",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^7.1.0",
+    "postcss": "^8.3.6",
+    "postcss-cli": "^10.0.0",
+    "postcss-custom-properties": "^11.0.0",
+    "postcss-scss": "^4.0.0",
+    "sass": "^1.49.10",
+    "trash-cli": "^5.0.0",
+    "uglify-js": "^3.14.2"
+  }
+}

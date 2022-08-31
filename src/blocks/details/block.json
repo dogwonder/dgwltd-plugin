@@ -1,0 +1,18 @@
+{
+    "name": "acf/dgwltd-details",
+    "title": "DGW.ltd Details",
+    "description": "Detailed information block",
+    "style": "file:./details.css",
+    "category": "theme",
+    "icon": "arrow-down",
+    "apiVersion": 2,
+    "supports": {
+        "jsx": true, 
+        "align": false
+    },
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "details.php"
+    },
+    "align": "full"
+}
