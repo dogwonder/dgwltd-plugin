@@ -79,6 +79,7 @@ class dgwltd_Blocks {
 		$this->define_public_hooks();
 		$this->define_acf_hooks();
 		$this->define_block_patterns_hooks();
+		// We don't want to set any rules yet
 		// $this->define_block_rules();
 
 	}

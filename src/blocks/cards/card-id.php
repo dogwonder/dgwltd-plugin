@@ -9,8 +9,7 @@
  */
 ?>
 <?php
-$image             = wp_get_attachment_image_url( get_post_thumbnail_id( $card->ID ), 'dgwltd-small' );
-$image_medium      = wp_get_attachment_image_url( get_post_thumbnail_id( $card->ID ), 'dgwltd-medium' );
+$image             = wp_get_attachment_image_url( get_post_thumbnail_id( $card->ID ), 'dgwltd-medium-crop' );
 $image_alt         = get_post_meta( get_post_thumbnail_id( $card->ID ), '_wp_attachment_image_alt', true );
 $image_placeholder = get_template_directory_uri() . '/dist/images/placeholder.png';
 
@@ -33,7 +32,6 @@ if ( ! empty( $dgwltd_tags ) ) {
 		<figure class="dgwltd-card__image">
 		  <picture>
 			<?php if ( has_post_thumbnail( $card->ID ) ) { ?>
-			<source media="(min-width: 769px)" srcset="<?php echo ( $image_medium ? $image_medium : $image ); ?>">
 			<img src="<?php echo $image; ?>" alt="<?php echo ( $image_alt ? $image_alt : '' ); ?>" loading="lazy" />
 			<?php } else { ?>
 			<source media="(min-width: 769px)" srcset="<?php echo $image_placeholder; ?>">

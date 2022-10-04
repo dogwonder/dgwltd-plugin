@@ -22,14 +22,12 @@
 <div class="dgwltd-card__inner">
 	<?php if ( ! empty( $image ) ) : ?>
 		<?php
-		$image_small  = $image['sizes']['dgwltd-small'];
-		$image_medium = $image['sizes']['dgwltd-medium'];
+		$image_medium = $image['sizes']['dgwltd-medium-crop'];
 		$image_alt    = esc_attr( $image['alt'] );
 		?>
 		<figure class="dgwltd-card__image">
 		<picture>
-		<source media="(min-width: 769px)" srcset="<?php echo ( $image_medium ? $image_medium : $image_small ); ?>">
-		<img src="<?php echo $image_small; ?>" alt="<?php echo ( $image_alt ? $image_alt : '' ); ?>" loading="lazy" />
+			<img src="<?php echo $image_medium; ?>" alt="<?php echo ( $image_alt ? $image_alt : '' ); ?>" loading="lazy" />
 		</picture>
 	</figure>
 	<?php else : ?>
@@ -51,4 +49,3 @@
 	</div>
 </div>
 </div>
-

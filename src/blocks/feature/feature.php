@@ -12,7 +12,7 @@ if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
 // Create class attribute allowing for custom "className" and "align" values. and "align" values.
-$class_name = 'dgwltd-block dgwltd-block--feature';
+$class_name = 'dgwltd-block dgwltd-block--feature flush';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
@@ -69,7 +69,6 @@ $block_template = array(
 
 <div id="<?php echo $block_id; ?>" class="<?php echo esc_attr( implode( ' ', $block_classes_arr ) ); ?>"<?php echo ($block_styles ? ' style="' . $block_styles . '"' : ''); ?>>
 			<?php if ( ! empty( $image ) ) : ?>    
-				<?php // print_r($image) ?>
 				<?php
 				$image_tiny        = $image['sizes']['dgwltd-tiny'];
 				if($image_mobile) {
