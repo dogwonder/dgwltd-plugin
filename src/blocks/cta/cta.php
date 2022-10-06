@@ -69,7 +69,7 @@ $block_template = array(
   </style>
 <?php endif; ?>
 <div id="<?php echo $block_id; ?>" class="<?php echo esc_attr( implode( ' ', $block_classes_arr ) ); ?>"<?php echo ( $reversed ? ' data-state="reversed"' : '' ); ?><?php echo ($block_styles ? ' style="' . $block_styles . '"' : ''); ?>>
-	<div class="dgwltd-cta__inner dgwltd-section__inner">
+	<div class="dgwltd-cta__inner">
 
 			<div class="dgwltd-cta__content">
 				<InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" template="<?php echo esc_attr( wp_json_encode( $block_template ) ); ?>" />

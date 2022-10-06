@@ -14,7 +14,7 @@ if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
 // Create class attribute allowing for custom "className" and "align" values. and "align" values.
-$class_name = 'dgwltd-block dgwltd-block--accordion dgwltd-section';
+$class_name = 'dgwltd-block dgwltd-block--accordion';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
@@ -31,7 +31,6 @@ $accordion_sections = get_field( 'accordion_sections' ) ? : '';
 $block_classes_arr = array( $class_name, $block_classes );
 ?>
 <div id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( implode( ' ', $block_classes_arr ) ); ?>"<?php echo ($block_styles ? ' style="' . $block_styles . '"' : ''); ?>>
-	<div class="dgwltd-section__inner">
 		<div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
 		<?php
 		if ( have_rows( 'accordion_sections' ) ) :
@@ -66,6 +65,4 @@ $block_classes_arr = array( $class_name, $block_classes );
 			?>
 
 		</div>
-	   
-	</div>
 </div>

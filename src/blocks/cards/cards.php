@@ -14,7 +14,7 @@ if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
 // Create class attribute allowing for custom "className" and "align" values. and "align" values.
-$class_name = 'dgwltd-block dgwltd-block--cards dgwltd-section';
+$class_name = 'dgwltd-block dgwltd-block--cards';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
@@ -74,8 +74,6 @@ $block_template = array(
 ?>
 <div id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( implode( ' ', $block_classes_arr ) ); ?>"<?php echo ($block_styles ? ' style="' . $block_styles . '"' : ''); ?>>
 
-	<div class="dgwltd-section__inner">
-
 		<InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" template="<?php echo esc_attr( wp_json_encode( $block_template ) ); ?>" />
 
 		<div class="dgwltd-block--cards_inner">
@@ -112,5 +110,4 @@ $block_template = array(
 		<?php endif; // end cards type check ?>
 		</div>
 
-	</div>
 </div>
