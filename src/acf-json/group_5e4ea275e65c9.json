@@ -1,6 +1,6 @@
 {
     "key": "group_5e4ea275e65c9",
-    "title": "Block: Cards",
+    "title": "Block: Featured boxes",
     "fields": [
         {
             "key": "field_5e4eb77043190",
@@ -228,7 +228,8 @@
                     "placeholder": "",
                     "parent_repeater": "field_5e4ea658f1cd8"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         },
         {
             "key": "field_5e553cf3b3282",
@@ -304,7 +305,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/dgwltd-cards"
+                "value": "acf\/dgwltd-featured-boxes"
             }
         ]
     ],
@@ -321,5 +322,5 @@
     "graphql_field_name": "",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1661443460
+    "modified": 1665396145
 }

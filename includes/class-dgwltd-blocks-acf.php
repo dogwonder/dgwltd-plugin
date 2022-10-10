@@ -14,8 +14,8 @@ class dgwltd_Blocks_ACF {
 	public function dgwltd_register_wp_blocks() {
 
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/accordion/block.json' );
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/cards/block.json' );
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/cta/block.json' );
+		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/featured-boxes/block.json' );
+		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/call-to-action/block.json' );
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/details/block.json' );
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/embed/block.json' );
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/feature/block.json' );

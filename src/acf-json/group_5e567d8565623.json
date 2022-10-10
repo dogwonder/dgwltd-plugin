@@ -1,6 +1,6 @@
 {
     "key": "group_5e567d8565623",
-    "title": "Block: CTA",
+    "title": "Block: Call-to-Action",
     "fields": [
         {
             "key": "field_5e568fc616aaf",
@@ -110,7 +110,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/dgwltd-cta"
+                "value": "acf\/dgwltd-call-to-action"
             }
         ]
     ],
@@ -127,5 +127,5 @@
     "graphql_field_name": "block:Cta",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1660835505
+    "modified": 1665396159
 }

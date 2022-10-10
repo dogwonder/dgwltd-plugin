@@ -14,7 +14,7 @@ if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
 // Create class attribute allowing for custom "className" and "align" values. and "align" values.
-$class_name = 'dgwltd-block dgwltd-block--cards';
+$class_name = 'dgwltd-block dgwltd-block--featured-boxes';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
@@ -76,7 +76,7 @@ $block_template = array(
 
 		<InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" template="<?php echo esc_attr( wp_json_encode( $block_template ) ); ?>" />
 
-		<div class="dgwltd-block--cards_inner">
+		<div class="dgwltd-block--featured-boxes_inner dgwltd-cards">
 	
 		<?php if ( $cards_type === 'relationship' ) : ?>
 			<?php
