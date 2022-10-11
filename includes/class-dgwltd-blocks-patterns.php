@@ -35,13 +35,12 @@ class dgwltd_Blocks_Patterns {
 			return;
 		}
 
-		// Supporters block.
 		$patterns['dgwltd-blocks/supporters'] = array(
 			'title'       => __( 'Supporters', 'dgwltd-blocks' ),
 			'description' => __( 'A group of images and links to list supporters.', 'dgwltd-blocks' ),
 			'content'     => '
-					<!-- wp:group {"style":{"color":{"background":"#fafafa"}}} -->
-						<div class="wp-block-group has-background" style="background-color:#fafafa"><div class="wp-block-group__inner-container">
+					<!-- wp:group {"style":{"color":{"background":"var(--wp--preset--color--alt),"text":"var(--wp--preset--color--foreground)""}}} -->
+						<div class="wp-block-group has-background has-alt-background-color dgwltd-block-group"><div class="wp-block-group__inner-container">
 						<!-- wp:heading {"align":"center","level":3} -->
 						<h3 class="has-text-align-center">Thanks to our supporters</h3>
 						<!-- /wp:heading -->
@@ -128,36 +127,12 @@ class dgwltd_Blocks_Patterns {
 			'categories'  => array( 'blocks' ),
 		);
 
-		// FAQ block.
-		$patterns['dgwltd-blocks/faq'] = array(
-			'title'       => __( 'FAQ', 'dgwltd-blocks' ),
-			'description' => __( 'Columns for commonly asked questions.', 'dgwltd-blocks' ),
-			'content'     => '
-					<!-- wp:group -->
-					<div class="wp-block-group"><div class="wp-block-group__inner-container">
-
-					<!-- wp:heading {"level":2} -->
-					<h2>Frequently Asked Questions</h2>
-					<!-- /wp:heading -->
-
-					<!-- wp:paragraph -->
-					<p>A really short blurb. Add and remove columns as needed.</p>
-					<!-- /wp:paragraph -->
-					
-					<!-- wp:acf/dgwltd-accordion --><!-- /wp:acf/dgwltd-accordion  -->
-						
-					</div></div>
-					<!-- /wp:group -->
-				',
-			'categories'  => array( 'blocks' ),
-		);
-
 		$patterns['dgwltd-blocks/columns-dark'] = array(
 			'title'       => __( 'Columns - dark', 'dgwltd-blocks' ),
 			'description' => __( 'Columns for content with a dark background colour', 'dgwltd-blocks' ),
 			'content'     => '
-					<!-- wp:group {"style":{"color":{"background":"#00466e","text":"#000000"}}} -->
-					<div class="wp-block-group has-text-color has-background dgwltd-block-group dgwltd-block-group--dark" style="background-color:#00466e;color:#000000"><div class="wp-block-group__inner-container">
+					<!-- wp:group {"style":{"color":{"background":"var(--wp--preset--color--primary)","text":"var(--wp--preset--color--foreground)"}}} -->
+					<div class="wp-block-group has-text-color has-background has-primary-background-color dgwltd-block-group"><div class="wp-block-group__inner-container">
 
 					<!-- wp:heading {"level":2} -->
 					<h2 class="has-white-color has-text-color">DGW.ltd</h2>
@@ -217,8 +192,8 @@ class dgwltd_Blocks_Patterns {
 			'title'       => __( 'Columns - light', 'dgwltd-blocks' ),
 			'description' => __( 'Columns for content with a light background colour', 'dgwltd-blocks' ),
 			'content'     => '
-					<!-- wp:group {"style":{"color":{"background":"#fafafa","text":"#000000"}}} -->
-					<div class="wp-block-group has-text-color has-background dgwltd-block-group dgwltd-block-group--light" style="background-color:#fafafa;color:#000000"><div class="wp-block-group__inner-container">
+					<!-- wp:group {"style":{"color":{"background":"var(--wp--preset--color--alt)","text":"var(--wp--preset--color--foreground)"}}} -->
+					<div class="wp-block-group has-text-color has-background has-alt-background-color dgwltd-block-group"><div class="wp-block-group__inner-container">
 
 					<!-- wp:heading {"level":2} -->
 					<h2>DGW.ltd</h2>
@@ -272,7 +247,6 @@ class dgwltd_Blocks_Patterns {
 				',
 			'categories'  => array( 'blocks' ),
 		);
-		
 
 		$patterns = apply_filters( 'dgwltd_block_patterns', $patterns );
 
