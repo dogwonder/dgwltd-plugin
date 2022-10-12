@@ -16,6 +16,10 @@
             "link": true
         }
     },
+    "styles": [
+        { "name": "default", "label": "Default", "isDefault": true },
+        { "name": "monochrome", "label": "Monochrome" }
+    ],
     "acf": {
         "mode": "preview",
         "renderTemplate": "call-to-action.php"

@@ -12,7 +12,7 @@ if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
 // Create class attribute allowing for custom "className" and "align" values. and "align" values.
-$class_name = 'dgwltd-block dgwltd-block--feature flush';
+$class_name = 'dgwltd-block dgwltd-feature flush';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
@@ -91,19 +91,19 @@ $block_template = array(
 				?>
 				<?php if ( $block_parallax ) : ?>
 				<style>
-					#<?php echo $block_id; ?>.dgwltd-block--feature {
+					#<?php echo $block_id; ?>.dgwltd-feature {
 						background: url('<?php echo $image_small; ?>') no-repeat fixed;
 						background-size: cover;
 						background-position: center center;
 						width: 100%;
 					}
 					@media only screen and (min-width: 641px) {
-						#<?php echo $block_id; ?>.dgwltd-block--feature {
+						#<?php echo $block_id; ?>.dgwltd-feature {
 							background-image:url('<?php echo $image_large; ?>');
 						}
 					}
 					<?php if ( $overlay ) : ?>
-					#<?php echo $block_id; ?>.dgwltd-block--feature:before {
+					#<?php echo $block_id; ?>.dgwltd-feature:before {
 						display: block;
 						z-index: 2;
 						content: '';
@@ -120,7 +120,7 @@ $block_template = array(
 				<?php else : ?>
 					<?php if ( $overlay ) : ?>
 						<style>
-						#<?php echo $block_id; ?>.dgwltd-block--feature:before {
+						#<?php echo $block_id; ?>.dgwltd-feature:before {
 							display: block;
 							z-index: 2;
 							content: '';

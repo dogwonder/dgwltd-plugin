@@ -15,7 +15,7 @@ if ( ! empty( $block['anchor'] ) ) {
 }
 
 // Create class attribute allowing for custom "className" and "align" values. and "align" values.
-$class_name = 'dgwltd-block dgwltd-block--image flush';
+$class_name = 'dgwltd-block dgwltd-image flush';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }

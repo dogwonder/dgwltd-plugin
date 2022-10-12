@@ -13,7 +13,7 @@ if ( ! empty( $block['anchor'] ) ) {
 }
 
 // Create class attribute allowing for custom "className" and "align" values. and "align" values.
-$class_name = 'dgwltd-block dgwltd-block--hero flush';
+$class_name = 'dgwltd-block dgwltd-hero flush';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
@@ -103,7 +103,7 @@ $block_template = array(
 				<link rel="preload" href="<?php echo $image_large; ?>" as="image" media="(min-width: 40.0625em)">
 				<?php if ( $overlay ) : ?>
 					<style>
-					#<?php echo $block_id; ?>.dgwltd-block--hero:before {
+					#<?php echo $block_id; ?>.dgwltd-hero:before {
 						display: block;
 						z-index: 2;
 						content: '';

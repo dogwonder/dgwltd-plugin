@@ -13,7 +13,7 @@ if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
 // Create class attribute allowing for custom "className" and "align" values. and "align" values.
-$class_name = 'dgwltd-block dgwltd-block--embed';
+$class_name = 'dgwltd-block dgwltd-embed';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
