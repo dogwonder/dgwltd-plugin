@@ -39,7 +39,7 @@ class dgwltd_Blocks_Patterns {
 			'title'       => __( 'Supporters', 'dgwltd-blocks' ),
 			'description' => __( 'A group of images and links to list supporters.', 'dgwltd-blocks' ),
 			'content'     => '
-					<!-- wp:group {"style":{"color":{"background":"var(--wp--preset--color--alt),"text":"var(--wp--preset--color--foreground)""}}} -->
+					<!-- wp:group {"style":{"color":{"background":"var(--wp--preset--color--alt),"text":"var(--wp--preset--color--dark)""}}} -->
 						<div class="wp-block-group has-background has-alt-background-color dgwltd-block-group"><div class="wp-block-group__inner-container">
 						<!-- wp:heading {"align":"center","level":3} -->
 						<h3 class="has-text-align-center">Thanks to our supporters</h3>
@@ -131,7 +131,7 @@ class dgwltd_Blocks_Patterns {
 			'title'       => __( 'Columns - dark', 'dgwltd-blocks' ),
 			'description' => __( 'Columns for content with a dark background colour', 'dgwltd-blocks' ),
 			'content'     => '
-					<!-- wp:group {"style":{"color":{"background":"var(--wp--preset--color--primary)","text":"var(--wp--preset--color--foreground)"}}} -->
+					<!-- wp:group {"style":{"color":{"background":"var(--wp--preset--color--primary)","text":"var(--wp--preset--color--dark)"}}} -->
 					<div class="wp-block-group has-text-color has-background has-primary-background-color dgwltd-block-group"><div class="wp-block-group__inner-container">
 
 					<!-- wp:heading {"level":2} -->
@@ -192,7 +192,7 @@ class dgwltd_Blocks_Patterns {
 			'title'       => __( 'Columns - light', 'dgwltd-blocks' ),
 			'description' => __( 'Columns for content with a light background colour', 'dgwltd-blocks' ),
 			'content'     => '
-					<!-- wp:group {"style":{"color":{"background":"var(--wp--preset--color--alt)","text":"var(--wp--preset--color--foreground)"}}} -->
+					<!-- wp:group {"style":{"color":{"background":"var(--wp--preset--color--alt)","text":"var(--wp--preset--color--dark)"}}} -->
 					<div class="wp-block-group has-text-color has-background has-alt-background-color dgwltd-block-group"><div class="wp-block-group__inner-container">
 
 					<!-- wp:heading {"level":2} -->
