@@ -91,7 +91,7 @@ class dgwltd_Blocks_Public {
 
 
 	/**
-	 * Get the embeded video host, YouTube or Vimeo
+	 * Get the embedded video host, YouTube or Vimeo
 	 *
 	 */
 	public static function dgwltd_parse_video_uri( $url ) {
