@@ -35,6 +35,83 @@ class dgwltd_Blocks_Patterns {
 			return;
 		}
 
+		$patterns['dgwltd-blocks/layout-page'] = array(
+			'title'       => __( 'Layout page', 'dgwltd-blocks' ),
+			'description' => __( 'A generic page layout', 'dgwltd-blocks' ),
+			'content'     => '
+				<!-- wp:group {"align":"wide","layout":{"type":"constrained"}} -->
+				<div class="wp-block-group alignwide">
+				<!-- wp:acf/dgwltd-hero {"name":"acf/dgwltd-hero","align":"full","mode":"preview","alignText":"left","backgroundColor":"primary","textColor":"foreground","style":{"elements":{"link":{"color":{"text":"var:preset|color|foreground"}}}}} -->
+				<!-- wp:heading {"level":1} -->
+				<h1>Add Hero title...</h1>
+				<!-- /wp:heading -->
+				<!-- wp:paragraph -->
+				<p>Add Hero content...</p>
+				<!-- /wp:paragraph -->
+				<!-- /wp:acf/dgwltd-hero -->
+
+				<!-- wp:acf/dgwltd-call-to-action {"name":"acf/dgwltd-call-to-action","mode":"preview"} -->
+				<!-- wp:heading {"placeholder":""} -->
+				<h2>Add Call-to-Action title...</h2>
+				<!-- /wp:heading -->
+				<!-- wp:paragraph {"placeholder":""} -->
+				<p>Add Call-to-Action content...</p>
+				<!-- /wp:paragraph -->
+				<!-- /wp:acf/dgwltd-call-to-action -->
+
+				</div>
+				<!-- /wp:group -->
+			',
+			'categories'  => array( 'blocks' ),
+		);
+
+		$patterns['dgwltd-blocks/lockable-content'] = array(
+			'title'       => __( 'Lockable content', 'dgwltd-blocks' ),
+			'description' => __( 'Content-only block editing', 'dgwltd-blocks' ),
+			'content'     => '
+				<!-- wp:group {"templateLock": "contentOnly", "align":"wide","layout":{"type":"constrained","wideSize":"2000px"}} -->
+				<div class="wp-block-group alignwide"><!-- wp:columns -->
+				<div class="wp-block-columns"><!-- wp:column -->
+				<div class="wp-block-column"><!-- wp:image {"id":231,"sizeSlug":"large","linkDestination":"none"} -->
+				<figure class="wp-block-image size-large"><img src="https://s.w.org/images/core/5.8/outside-02.jpg" alt="" class="wp-image-231"/></figure>
+				<!-- /wp:image -->
+				
+				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+				<div class="wp-block-group"><!-- wp:heading {"fontSize":"large"} -->
+				<h2 class="has-large-font-size"><strong>Project 2</strong></h2>
+				<!-- /wp:heading -->
+				
+				<!-- wp:paragraph {"fontSize":"small"} -->
+				<p class="has-small-font-size">A tiny description of this project.</p>
+				<!-- /wp:paragraph --></div>
+				<!-- /wp:group --></div>
+				<!-- /wp:column -->
+				
+				<!-- wp:column -->
+				<div class="wp-block-column"><!-- wp:spacer -->
+				<div style="height:100px" aria-hidden="true" class="wp-block-spacer"></div>
+				<!-- /wp:spacer -->
+				
+				<!-- wp:group {"style":{"spacing":{"blockGap":"var:preset|spacing|20"}},"layout":{"type":"flex","orientation":"vertical"}} -->
+				<div class="wp-block-group"><!-- wp:heading {"fontSize":"large"} -->
+				<h2 class="has-large-font-size"><strong>Project 1</strong></h2>
+				<!-- /wp:heading -->
+				
+				<!-- wp:paragraph {"fontSize":"small"} -->
+				<p class="has-small-font-size">A tiny description of this project.</p>
+				<!-- /wp:paragraph --></div>
+				<!-- /wp:group -->
+				
+				<!-- wp:image {"id":232,"sizeSlug":"large","linkDestination":"none"} -->
+				<figure class="wp-block-image size-large"><img src="https://s.w.org/images/core/5.8/outside-02.jpg" alt="" class="wp-image-232"/></figure>
+				<!-- /wp:image --></div>
+				<!-- /wp:column --></div>
+				<!-- /wp:columns --></div>
+				<!-- /wp:group -->
+			',
+			'categories'  => array( 'blocks' ),
+		);
+
 		$patterns['dgwltd-blocks/supporters'] = array(
 			'title'       => __( 'Supporters', 'dgwltd-blocks' ),
 			'description' => __( 'A group of images and links to list supporters.', 'dgwltd-blocks' ),
