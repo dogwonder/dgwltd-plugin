@@ -44,7 +44,7 @@ $block_image   = $image ? 'has-image ' : '';
 $block_classes_arr = array( $class_name, $block_classes, $block_image, $block_aspect_ratio );
 
 // JSX Innerblocks - https://www.billerickson.net/innerblocks-with-acf-blocks/
-$allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/button' );
+$allowed_blocks = array( 'core/columns', 'core/heading', 'core/paragraph', 'core/button' );
 $block_template = array(
 	array(
 		'core/heading',

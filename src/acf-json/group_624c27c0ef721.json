@@ -21,6 +21,32 @@
             "ui_on_text": "",
             "ui_off_text": "",
             "translations": "copy_once"
+        },
+        {
+            "key": "field_634fe158af810",
+            "label": "Block spacing",
+            "name": "block_spacing",
+            "type": "button_group",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "show_in_graphql": 1,
+            "choices": {
+                "extra-small": "Extra Small",
+                "small": "Small",
+                "medium": "Medium",
+                "large": "Large",
+                "extra-large": "Extra Large"
+            },
+            "default_value": "medium",
+            "return_format": "value",
+            "allow_null": 0,
+            "layout": "horizontal"
         }
     ],
     "location": [
@@ -45,5 +71,5 @@
     "graphql_field_name": "pageSettings",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1660137049
+    "modified": 1666179515
 }
