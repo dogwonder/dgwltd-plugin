@@ -175,28 +175,36 @@ class dgwltd_Blocks_Public {
 		$block_align = null;
 		$block_align_text = null;
 
-		if ( $block['backgroundColor'] ) {
+		$blockOptStyle = $block['style'] ?? null;
+		$blockOptBackgroundColor = $block['backgroundColor'] ?? null;
+		$blockOptTextColor = $block['textColor'] ?? null;
+		$blockOptAlign = $block['align'] ?? null;
+		$blockOptAlignText = $block['alignText'] ?? null;
+		$blockOptStyleColorBackground = $block['style']['color']['background'] ?? null;
+		$blockOptStyleColorText = $block['style']['color']['text'] ?? null;
+
+		if ( $blockOptBackgroundColor ) {
 			$block_class .= ' has-background has-' . $block['backgroundColor'] . '-background-color ';
 		}
 
-		if ( $block['textColor'] ) {
+		if ( $blockOptTextColor ) {
 			$block_class .= ' has-text-color has-' . $block['textColor'] . '-color ';
 		}
 
-		if ( $block['align'] ) {
+		if ( $blockOptAlign ) {
 			$block_class .= ' align' . $block['align'];
 		}
 
-		if ( $block['alignText'] ) {
+		if ( $blockOptAlignText ) {
 			$block_class .= ' has-text-align-' . $block['alignText'];
 		}
 
-		if ( is_array($block['style']) && $block['style']['color']['background'] ) {
+		if ( is_array($blockOptStyle) && $blockOptStyleColorBackground ) {
 			$block_class .= ' has-background ';
 			$block_style .= 'background-color: ' . $block['style']['color']['background'] . ';';
 		}
 
-		if ( is_array($block['style']) && $block['style']['color']['text'] ) {
+		if ( is_array($blockOptStyle) && $blockOptStyleColorText ) {
 			$block_class .= ' has-text-color ';
 			$block_style .= 'color: ' . $block['style']['color']['text'] . ';';
 		}

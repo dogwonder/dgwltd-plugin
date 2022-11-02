@@ -45,8 +45,8 @@ else :
 endif;
 
 // Classes
-$block_image   = $show_image ? 'hide-image ' : '';
-$block_description   = $show_description ? 'hide-description ' : '';
+$block_image   = $hide_image ? 'hide-image ' : '';
+$block_description   = $hide_description ? 'hide-description ' : '';
 
 // Card index
 $card_index = 0;
