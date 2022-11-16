@@ -61,6 +61,12 @@ Blocks
       padding-bottom: 5rem;
     }
   }
+  .has-video {
+    text-align: center;
+    .popup-modal__close {
+      display: none;
+    }
+  }
 }
 
 //Full width
