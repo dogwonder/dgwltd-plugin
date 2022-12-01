@@ -6,6 +6,7 @@
             "key": "field_622f8fafe240b",
             "label": "Background image",
             "name": "background_image",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -30,6 +31,7 @@
             "key": "field_624af210bac57",
             "label": "Background image (mobile)",
             "name": "background_image_mobile",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -55,31 +57,33 @@
             "key": "field_5fbf7564fb688",
             "label": "Overlay",
             "name": "overlay",
+            "aria-label": "",
             "type": "color_picker",
             "instructions": "Adds a colour overlay to the image",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_622f8fafe240b",
+                        "operator": "!=empty"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
+            "show_in_graphql": 1,
             "default_value": "",
             "enable_opacity": 0,
-            "return_format": "string",
-            "display": "default",
-            "button_label": "Select Color",
-            "color_picker": true,
-            "absolute": false,
-            "input": true,
-            "allow_null": true,
-            "theme_colors": false,
-            "colors": []
+            "return_format": "string"
         },
         {
             "key": "field_622f90e7a1de2",
             "label": "Overlay opacity",
             "name": "overlay_opacity",
+            "aria-label": "",
             "type": "range",
             "instructions": "",
             "required": 0,
@@ -107,20 +111,29 @@
             "key": "field_5fbf754ffb687",
             "label": "Parallax",
             "name": "parallax",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_622f8fafe240b",
+                        "operator": "!=empty"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
+            "show_in_graphql": 1,
             "message": "",
             "default_value": 0,
-            "ui": 1,
             "ui_on_text": "",
-            "ui_off_text": ""
+            "ui_off_text": "",
+            "ui": 1
         }
     ],
     "location": [
@@ -145,5 +158,5 @@
     "graphql_field_name": "block:Feature",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1660835511
+    "modified": 1669895318
 }

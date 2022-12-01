@@ -68,7 +68,8 @@ $block_template = array(
 ?>
 
 <div id="<?php echo $block_id; ?>" class="<?php echo esc_attr( implode( ' ', $block_classes_arr ) ); ?>"<?php echo ($block_styles ? ' style="' . $block_styles . '"' : ''); ?>>
-			<?php if ( ! empty( $image ) ) : ?>    
+
+			<?php if ( ! empty( $image ) ) : ?>  
 				<?php
 				$image_tiny        = $image['sizes']['dgwltd-tiny'];
 				if($image_mobile) {
@@ -89,20 +90,23 @@ $block_template = array(
 				$data   = file_get_contents( $image_tiny );
 				$base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
 				?>
-				<?php if ( $block_parallax ) : ?>
-				<style>
-					#<?php echo $block_id; ?>.dgwltd-feature {
-						background: url('<?php echo $image_small; ?>') no-repeat fixed;
-						background-size: cover;
-						background-position: center center;
-						width: 100%;
-					}
-					@media only screen and (min-width: 641px) {
+				<?php if ( $parallax ) : ?>
+					<style>
 						#<?php echo $block_id; ?>.dgwltd-feature {
-							background-image:url('<?php echo $image_large; ?>');
+							background: url('<?php echo $image_small; ?>') no-repeat fixed;
+							background-size: cover;
+							background-position: center center;
+							width: 100%;
 						}
-					}
-					<?php if ( $overlay ) : ?>
+						@media only screen and (min-width: 641px) {
+							#<?php echo $block_id; ?>.dgwltd-feature {
+								background-image:url('<?php echo $image_large; ?>');
+							}
+						}
+					</style>
+				<?php endif; ?>
+				<?php if ( $overlay ) : ?>
+				<style>
 					#<?php echo $block_id; ?>.dgwltd-feature:before {
 						display: block;
 						z-index: 2;
@@ -115,25 +119,8 @@ $block_template = array(
 						background-color: <?php echo $overlay; ?>;
 						opacity:<?php echo ($overlay_opacity ? $overlay_opacity : '0.7'); ?>;
 					}
-					<?php endif; ?>
 				</style>
-				<?php else : ?>
-					<?php if ( $overlay ) : ?>
-						<style>
-						#<?php echo $block_id; ?>.dgwltd-feature:before {
-							display: block;
-							z-index: 2;
-							content: '';
-							position: absolute;
-							top: 0;
-							right: 0;
-							bottom: 0;
-							left: 0;
-							background-color: <?php echo $overlay; ?>;
-							opacity:<?php echo ($overlay_opacity ? $overlay_opacity : '0.7'); ?>;
-						}
-						</style>
-					<?php endif; ?>
+				<?php endif; ?>  
 					<div class="block__background">
 						<figure>
 						<picture>
@@ -142,8 +129,6 @@ $block_template = array(
 						</picture>
 						</figure>
 					</div>
-				<?php endif; ?>
-				
 			<?php endif; ?>    
 
 			<div class="dgwltd-feature__wrapper">

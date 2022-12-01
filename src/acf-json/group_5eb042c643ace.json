@@ -3,31 +3,10 @@
     "title": "Block: Hero",
     "fields": [
         {
-            "key": "field_5f8daff1da4cf",
-            "label": "Block type",
-            "name": "block_type",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "image": "Image",
-                "solid": "Solid"
-            },
-            "default_value": "image",
-            "return_format": "value",
-            "allow_null": 0,
-            "layout": "horizontal"
-        },
-        {
             "key": "field_5eb0434782e52",
             "label": "Background image",
             "name": "background_image",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -60,6 +39,7 @@
             "key": "field_624af22ca19c1",
             "label": "Background image (mobile)",
             "name": "background_image_mobile",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -93,6 +73,7 @@
             "key": "field_623d968845b39",
             "label": "Has height",
             "name": "has_height",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -113,6 +94,7 @@
             "key": "field_6356af5748837",
             "label": "Has video",
             "name": "has_video",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -132,6 +114,7 @@
             "key": "field_5f71d14d59e08",
             "label": "Video",
             "name": "video",
+            "aria-label": "",
             "type": "oembed",
             "instructions": "",
             "required": 0,
@@ -156,6 +139,7 @@
             "key": "field_5f0587bee98dc",
             "label": "Vertical height",
             "name": "vertical_height",
+            "aria-label": "",
             "type": "range",
             "instructions": "",
             "required": 0,
@@ -185,6 +169,7 @@
             "key": "field_622f910f92ad7",
             "label": "Overlay",
             "name": "overlay",
+            "aria-label": "",
             "type": "color_picker",
             "instructions": "",
             "required": 0,
@@ -203,6 +188,7 @@
             "key": "field_622f912492ad8",
             "label": "Overlay opacity",
             "name": "overlay_opacity",
+            "aria-label": "",
             "type": "range",
             "instructions": "",
             "required": 0,
@@ -239,5 +225,9 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1666625392
+    "show_in_graphql": 0,
+    "graphql_field_name": "",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": "",
+    "modified": 1669895648
 }

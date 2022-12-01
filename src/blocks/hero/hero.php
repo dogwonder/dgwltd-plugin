@@ -22,7 +22,6 @@ if ( ! empty( $block['className'] ) ) {
 $rand = substr( md5( microtime() ), wp_rand( 0, 26 ), 5 );
 
 // Block Fields
-$type      		 = get_field( 'block_type' ) ? : '';
 $image           = get_field( 'background_image' ) ? : '';
 $image_mobile    = get_field( 'background_image_mobile' ) ? : '';
 $has_video        = get_field( 'has_video' ) ? : '';
@@ -44,7 +43,6 @@ $has_height = get_field( 'has_height' ) ? : '';
 $vertical_height = get_field( 'vertical_height' ) ? : '';
 
 // Classes
-$block_type	= $type ? 'block-type--' . $type : '';
 $block_image   = $image ? 'has-image ' : '';
 $block_video   = $video ? 'has-video ' : '';
 $block_height = $has_height ? 'has-height ' : '';
@@ -55,7 +53,7 @@ if($block_height) {
 $block_overlay  = $overlay ? 'has-overlay ' : '';
 
 // Class list
-$block_classes_arr = array( $class_name, $block_classes, $block_type, $block_image, $block_video, $block_height, $block_overlay);
+$block_classes_arr = array( $class_name, $block_classes, $block_image, $block_video, $block_height, $block_overlay);
 
 // JSX Innerblocks - https://www.billerickson.net/innerblocks-with-acf-blocks/
 $allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/list', 'core/button' );
@@ -78,7 +76,7 @@ $block_template = array(
 
 <div id="<?php echo $block_id; ?>" class="<?php echo esc_attr( implode( ' ', $block_classes_arr ) ); ?>"<?php echo ($block_styles ? ' style="' . $block_styles . '"' : ''); ?>>
 
-			<?php if ( ! empty( $image ) && $type == 'image' ) : ?>
+			<?php if ( ! empty( $image ) ) : ?>
 				<?php
 				$image_tiny        = $image['sizes']['dgwltd-tiny'];
 				if($image_mobile) {
