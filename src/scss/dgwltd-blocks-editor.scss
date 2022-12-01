@@ -3,9 +3,9 @@ Generic styles
 ***********************/
 .dgwltd-button {
     display: inline-block;
-    color: #ffffff;
+    color: var(--wp--preset--color--light);
     background-color: black;
-    box-shadow: 0 2px 0 #111;
+    box-shadow: 0 2px 0 var(--wp--preset--color--dark);
     border: 0;
     font-weight: bold;
     font-size: 1rem;
@@ -15,9 +15,15 @@ Generic styles
     &:link,
     &:visited,
     &:active {
-      color: #ffffff;
+      color: var(--wp--preset--color--light);
     }
 }
+
+//Remove border so it doesn't look weird when a different colour is used
+.wp-block-button__link {
+  border: 0 !important;
+}
+
 
 /***********************
 Blocks
@@ -26,12 +32,13 @@ Blocks
 [data-type='acf/dgwltd-feature'], 
 [data-type='acf/dgwltd-call-to-action'], 
 [data-type='acf/dgwltd-featured-boxes'] {
+
   box-sizing: border-box;
   max-width: 100%;
-  width: clamp(16rem, 90vw, 70rem);
-  border: 1px solid #000;
-  border-radius: 2px;
-  background-color: #fff;
+  width: clamp(16rem, 95vw, 70rem);
+  border: 1px solid var(--wp--preset--color--dark);
+  border-radius: 0;
+  background-color:white;
   
   .wp-block {
     max-width: 100%;
@@ -74,7 +81,7 @@ Blocks
 [data-type='acf/dgwltd-feature'], 
 [data-type='acf/dgwltd-call-to-action'] {
   &.alignfull {
-    width: clamp(16rem, 90vw, 100%);
+    width: clamp(16rem, 95vw, 100%);
     .acf-innerblocks-container {
       max-width: 70rem;
       margin: 0 auto;
@@ -85,8 +92,8 @@ Blocks
 //Hero & Feature
 [data-type='acf/dgwltd-hero'], 
 [data-type='acf/dgwltd-feature'] {
-  .has-background, 
-  .has-image {
+  > .has-background, 
+  > .has-image {
     position: relative;
     padding: 1.25rem;
     background-size: cover;
@@ -107,7 +114,7 @@ Blocks
       position: relative;
     }
   }
-  .has-image {
+  > .has-image {
     &:before {
       background-color: white;
       opacity: 0.5;
@@ -195,7 +202,6 @@ Blocks
   }
 
 }
-
 
 //Background image
 .block__background {
