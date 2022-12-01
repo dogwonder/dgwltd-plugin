@@ -33,7 +33,6 @@ $cards_type   = get_field( 'cards_type' ) ? : '';
 $hide_image     = get_field( 'hide_image' ) ? : '';
 $hide_description	= get_field( 'hide_description' ) ? : '';
 $heading_type = get_field( 'heading_type' ) ? : '';
-$reversed     = get_field( 'reversed' ) ? : '';
 
 // Count the cards
 if ( $cards_type === 'relationship' && ! empty( $cards ) ) :

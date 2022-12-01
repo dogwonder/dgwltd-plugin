@@ -25,7 +25,7 @@ if ( ! empty( $dgwltd_tags ) ) {
 	$term_display     = '';
 }
 ?>
-<div class="dgwltd-card<?php echo ( has_post_thumbnail( $card->ID ) ? ' has-image' : '' ); ?> card-<?php echo $card_index; ?>" data-url="<?php echo esc_url( get_permalink( $card->ID ) ); ?>" <?php echo ( $reversed ? ' data-state="reversed"' : '' ); ?>> 
+<div class="dgwltd-card<?php echo ( has_post_thumbnail( $card->ID ) ? ' has-image' : '' ); ?> card-<?php echo $card_index; ?>" data-url="<?php echo esc_url( get_permalink( $card->ID ) ); ?>"> 
 	<div class="dgwltd-card__inner">
 	
 		<?php if ( ! empty( $image ) && !$hide_image ) : ?>

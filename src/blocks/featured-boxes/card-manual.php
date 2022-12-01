@@ -16,9 +16,8 @@
 	$link_url          = get_sub_field( 'link' );
 	$link_url_external = get_sub_field( 'link_external' );
 	$url               = ( $link_type === 'internal' ) ? $link_url : $link_url_external;
-	$reversed 		   = get_sub_field( 'reversed' ) ? : '';
 ?>
-<div class="dgwltd-card card-<?php echo $card_index; ?>" <?php echo ( $reversed ? ' data-state="reversed"' : '' ); ?> <?php echo ( $url ? ' data-url="' . $url . '"' : '' ); ?>>
+<div class="dgwltd-card card-<?php echo $card_index; ?>" <?php echo ( $url ? ' data-url="' . $url . '"' : '' ); ?>>
 <div class="dgwltd-card__inner">
 	<?php if ( ! empty( $image ) ) : ?>
 		<?php
