@@ -26,6 +26,7 @@ $block_classes = $block_attrs['class'] ? $block_attrs['class'] : '';
 $block_styles = $block_attrs['style'] ? $block_attrs['style'] : '';
 
 // Block fields
+$block_title = esc_html( get_field( 'block_title' ) ) ? : __('Related', 'dgwltd');
 $related_pages = get_field( 'related' ) ? : '';
 
 // Class list
@@ -34,7 +35,7 @@ $block_classes_arr = array( $class_name, $block_classes );
 <div id="<?php echo esc_attr( $block_id ); ?>" class="<?php echo esc_attr( implode( ' ', $block_classes_arr ) ); ?>"<?php echo ($block_styles ? ' style="' . $block_styles . '"' : ''); ?>>
 	<?php if ( $related_pages ) : ?>
 	<div class="contextual-footer">
-		<h2 class="govuk-heading-m"><?php esc_html_e( 'Related', 'dgwltd' ); ?></h2>
+		<h2 class="govuk-heading-m"><?php echo $block_title ?></h2>
 		<ul class="dgwltd-list">
 			<?php foreach ( $related_pages as $related ) : ?>
 			<li><a class="govuk-link" href="<?php echo esc_url( get_permalink( $related->ID ) ); ?>"><?php echo esc_html( get_the_title( $related->ID ) ); ?></a></li>
