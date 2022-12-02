@@ -31,15 +31,13 @@ if($overlay) {
 	//Divide overlay_opacity by 100 to get decimal
 	$overlay_opacity = $overlay_opacity / 100;
 }
-$parallax = get_field( 'parallax' ) ? : '';
 
 // Classes
 $block_image    = $image ? 'has-image ' : '';
 $block_overlay  = $overlay ? 'has-overlay ' : '';
-$block_parallax = $parallax ? 'is-parallax ' : '';
 
 // Class list
-$block_classes_arr  = array( $class_name, $block_classes, $block_image, $block_overlay, $block_parallax);
+$block_classes_arr  = array( $class_name, $block_classes, $block_image, $block_overlay);
 
 // JSX Innerblocks - https://www.billerickson.net/innerblocks-with-acf-blocks/
 $allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/button' );
@@ -90,21 +88,6 @@ $block_template = array(
 				$data   = file_get_contents( $image_tiny );
 				$base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
 				?>
-				<?php if ( $parallax ) : ?>
-					<style>
-						#<?php echo $block_id; ?>.dgwltd-feature {
-							background: url('<?php echo $image_small; ?>') no-repeat fixed;
-							background-size: cover;
-							background-position: center center;
-							width: 100%;
-						}
-						@media only screen and (min-width: 641px) {
-							#<?php echo $block_id; ?>.dgwltd-feature {
-								background-image:url('<?php echo $image_large; ?>');
-							}
-						}
-					</style>
-				<?php endif; ?>
 				<?php if ( $overlay ) : ?>
 				<style>
 					#<?php echo $block_id; ?>.dgwltd-feature:before {

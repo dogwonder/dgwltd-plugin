@@ -106,34 +106,6 @@
             "step": 10,
             "prepend": "",
             "append": ""
-        },
-        {
-            "key": "field_5fbf754ffb687",
-            "label": "Parallax",
-            "name": "parallax",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_622f8fafe240b",
-                        "operator": "!=empty"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "",
-            "ui_off_text": "",
-            "ui": 1
         }
     ],
     "location": [
@@ -158,5 +130,5 @@
     "graphql_field_name": "block:Feature",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1669895318
+    "modified": 1669974530
 }
