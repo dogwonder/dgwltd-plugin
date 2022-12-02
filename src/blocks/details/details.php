@@ -27,7 +27,7 @@ $block_styles = $block_attrs['style'] ? $block_attrs['style'] : '';
 
 // Block fields
 $summary = esc_html( get_field( 'summary' ) ) ? : '';
-$details = esc_html( get_field( 'details' ) ) ? : '';
+$details = get_field( 'details' ) ? : '';
 
 // Class list
 $block_classes_arr = array( $class_name, $block_classes );
