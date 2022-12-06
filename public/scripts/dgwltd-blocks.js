@@ -370,7 +370,7 @@ class LiteYTEmbed extends HTMLElement {
          * See https://github.com/paulirish/lite-youtube-embed/blob/master/youtube-thumbnail-urls.md
          *
          */
-        this.posterUrl = `https://i.ytimg.com/vi/${this.videoId}/hqdefault.jpg`;
+        this.posterUrl = `https://i.ytimg.com/vi/${this.videoId}/maxresdefault.jpg`;
         // Warm the connection for the poster image
         LiteYTEmbed.addPrefetch('preload', this.posterUrl, 'image');
 
