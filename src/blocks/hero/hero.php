@@ -141,6 +141,7 @@ $block_template = array(
 								</a>
 							</div>
 						<?php endif; ?>
+
 						
 
 					</div>
@@ -149,7 +150,6 @@ $block_template = array(
 			</div>
 
 </div>
-
 
 <?php if ( ! empty( $video ) && $has_video) : 
 $parse = parse_url( $video );
@@ -173,23 +173,24 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 	$video_id   = ltrim( $parse['path'], '/' );
 }
 ?>
+						
 <div 
- class="popup-modal shadow" 
+ class="popup-modal" 
  data-popup-modal="videoModal<?php echo $rand; ?>"
  role="dialog"
  aria-labelledby="dialog-title"
  aria-modal="true"
  >
- <i class="popup-modal__close" aria-label="Close">
+ <button class="popup-modal__close" data-modal-close aria-label="Close">
  <svg class="icon" viewBox="0 0 320 512" width="0.75em" height="0.75em" stroke="currentColor" stroke-width="2" role="presentation" focusable="false">
  <path d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"/>
  </svg>
- </i>
- <h2 class="popup-modal__heading" id="dialog-title" tabindex="-1"><?php esc_html_e( 'Watch the video', 'dgwltd' ); ?></h2>
+ </button>
+ <h2 class="popup-modal__heading" data-modal-title id="dialog-title" tabindex="-1"><?php esc_html_e( 'Watch the video', 'dgwltd' ); ?></h2>
 <?php if ( $video_type == 'youtube' ) { ?>
 	   <iframe 
 	   id="youtube_player" 
-	   src="http://www.youtube.com/embed/<?php echo $video_id; ?>" 
+	   src="http://www.youtube.com/embed/<?php echo $video_id; ?>?enablejsapi=1" 
 	   frameborder="0" 
 	   allowfullscreen 
 	   ></iframe>
@@ -205,32 +206,102 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-   const modalTriggers = document.querySelectorAll('.popup-trigger');
-   const modalCloseTrigger = document.querySelector('.popup-modal__close');
 
-   modalTriggers.forEach(trigger => {
-   trigger.addEventListener('click', () => {
-	   const { popupTrigger } = trigger.dataset
-	   const popupModal = document.querySelector(`[data-popup-modal="${popupTrigger}"]`);
-	   const popupModalTitle = document.querySelector('#dialog-title');
+(function() {
+  'use strict';
 
-	   popupModal.classList.add('is--visible');
-	   document.body.classList.add('is-blacked-out');
+  let priorFocus;
+  let modal = document.querySelector('.popup-modal');
+  if (!modal) return;
+  
+  let modalTriggers = document.querySelectorAll('.popup-trigger');
 
-	  //allocate focus to the title 
-	  popupModalTitle.focus();
+  modalTriggers.forEach(trigger => {
+	trigger.addEventListener('click', openModal);
+	//If click on document body and is not button or modal or modal children, close modal
+	document.body.addEventListener('click', function(e) {
+	  if (e.target !== trigger && e.target !== modal && !modal.contains(e.target)) {
+		closeModal();
+	  }
+	});	  
+  });
+  
+  function openModal() {
 
-	   popupModal.querySelector('.popup-modal__close').addEventListener('click', () => {
-		   popupModal.classList.remove('is--visible');
-		   document.body.classList.remove('is-blacked-out');
-	   });
+    // Track the element (likely a button) that had focus before we open the modal.
+    priorFocus = document.activeElement;
+    var modalClose = modal.querySelector('.popup-modal__close');
 
-   })
+    // Set up the event listeners we need for the modal
+    modal.addEventListener("keydown", keydownEvent);
+    modalClose.addEventListener('click', closeModal);
 
-   })
+    // Find all focusable children
+    var focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
+    var focusableElements = modal.querySelectorAll(focusableElementsString);
+    focusableElements = Array.prototype.slice.call(focusableElements);
 
-});
+    var firstTabStop = focusableElements[0];
+    var lastTabStop = focusableElements[focusableElements.length - 1];
+
+    // Show the modal and overlay
+    modal.classList.add('is--visible');
+	document.body.classList.add('is-blacked-out');
+
+    firstTabStop.focus();
+
+    function keydownEvent(e) {
+
+      // Escape key should close the modal
+      if ( e.keyCode === 27 ) {
+        closeModal();
+      }
+
+      // Tab key check for first or last tab stop
+      if (e.keyCode === 9) {
+
+        // Tab + Shift (reverse tabbing)
+        if (e.shiftKey) {
+          if (document.activeElement === firstTabStop) {
+            e.preventDefault();
+            lastTabStop.focus();
+          }
+        } else {
+          if (document.activeElement === lastTabStop) {
+            e.preventDefault();
+            firstTabStop.focus();
+          }
+        }
+      }
+
+    }
+
+  }
+
+  function closeModal() {
+
+	<?php if ( $video_type == 'vimeo' ) : ?>
+	//Stop vimeo if playing
+	var vimeo_player = modal.querySelector('#vimeo_player');
+	vimeo_player.contentWindow.postMessage('{"method":"pause"}', '*');
+	// console.log(vimeo_player);
+	<?php endif; ?>
+	<?php if ( $video_type == 'youtube' ) : ?>
+	//Stop youtube if playing
+	var youtube_player = modal.querySelector('#youtube_player');
+	youtube_player.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
+	<?php endif; ?>
+
+    // Hide the modal and overlay
+    modal.classList.remove('is--visible');
+	document.body.classList.remove('is-blacked-out');
+
+    // Set focus back to element that had it before the modal was opened
+    priorFocus.focus();
+	
+  }
+
+}());
 </script>
 
 <?php endif; ?>
