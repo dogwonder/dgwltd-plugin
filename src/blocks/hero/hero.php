@@ -204,16 +204,14 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 	   ></iframe>
  <?php } ?>
 </div>
-
 <script>
-
 (function() {
   'use strict';
 
   let priorFocus;
   let modal = document.querySelector('.popup-modal');
   if (!modal) return;
-  
+
   let modalTriggers = document.querySelectorAll('.popup-trigger');
 
   modalTriggers.forEach(trigger => {
@@ -284,7 +282,6 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 	//Stop vimeo if playing
 	var vimeo_player = modal.querySelector('#vimeo_player');
 	vimeo_player.contentWindow.postMessage('{"method":"pause"}', '*');
-	// console.log(vimeo_player);
 	<?php endif; ?>
 	<?php if ( $video_type == 'youtube' ) : ?>
 	//Stop youtube if playing
@@ -303,5 +300,4 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 
 }());
 </script>
-
 <?php endif; ?>
