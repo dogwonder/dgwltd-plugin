@@ -209,22 +209,29 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
   'use strict';
 
   let priorFocus;
-  let modal = document.querySelector('.popup-modal');
-  if (!modal) return;
-
   let modalTriggers = document.querySelectorAll('.popup-trigger');
+  
+  if (!modalTriggers) return;
 
   modalTriggers.forEach(trigger => {
-	trigger.addEventListener('click', openModal);
+	//Get data-popup-trigger value
+	let modalID = trigger.getAttribute('data-popup-trigger');
+	//Get modal element
+	//Find modal with data-popup-modal value that matches data-popup-trigger value
+	let modal = document.querySelector('[data-popup-modal="' + modalID + '"]');
+	// console.log(modal);
+	trigger.addEventListener('click', function(){
+		openModal(modal);
+  	});
 	//If click on document body and is not button or modal or modal children, close modal
 	document.body.addEventListener('click', function(e) {
 	  if (e.target !== trigger && e.target !== modal && !modal.contains(e.target)) {
-		closeModal();
+		closeModal(modal);
 	  }
-	});	  
+	});
   });
   
-  function openModal() {
+  function openModal(modal) {
 
     // Track the element (likely a button) that had focus before we open the modal.
     priorFocus = document.activeElement;
@@ -232,7 +239,9 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 
     // Set up the event listeners we need for the modal
     modal.addEventListener("keydown", keydownEvent);
-    modalClose.addEventListener('click', closeModal);
+	modalClose.addEventListener('click', function(){
+		closeModal(modal);
+  	});
 
     // Find all focusable children
     var focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
@@ -252,7 +261,7 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 
       // Escape key should close the modal
       if ( e.keyCode === 27 ) {
-        closeModal();
+        closeModal(modal);
       }
 
       // Tab key check for first or last tab stop
@@ -276,7 +285,7 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 
   }
 
-  function closeModal() {
+  function closeModal(modal) {
 
 	<?php if ( $video_type == 'vimeo' ) : ?>
 	//Stop vimeo if playing
