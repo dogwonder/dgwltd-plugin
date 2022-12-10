@@ -190,6 +190,8 @@ class dgwltd_Blocks {
 		$plugin_acf = new dgwltd_Blocks_ACF();
 
 		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_blocks' );
+		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_block_scripts');
+		
 		$this->loader->add_action( 'acf/settings/save_json', $plugin_acf, 'dgwltd_acf_json_save_point' );
 		$this->loader->add_action( 'acf/settings/load_json', $plugin_acf, 'dgwltd_acf_json_load_point' );
 
@@ -207,7 +209,7 @@ class dgwltd_Blocks {
 		$plugin_public = new dgwltd_Blocks_Public( $this->get_dgwltd_Blocks(), $this->get_version() );
 
 		
-		$this->loader->add_filter('script_loader_tag', $plugin_public, 'dgwltd_add_type_attribute' , 10, 3);
+		$this->loader->add_filter('script_loader_tag', $plugin_public, 'dgwltd_add_type_attribute', 10, 3);
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_scripts' );
 		

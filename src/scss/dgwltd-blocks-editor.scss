@@ -19,6 +19,12 @@ Generic styles
     }
 }
 
+//Editor margin
+.editor-styles-wrapper > * {
+  margin-left: var(--wp--custom--spacing--outer) !important;
+  margin-right: var(--wp--custom--spacing--outer) !important;
+}
+
 //Remove border so it doesn't look weird when a different colour is used
 .wp-block-button__link {
   border: 0 !important;
@@ -52,8 +58,14 @@ Blocks
   .acf-innerblocks-container {
     > h1, 
     > h2, 
-    > h3 {
+    > h3, 
+    > h4, 
+    > h5, 
+    > h6 {
       margin-top: 0;
+      &.has-background {
+        padding: 0;
+      }
     }
   }
 }

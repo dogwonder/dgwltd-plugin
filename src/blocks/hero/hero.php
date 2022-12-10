@@ -7,7 +7,7 @@
  * @param   bool $is_preview True during AJAX preview.
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
-$block_id = 'block-' . $block['id'];
+$block_id = $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
@@ -135,7 +135,7 @@ $block_template = array(
 						
 						<?php if ( ! empty( $video ) && $has_video ) : ?>
 							<div class="dgwltd-hero__play">
-								<a class="dgwltd-button popup-trigger"  data-popup-trigger="videoModal<?php echo $rand; ?>">
+								<a class="dgwltd-button popup-trigger" data-popup-trigger="videoModal<?php echo $rand; ?>">
 									<?php esc_html_e( 'Watch', 'dgwltd' ); ?>
 									<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M356.5 235.5C363.6 239.9 368 247.6 368 256C368 264.4 363.6 272.1 356.5 276.5L212.5 364.5C205.1 369 195.8 369.2 188.3 364.9C180.7 360.7 176 352.7 176 344V167.1C176 159.3 180.7 151.3 188.3 147.1C195.8 142.8 205.1 142.1 212.5 147.5L356.5 235.5zM208 182.3V329.7L328.7 255.1L208 182.3zM0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512C114.6 512 0 397.4 0 256zM256 480C379.7 480 480 379.7 480 256C480 132.3 379.7 32 256 32C132.3 32 32 132.3 32 256C32 379.7 132.3 480 256 480z"/></svg>     
 								</a>
@@ -177,6 +177,7 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 <div 
  class="popup-modal" 
  data-popup-modal="videoModal<?php echo $rand; ?>"
+ data-popup-type="<?php echo $video_type ? : 'none'; ?>"
  role="dialog"
  aria-labelledby="dialog-title"
  aria-modal="true"
@@ -204,109 +205,4 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 	   ></iframe>
  <?php } ?>
 </div>
-<script>
-(function() {
-  'use strict';
-
-  let priorFocus;
-  let modalTriggers = document.querySelectorAll('.popup-trigger');
-  
-  if (!modalTriggers) return;
-
-  modalTriggers.forEach(trigger => {
-	//Get data-popup-trigger value
-	let modalID = trigger.getAttribute('data-popup-trigger');
-	//Get modal element
-	//Find modal with data-popup-modal value that matches data-popup-trigger value
-	let modal = document.querySelector('[data-popup-modal="' + modalID + '"]');
-	// console.log(modal);
-	trigger.addEventListener('click', function(){
-		openModal(modal);
-  	});
-	//If click on document body and is not button or modal or modal children, close modal
-	document.body.addEventListener('click', function(e) {
-	  if (e.target !== trigger && e.target !== modal && !modal.contains(e.target)) {
-		closeModal(modal);
-	  }
-	});
-  });
-  
-  function openModal(modal) {
-
-    // Track the element (likely a button) that had focus before we open the modal.
-    priorFocus = document.activeElement;
-    var modalClose = modal.querySelector('.popup-modal__close');
-
-    // Set up the event listeners we need for the modal
-    modal.addEventListener("keydown", keydownEvent);
-	modalClose.addEventListener('click', function(){
-		closeModal(modal);
-  	});
-
-    // Find all focusable children
-    var focusableElementsString = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]';
-    var focusableElements = modal.querySelectorAll(focusableElementsString);
-    focusableElements = Array.prototype.slice.call(focusableElements);
-
-    var firstTabStop = focusableElements[0];
-    var lastTabStop = focusableElements[focusableElements.length - 1];
-
-    // Show the modal and overlay
-    modal.classList.add('is--visible');
-	document.body.classList.add('is-blacked-out');
-
-    firstTabStop.focus();
-
-    function keydownEvent(e) {
-
-      // Escape key should close the modal
-      if ( e.keyCode === 27 ) {
-        closeModal(modal);
-      }
-
-      // Tab key check for first or last tab stop
-      if (e.keyCode === 9) {
-
-        // Tab + Shift (reverse tabbing)
-        if (e.shiftKey) {
-          if (document.activeElement === firstTabStop) {
-            e.preventDefault();
-            lastTabStop.focus();
-          }
-        } else {
-          if (document.activeElement === lastTabStop) {
-            e.preventDefault();
-            firstTabStop.focus();
-          }
-        }
-      }
-
-    }
-
-  }
-
-  function closeModal(modal) {
-
-	<?php if ( $video_type == 'vimeo' ) : ?>
-	//Stop vimeo if playing
-	var vimeo_player = modal.querySelector('#vimeo_player');
-	vimeo_player.contentWindow.postMessage('{"method":"pause"}', '*');
-	<?php endif; ?>
-	<?php if ( $video_type == 'youtube' ) : ?>
-	//Stop youtube if playing
-	var youtube_player = modal.querySelector('#youtube_player');
-	youtube_player.contentWindow.postMessage('{"event":"command","func":"stopVideo","args":""}', '*');
-	<?php endif; ?>
-
-    // Hide the modal and overlay
-    modal.classList.remove('is--visible');
-	document.body.classList.remove('is-blacked-out');
-
-    // Set focus back to element that had it before the modal was opened
-    priorFocus.focus();
-	
-  }
-
-}());
-</script>
 <?php endif; ?>

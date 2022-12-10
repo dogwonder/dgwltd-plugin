@@ -9,7 +9,7 @@
  */
 
  // Create id attribute allowing for custom "anchor" value.
-$block_id = 'block-' . $block['id'];
+$block_id = $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
