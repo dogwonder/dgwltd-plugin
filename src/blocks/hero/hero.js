@@ -1,8 +1,6 @@
 
 document.addEventListener("DOMContentLoaded", function() {
 
-  // console.log('hero.js loaded');
-
   let priorFocus;
   let modalTriggers = document.querySelectorAll('[data-popup-trigger]');
 
