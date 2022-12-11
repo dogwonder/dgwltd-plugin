@@ -182,27 +182,29 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
  aria-labelledby="dialog-title"
  aria-modal="true"
  >
- <button class="popup-modal__close" data-modal-close aria-label="Close">
- <svg class="icon" viewBox="0 0 320 512" width="0.75em" height="0.75em" stroke="currentColor" stroke-width="2" role="presentation" focusable="false">
- <path d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"/>
- </svg>
- </button>
- <h2 class="popup-modal__heading" data-modal-title id="dialog-title" tabindex="-1"><?php esc_html_e( 'Watch the video', 'dgwltd' ); ?></h2>
-<?php if ( $video_type == 'youtube' ) { ?>
-	   <iframe 
-	   id="youtube_player" 
-	   src="http://www.youtube.com/embed/<?php echo $video_id; ?>?enablejsapi=1" 
-	   frameborder="0" 
-	   allowfullscreen 
-	   ></iframe>
- <?php } ?>
-<?php if ( $video_type == 'vimeo' ) { ?>
-	   <iframe 
-	   id="vimeo_player" 
-	   src="https://player.vimeo.com/video/<?php echo $video_id; ?>" 
-	   frameborder="0" 
-	   allowfullscreen 
-	   ></iframe>
- <?php } ?>
+	<div class="popup-modal__dialog">
+	<button class="popup-modal__close" data-modal-close aria-label="Close">
+	<svg class="icon" viewBox="0 0 320 512" width="0.75em" height="0.75em" stroke="currentColor" stroke-width="2" role="presentation" focusable="false">
+	<path d="M312.1 375c9.369 9.369 9.369 24.57 0 33.94s-24.57 9.369-33.94 0L160 289.9l-119 119c-9.369 9.369-24.57 9.369-33.94 0s-9.369-24.57 0-33.94L126.1 256L7.027 136.1c-9.369-9.369-9.369-24.57 0-33.94s24.57-9.369 33.94 0L160 222.1l119-119c9.369-9.369 24.57-9.369 33.94 0s9.369 24.57 0 33.94L193.9 256L312.1 375z"/>
+	</svg>
+	</button>	
+	<h2 class="popup-modal__heading" data-modal-title id="dialog-title" tabindex="-1"><?php esc_html_e( 'Watch the video', 'dgwltd' ); ?></h2>
+	<?php if ( $video_type == 'youtube' ) { ?>
+		<iframe 
+		id="youtube_player" 
+		src="http://www.youtube.com/embed/<?php echo $video_id; ?>?enablejsapi=1" 
+		frameborder="0" 
+		allowfullscreen 
+		></iframe>
+	<?php } ?>
+	<?php if ( $video_type == 'vimeo' ) { ?>
+		<iframe 
+		id="vimeo_player" 
+		src="https://player.vimeo.com/video/<?php echo $video_id; ?>" 
+		frameborder="0" 
+		allowfullscreen 
+		></iframe>
+	<?php } ?>
+	</div>
 </div>
 <?php endif; ?>

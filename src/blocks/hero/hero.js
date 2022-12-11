@@ -30,10 +30,11 @@ document.addEventListener("DOMContentLoaded", function() {
 
       //Get current modal
       let modal = document.querySelector('.popup-modal.is--visible');
-      //If click outside of modal and not button, close modal
+      //If click on .modal but not .modal__dialog close modal
       if ( modal && !modal.contains(e.target) && !e.target.matches('[data-popup-trigger]') ) {
         closeModal(modal);
       }
+
       
   });
   
