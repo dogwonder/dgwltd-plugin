@@ -192,6 +192,7 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 	<?php if ( $video_type == 'youtube' ) { ?>
 		<iframe 
 		id="youtube_player" 
+		title="<?php esc_html_e( 'Video modal', 'dgwltd' ); ?>"
 		src="http://www.youtube.com/embed/<?php echo $video_id; ?>?enablejsapi=1" 
 		frameborder="0" 
 		allowfullscreen 
@@ -200,6 +201,7 @@ if ( ( $parse['host'] == 'vimeo.com' ) || ( $parse['host'] == 'www.vimeo.com' ) 
 	<?php if ( $video_type == 'vimeo' ) { ?>
 		<iframe 
 		id="vimeo_player" 
+		title="<?php esc_html_e( 'Video modal', 'dgwltd' ); ?>"
 		src="https://player.vimeo.com/video/<?php echo $video_id; ?>" 
 		frameborder="0" 
 		allowfullscreen 
