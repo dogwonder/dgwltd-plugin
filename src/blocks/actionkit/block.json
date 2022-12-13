@@ -1,0 +1,25 @@
+{
+    "name": "acf/dgwltd-actionkit",
+    "title": "DGW.ltd Actionkit",
+    "description": "Actionkit block",
+    "style": "file:./actionkit.css",
+    "script": "file:./actionkit.js",
+    "category": "theme",
+    "icon": "megaphone",
+    "apiVersion": 2,
+    "supports": {
+        "jsx": true, 
+        "align": [ "full" ],
+        "alignText": true, 
+        "color": {
+            "text": true,
+            "background": true,
+            "link": true
+        }
+    },
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "actionkit.php"
+    },
+    "align": "full"
+}

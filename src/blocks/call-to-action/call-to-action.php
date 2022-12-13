@@ -76,7 +76,6 @@ $block_template = array(
 			</div>
 
 			 <?php if ( ! empty( $image ) ) : ?>
-					<?php // print_r($image) ?>
 					<?php
 					$image_tiny        = $image['sizes']['dgwltd-tiny'];
 					$image_small       = $image['sizes']['dgwltd-small'];
