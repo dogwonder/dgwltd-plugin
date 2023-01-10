@@ -14,20 +14,25 @@ class dgwltd_Blocks_Rules {
 	// Define the post types and the allowed blocks
 	// public function dgwltd_register_block_rules( $allowed_block_types ) {
 
-    // global $current_screen;
+	// 	global $current_screen;
 
-	// //Limit blocks in 'post' post type
+	// 	//Limit blocks in 'post' post type, note block patterns will only appear if the blocks in them are allowed.
 
-	// if ( ! empty( $current_screen->post_type === 'post' ) ) {
-	// 	// Return an array containing the allowed block types
-	// 	return array(
-	// 		'core/paragraph',
-	// 		'core/heading', 
-	//         'core/image', 
-	//         'core/list'
-	// 	);
-	// }
-	// return $allowed_block_types;
+	// 	if ( ! empty( $current_screen->post_type === 'post' ) ) {
+	// 		// Return an array containing the allowed block types
+	// 		return array(
+	// 			'core/column',
+	// 			'core/columns', 
+	// 			'core/heading', 
+	// 			'core/image', 
+	// 			'core/group', 
+	// 			'core/list', 
+	// 			'core/paragraph',
+	// 			'core/spacer'
+	// 		);
+	// 	}
+
+	// 	return $allowed_block_types;
 
 	// }
 

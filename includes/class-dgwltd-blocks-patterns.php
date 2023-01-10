@@ -329,7 +329,10 @@ class dgwltd_Blocks_Patterns {
 
 		foreach ( $patterns as $pattern => $definition ) {
 			register_block_pattern( $pattern, $definition );
+			
 		}
 	}
+
+
 
 }
