@@ -15,7 +15,7 @@
  * Plugin Name:       DGW.ltd: Blocks
  * Plugin URI:        http://dgw.ltd
  * Description:       A collection of custom ACF blocks
- * Version:           1.0.2
+ * Version:           1.0.4
  * Author:            Dogwonder Ltd
  * Author URI:        http://richholman.com
  * License:           GPL-2.0+
