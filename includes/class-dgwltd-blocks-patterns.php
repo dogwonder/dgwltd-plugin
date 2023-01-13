@@ -6,11 +6,11 @@
  * Loads and defines the block patterns for this plugin
  *
  * @since      1.0.0
- * @package    dgwltd_Blocks
- * @subpackage dgwltd_Blocks/includes
+ * @package    Dgwltd_Blocks
+ * @subpackage Dgwltd_Blocks/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class dgwltd_Blocks_Patterns {
+class Dgwltd_Blocks_Patterns {
 
 	/**
 	* Register Event Block Pattern Category

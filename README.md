@@ -6,7 +6,6 @@ Based on https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
 
  - Embed scripts - add to blocks.json in embed block so it's scoped and not global
  
-
 ## License
 
 The WordPress Plugin Boilerplate is licensed under the GPL v2 or later.

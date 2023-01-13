@@ -5,11 +5,11 @@
  * Loads and defines the ACF blocks for this plugin
  *
  * @since      1.0.0
- * @package    dgwltd_Blocks
- * @subpackage dgwltd_Blocks/includes
+ * @package    Dgwltd_Blocks
+ * @subpackage Dgwltd_Blocks/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class dgwltd_Blocks_ACF {
+class Dgwltd_Blocks_ACF {
 
 	public function dgwltd_register_wp_block_scripts() {
 

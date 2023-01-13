@@ -5,11 +5,11 @@
  * Loads and defines the Block rules for post types
  *
  * @since      1.0.0
- * @package    dgwltd_Blocks
- * @subpackage dgwltd_Blocks/includes
+ * @package    Dgwltd_Blocks
+ * @subpackage Dgwltd_Blocks/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class dgwltd_Blocks_Rules {
+class Dgwltd_Blocks_Rules {
 
 	// Define the post types and the allowed blocks
 	// public function dgwltd_register_block_rules( $allowed_block_types ) {

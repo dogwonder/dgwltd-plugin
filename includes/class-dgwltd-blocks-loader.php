@@ -6,11 +6,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    dgwltd_Blocks
- * @subpackage dgwltd_Blocks/includes
+ * @package    Dgwltd_Blocks
+ * @subpackage Dgwltd_Blocks/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class dgwltd_Blocks_Loader {
+class Dgwltd_Blocks_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

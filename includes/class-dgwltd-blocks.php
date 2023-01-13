@@ -9,8 +9,8 @@
  * @link       https://dgw.ltd
  * @since      1.0.0
  *
- * @package    dgwltd_Blocks
- * @subpackage dgwltd_Blocks/includes
+ * @package    Dgwltd_Blocks
+ * @subpackage Dgwltd_Blocks/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    dgwltd_Blocks
- * @subpackage dgwltd_Blocks/includes
+ * @package    Dgwltd_Blocks
+ * @subpackage Dgwltd_Blocks/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class dgwltd_Blocks {
+class Dgwltd_Blocks {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class dgwltd_Blocks {
 	 *
 
 	 * @access   protected
-	 * @var      dgwltd_Blocks_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Dgwltd_Blocks_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -44,9 +44,9 @@ class dgwltd_Blocks {
 	 *
 
 	 * @access   protected
-	 * @var      string    $dgwltd_Blocks    The string used to uniquely identify this plugin.
+	 * @var      string    $Dgwltd_Blocks    The string used to uniquely identify this plugin.
 	 */
-	protected $dgwltd_Blocks;
+	protected $Dgwltd_Blocks;
 
 	/**
 	 * The current version of the plugin.
@@ -66,12 +66,12 @@ class dgwltd_Blocks {
 	 *
 	 */
 	public function __construct() {
-		if ( defined( 'dgwltd_BLOCKS_VERSION' ) ) {
-			$this->version = dgwltd_BLOCKS_VERSION;
+		if ( defined( 'DGWLTD_BLOCKS_VERSION' ) ) {
+			$this->version = DGWLTD_BLOCKS_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->dgwltd_Blocks = 'dgwltd-blocks';
+		$this->Dgwltd_Blocks = 'dgwltd-blocks';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -89,10 +89,10 @@ class dgwltd_Blocks {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - dgwltd_Blocks_Loader. Orchestrates the hooks of the plugin.
-	 * - dgwltd_Blocks_I18n. Defines internationalization functionality.
-	 * - dgwltd_Blocks_Admin. Defines all hooks for the admin area.
-	 * - dgwltd_Blocks_Public. Defines all hooks for the public side of the site.
+	 * - Dgwltd_Blocks_Loader. Orchestrates the hooks of the plugin.
+	 * - Dgwltd_Blocks_I18n. Defines internationalization functionality.
+	 * - Dgwltd_Blocks_Admin. Defines all hooks for the admin area.
+	 * - Dgwltd_Blocks_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -140,14 +140,14 @@ class dgwltd_Blocks {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dgwltd-blocks-rules.php';
 
-		$this->loader = new dgwltd_Blocks_Loader();
+		$this->loader = new Dgwltd_Blocks_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the dgwltd_Blocks_I18n class in order to set the domain and to register the hook
+	 * Uses the Dgwltd_Blocks_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 
@@ -155,7 +155,7 @@ class dgwltd_Blocks {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new dgwltd_Blocks_I18n();
+		$plugin_i18n = new Dgwltd_Blocks_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -170,7 +170,7 @@ class dgwltd_Blocks {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new dgwltd_Blocks_Admin( $this->get_dgwltd_Blocks(), $this->get_version() );
+		$plugin_admin = new Dgwltd_Blocks_Admin( $this->get_Dgwltd_Blocks(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_styles' );
 		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_scripts' );
@@ -187,7 +187,7 @@ class dgwltd_Blocks {
 	 */
 	private function define_acf_hooks() {
 
-		$plugin_acf = new dgwltd_Blocks_ACF();
+		$plugin_acf = new Dgwltd_Blocks_ACF();
 
 		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_block_scripts');
 		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_blocks' );
@@ -206,7 +206,7 @@ class dgwltd_Blocks {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new dgwltd_Blocks_Public( $this->get_dgwltd_Blocks(), $this->get_version() );
+		$plugin_public = new Dgwltd_Blocks_Public( $this->get_Dgwltd_Blocks(), $this->get_version() );
 
 		
 		$this->loader->add_filter('script_loader_tag', $plugin_public, 'dgwltd_add_type_attribute', 10, 3);
@@ -225,7 +225,7 @@ class dgwltd_Blocks {
 	 */
 	private function define_block_patterns_hooks() {
 
-		$plugin_patterns = new dgwltd_Blocks_Patterns();
+		$plugin_patterns = new Dgwltd_Blocks_Patterns();
 
 		/**
  		* Load our custom ones
@@ -245,7 +245,7 @@ class dgwltd_Blocks {
 	 */
 	private function define_block_rules() {
 
-		$plugin_rules = new dgwltd_Blocks_Rules();
+		$plugin_rules = new Dgwltd_Blocks_Rules();
 
 		/**
  		* Allow-list the block types available in the inserter.
@@ -270,15 +270,15 @@ class dgwltd_Blocks {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_dgwltd_Blocks() {
-		return $this->dgwltd_Blocks;
+	public function get_Dgwltd_Blocks() {
+		return $this->Dgwltd_Blocks;
 	}
 
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    dgwltd_Blocks_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Dgwltd_Blocks_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

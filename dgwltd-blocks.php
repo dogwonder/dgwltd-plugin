@@ -9,7 +9,7 @@
  *
  * @link              https://dgw.ltd
  * @since             1.0.0
- * @package           dgwltd_Blocks
+ * @package           Dgwltd_Blocks
  *
  * @wordpress-plugin
  * Plugin Name:       DGW.ltd: Blocks
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'dgwltd_BLOCKS_VERSION', '1.0.0' );
+define( 'DGWLTD_BLOCKS_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
@@ -42,7 +42,7 @@ define( 'dgwltd_BLOCKS_VERSION', '1.0.0' );
  */
 function activate_dgwltd_blocks() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dgwltd-blocks-activator.php';
-	dgwltd_Blocks_Activator::activate();
+	Dgwltd_Blocks_Activator::activate();
 }
 
 /**
@@ -51,7 +51,7 @@ function activate_dgwltd_blocks() {
  */
 function deactivate_dgwltd_blocks() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dgwltd-blocks-deactivator.php';
-	dgwltd_Blocks_Deactivator::deactivate();
+	Dgwltd_Blocks_Deactivator::deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_dgwltd_blocks' );
@@ -74,7 +74,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-dgwltd-blocks.php';
  */
 function run_dgwltd_blocks() {
 
-	$plugin = new dgwltd_Blocks();
+	$plugin = new Dgwltd_Blocks();
 	$plugin->run();
 
 }

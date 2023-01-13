@@ -6,8 +6,8 @@
  * @link       https://dgw.ltd
  * @since      1.0.0
  *
- * @package    dgwltd_Blocks
- * @subpackage dgwltd_Blocks/public
+ * @package    Dgwltd_Blocks
+ * @subpackage Dgwltd_Blocks/public
  */
 
 /**
@@ -16,20 +16,20 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    dgwltd_Blocks
- * @subpackage dgwltd_Blocks/public
+ * @package    Dgwltd_Blocks
+ * @subpackage Dgwltd_Blocks/public
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class dgwltd_Blocks_Public {
+class Dgwltd_Blocks_Public {
 
 	/**
 	 * The ID of this plugin.
 	 *
 
 	 * @access   private
-	 * @var      string    $dgwltd_Blocks    The ID of this plugin.
+	 * @var      string    $Dgwltd_Blocks    The ID of this plugin.
 	 */
-	private $dgwltd_Blocks;
+	private $Dgwltd_Blocks;
 
 
 	/**
@@ -45,12 +45,12 @@ class dgwltd_Blocks_Public {
 	 * Initialize the class and set its properties.
 	 *
 
-	 * @param      string $dgwltd_Blocks       The name of the plugin.
+	 * @param      string $Dgwltd_Blocks       The name of the plugin.
 	 * @param      string $version    The version of this plugin.
 	 */
-	public function __construct( $dgwltd_Blocks, $version ) {
+	public function __construct( $Dgwltd_Blocks, $version ) {
 
-		$this->dgwltd_Blocks = $dgwltd_Blocks;
+		$this->Dgwltd_Blocks = $Dgwltd_Blocks;
 		$this->version       = $version;
 
 	}
@@ -61,7 +61,7 @@ class dgwltd_Blocks_Public {
 	 */
 	public function dgwltd_enqueue_theme_styles() {
 
-		wp_enqueue_style( $this->dgwltd_Blocks, plugin_dir_url( __FILE__ ) . 'css/dgwltd-blocks-theme.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->Dgwltd_Blocks, plugin_dir_url( __FILE__ ) . 'css/dgwltd-blocks-theme.css', array(), $this->version, 'all' );
 	}
 
 	/**
@@ -71,7 +71,7 @@ class dgwltd_Blocks_Public {
 	public function dgwltd_enqueue_theme_scripts() {
 		
 		// Remove array('jquery') from wp_enqueue_script as we don't want to be dependant on the WP jQuery core
-		wp_enqueue_script( $this->dgwltd_Blocks, plugin_dir_url( __FILE__ ) . 'scripts/dgwltd-blocks.min.js', array(), $this->version, false );
+		wp_enqueue_script( $this->Dgwltd_Blocks, plugin_dir_url( __FILE__ ) . 'scripts/dgwltd-blocks.min.js', array(), $this->version, false );
 
 	}
 
