@@ -3,7 +3,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://dgw.ltd
+ * @link       https://wp.dgw.ltd
  * @since      1.0.0
  *
  * @package    Dgwltd_Blocks

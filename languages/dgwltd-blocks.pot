@@ -89,7 +89,7 @@ msgid "DGW.ltd: Blocks"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "http://dgw.ltd"
+msgid "https://wp.dgw.ltd"
 msgstr ""
 
 #. Description of the plugin/theme
@@ -101,5 +101,5 @@ msgid "Dogwonder Ltd"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "http://richholman.com"
+msgid "https://richholman.com"
 msgstr ""

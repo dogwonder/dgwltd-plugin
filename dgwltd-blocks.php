@@ -7,17 +7,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin. Based on http://wppb.io // https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
  *
- * @link              https://dgw.ltd
+ * @link              https://wp.dgw.ltd
  * @since             1.0.0
  * @package           Dgwltd_Blocks
  *
  * @wordpress-plugin
  * Plugin Name:       DGW.ltd: Blocks
- * Plugin URI:        http://dgw.ltd
+ * Plugin URI:        https://wp.dgw.ltd
  * Description:       A collection of custom ACF blocks
  * Version:           1.0.4
  * Author:            Dogwonder Ltd
- * Author URI:        http://richholman.com
+ * Author URI:        https://richholman.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       dgwltd-blocks

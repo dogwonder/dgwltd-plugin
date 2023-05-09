@@ -35,6 +35,7 @@ $block_styles = $block_attrs['style'] ? $block_attrs['style'] : '';
 $overlay  = get_field( 'overlay' ) ? : '';
 if($overlay) {
 	$overlay_opacity  = get_field( 'overlay_opacity' ) ? : '';
+	$hex2rgb = Oneorg_Site_Public::oneorg_hex2rgb( $overlay_color );
 	$overlay_opacity = $overlay_opacity / 100;
 }
 
