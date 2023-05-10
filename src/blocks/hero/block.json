@@ -11,6 +11,7 @@
         "jsx": true, 
         "align": [ "full" ],
         "alignText": true, 
+        "anchor": true,
         "color": {
             "text": true,
             "background": true,

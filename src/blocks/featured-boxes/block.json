@@ -8,7 +8,8 @@
     "apiVersion": 2,
     "supports": {
         "jsx": true, 
-        "align": false
+        "align": false,
+        "anchor": true
     },
     "acf": {
         "mode": "preview",

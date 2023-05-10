@@ -10,6 +10,7 @@
         "jsx": true, 
         "align": [ "full" ],
         "alignText": false, 
+        "anchor": true,
         "color": {
             "text": true,
             "background": true,
