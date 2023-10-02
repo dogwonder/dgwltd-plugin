@@ -24,7 +24,6 @@ class Dgwltd_Blocks_ACF {
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/anchor/block.json' );
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/featured-boxes/block.json' );
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/call-to-action/block.json' );
-		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/details/block.json' );
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/embed/block.json' );
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/feature/block.json' );
 		register_block_type( plugin_dir_path( dirname( __FILE__ ) ) . 'src/blocks/hero/block.json' );

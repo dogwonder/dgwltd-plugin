@@ -34,9 +34,15 @@ $block_styles = $block_attrs['style'] ? $block_attrs['style'] : '';
 
 $overlay  = get_field( 'overlay' ) ? : '';
 if($overlay) {
-	$overlay_opacity  = get_field( 'overlay_opacity' ) ? : '';
-	$hex2rgb = Oneorg_Site_Public::oneorg_hex2rgb( $overlay_color );
+	//Convert to RGB
+	$overlay_color  = get_field( 'overlay_color' ) ? : '';
+	$hex2rgb = dgwltd_blocks_Public::dgwltd_hex2rgb( $overlay_color );
+	$overlay_opacity  = get_field( 'overlay_opacity' ) ? : '0.7';
 	$overlay_opacity = $overlay_opacity / 100;
+	//Loop through RGB values and add opacity
+	$overlay_rgb = 'rgba(' . $hex2rgb[0] . ',' . $hex2rgb[1] . ',' . $hex2rgb[2] . ')';
+	$overlay_rgba = 'rgba(' . $hex2rgb[0] . ',' . $hex2rgb[1] . ',' . $hex2rgb[2] . ',' . $overlay_opacity . ')';
+	$overlay_rgba_full = 'rgba(' . $hex2rgb[0] . ',' . $hex2rgb[1] . ',' . $hex2rgb[2] . ', 0)';
 }
 
 // Heights
