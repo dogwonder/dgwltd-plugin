@@ -6,6 +6,7 @@
             "key": "field_5e735ece06e83",
             "label": "Title",
             "name": "title",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -25,6 +26,7 @@
             "key": "field_5ee393fbb8733",
             "label": "Content",
             "name": "content",
+            "aria-label": "",
             "type": "wysiwyg",
             "instructions": "",
             "required": 0,
@@ -44,6 +46,7 @@
             "key": "field_5e622636452e7",
             "label": "Summary list",
             "name": "summary_list",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -63,6 +66,7 @@
                     "key": "field_5e622649452e8",
                     "label": "Term",
                     "name": "term",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -76,12 +80,14 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_5e622636452e7"
                 },
                 {
                     "key": "field_5e8b43adf199d",
                     "label": "Details type",
                     "name": "details_type",
+                    "aria-label": "",
                     "type": "button_group",
                     "instructions": "",
                     "required": 0,
@@ -98,12 +104,14 @@
                     "allow_null": 0,
                     "default_value": "text",
                     "layout": "horizontal",
-                    "return_format": "value"
+                    "return_format": "value",
+                    "parent_repeater": "field_5e622636452e7"
                 },
                 {
                     "key": "field_5e62264f452e9",
                     "label": "Details",
                     "name": "details",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -125,12 +133,14 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_5e622636452e7"
                 },
                 {
                     "key": "field_5e734c47d1dc1",
                     "label": "Details link",
                     "name": "details_link",
+                    "aria-label": "",
                     "type": "url",
                     "instructions": "optional",
                     "required": 0,
@@ -149,12 +159,14 @@
                         "id": ""
                     },
                     "default_value": "",
-                    "placeholder": ""
+                    "placeholder": "",
+                    "parent_repeater": "field_5e622636452e7"
                 },
                 {
                     "key": "field_5e8b4147a154d",
                     "label": "Details embed",
                     "name": "details_embed",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "HTML code",
                     "required": 0,
@@ -176,9 +188,11 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": ""
+                    "new_lines": "",
+                    "parent_repeater": "field_5e622636452e7"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -196,9 +210,12 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": 1,
+    "active": true,
     "description": "",
-    "acfcdt_manage_table_definition": 0,
-    "acfcdt_table_definition_file_name": "table_54x5ee393f9ddde5",
-    "modified": 1591972871
+    "show_in_rest": 0,
+    "show_in_graphql": 0,
+    "graphql_field_name": "",
+    "map_graphql_types_from_location_rules": 0,
+    "graphql_types": "",
+    "modified": 1696243330
 }

@@ -1,11 +1,11 @@
 {
-    "key": "group_5e7b3d7a441d7",
-    "title": "Block: Related",
+    "key": "group_5e4a9de7ecd6f",
+    "title": "Block: Details",
     "fields": [
         {
-            "key": "field_6389e7b0f44d9",
-            "label": "Block title",
-            "name": "block_title",
+            "key": "field_5e4a9e23a9ed4",
+            "label": "Summary",
+            "name": "summary",
             "aria-label": "",
             "type": "text",
             "instructions": "",
@@ -16,19 +16,18 @@
                 "class": "",
                 "id": ""
             },
-            "show_in_graphql": 1,
             "default_value": "",
-            "maxlength": "",
             "placeholder": "",
             "prepend": "",
-            "append": ""
+            "append": "",
+            "maxlength": ""
         },
         {
-            "key": "field_5e7b3d825c4d7",
-            "label": "Related",
-            "name": "related",
+            "key": "field_5e4a9e27a9ed5",
+            "label": "Details",
+            "name": "details",
             "aria-label": "",
-            "type": "relationship",
+            "type": "wysiwyg",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -37,17 +36,11 @@
                 "class": "",
                 "id": ""
             },
-            "post_type": "",
-            "taxonomy": "",
-            "filters": [
-                "search",
-                "post_type",
-                "taxonomy"
-            ],
-            "elements": "",
-            "min": "",
-            "max": "",
-            "return_format": "object"
+            "default_value": "",
+            "tabs": "visual",
+            "toolbar": "basic",
+            "media_upload": 0,
+            "delay": 0
         }
     ],
     "location": [
@@ -55,7 +48,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/dgwltd-related"
+                "value": "all"
             }
         ]
     ],
@@ -72,5 +65,5 @@
     "graphql_field_name": "",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1669982144
+    "modified": 1696243321
 }

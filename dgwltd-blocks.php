@@ -30,18 +30,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
+ * Plugin constants
  */
-define( 'DGWLTD_BLOCKS_VERSION', '1.0.0' );
+define( 'DGWLTD_BLOCKS_VERSION', '1.1.0' );
+define( 'DGWLTD_BLOCKS_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'DGWLTD_BLOCKS_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'DGWLTD_BLOCKS_PLUGIN_BLOCKS', DGWLTD_BLOCKS_PLUGIN_DIR . 'src/blocks/' );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-dgwltd-blocks-activator.php
  */
 function activate_dgwltd_blocks() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dgwltd-blocks-activator.php';
+	require_once DGWLTD_BLOCKS_PLUGIN_DIR . 'includes/class-dgwltd-blocks-activator.php';
 	Dgwltd_Blocks_Activator::activate();
 }
 
@@ -50,7 +51,7 @@ function activate_dgwltd_blocks() {
  * This action is documented in includes/class-dgwltd-blocks-deactivator.php
  */
 function deactivate_dgwltd_blocks() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-dgwltd-blocks-deactivator.php';
+	require_once DGWLTD_BLOCKS_PLUGIN_DIR . 'includes/class-dgwltd-blocks-deactivator.php';
 	Dgwltd_Blocks_Deactivator::deactivate();
 }
 
@@ -61,7 +62,7 @@ register_deactivation_hook( __FILE__, 'deactivate_dgwltd_blocks' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-dgwltd-blocks.php';
+require DGWLTD_BLOCKS_PLUGIN_DIR . 'includes/class-dgwltd-blocks.php';
 
 /**
  * Begins execution of the plugin.

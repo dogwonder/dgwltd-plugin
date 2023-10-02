@@ -6,6 +6,7 @@
             "key": "field_624c27c6ed939",
             "label": "Hide title",
             "name": "hide_title",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -26,6 +27,7 @@
             "key": "field_634fe158af810",
             "label": "Block spacing",
             "name": "block_spacing",
+            "aria-label": "",
             "type": "button_group",
             "instructions": "",
             "required": 0,
@@ -71,5 +73,5 @@
     "graphql_field_name": "pageSettings",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1666179515
+    "modified": 1696243333
 }

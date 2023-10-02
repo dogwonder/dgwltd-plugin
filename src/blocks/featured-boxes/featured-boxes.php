@@ -84,7 +84,7 @@ $block_template = array(
 				<?php foreach ( $cards as $card ) : ?>
 					<?php // print_r($card) ?>
 					<?php $card_index++; ?>
-					<?php require plugin_dir_path( __FILE__ ) . 'card-id.php' ; ?>
+					<?php require DGWLTD_BLOCKS_PLUGIN_DIR . 'card-id.php' ; ?>
 		<?php endforeach; ?>
 				<?php wp_reset_postdata(); // IMPORTANT - reset the $post object so the rest of the page works correctly ?>
 			<?php endif; ?>
@@ -99,7 +99,7 @@ $block_template = array(
 						the_row();
 						?>
 						<?php $card_index++; ?>
-						<?php require plugin_dir_path( __FILE__ ) . 'card-manual.php' ; ?>
+						<?php require DGWLTD_BLOCKS_PLUGIN_DIR . 'card-manual.php' ; ?>
 						<?php
 					endwhile;
 			endif;

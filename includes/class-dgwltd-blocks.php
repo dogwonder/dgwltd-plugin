@@ -106,39 +106,39 @@ class Dgwltd_Blocks {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dgwltd-blocks-loader.php';
+		require_once DGWLTD_BLOCKS_PLUGIN_DIR . 'includes/class-dgwltd-blocks-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dgwltd-blocks-i18n.php';
+		require_once DGWLTD_BLOCKS_PLUGIN_DIR . 'includes/class-dgwltd-blocks-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-dgwltd-blocks-admin.php';
+		require_once DGWLTD_BLOCKS_PLUGIN_DIR . 'admin/class-dgwltd-blocks-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-dgwltd-blocks-public.php';
+		require_once DGWLTD_BLOCKS_PLUGIN_DIR . 'public/class-dgwltd-blocks-public.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the custom blocks
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dgwltd-blocks-acf.php';
+		require_once DGWLTD_BLOCKS_PLUGIN_DIR . 'includes/class-dgwltd-blocks-acf.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the block patterns
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dgwltd-blocks-patterns.php';
+		require_once DGWLTD_BLOCKS_PLUGIN_DIR . 'includes/class-dgwltd-blocks-patterns.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the custom rules
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-dgwltd-blocks-rules.php';
+		require_once DGWLTD_BLOCKS_PLUGIN_DIR . 'includes/class-dgwltd-blocks-rules.php';
 
 		$this->loader = new Dgwltd_Blocks_Loader();
 
@@ -191,9 +191,15 @@ class Dgwltd_Blocks {
 
 		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_block_scripts');
 		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_blocks' );
-		
-		$this->loader->add_action( 'acf/settings/save_json', $plugin_acf, 'dgwltd_acf_json_save_point' );
-		$this->loader->add_action( 'acf/settings/load_json', $plugin_acf, 'dgwltd_acf_json_load_point' );
+		// $this->loader->add_action( 'init', $plugin_acf, 'dgwltd_acf_get_blocks' );
+		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_options_page' );
+
+		$this->loader->add_filter( 'acf/json/load_paths', $plugin_acf, 'dgwltd_acf_json_load_paths' );
+		$this->loader->add_filter( 'acf/settings/save_json/type=acf-field-group', $plugin_acf, 'dgwltd_acf_json_save_path_for_field_groups' );
+		$this->loader->add_filter( 'acf/settings/save_json/type=acf-ui-options-page', $plugin_acf, 'dgwltd_acf_json_save_path_for_option_pages' );
+		$this->loader->add_filter( 'acf/settings/save_json/type=acf-post-type', $plugin_acf, 'dgwltd_acf_json_save_path_for_post_types' );
+		$this->loader->add_filter( 'acf/settings/save_json/type=acf-taxonomy', $plugin_acf, 'dgwltd_acf_json_save_path_for_taxonomies' );
+		$this->loader->add_filter( 'acf/json/save_file_name', $plugin_acf, 'dgwltd_acf_json_filename', 10, 3 );
 
 	}
 
