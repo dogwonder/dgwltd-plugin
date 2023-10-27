@@ -123,10 +123,20 @@ $block_template = array(
 					</style>
 				<?php endif; ?>
 				<div class="block__background">
+					<?php 
+					//Don't lazyload this https://cloudfour.com/thinks/stop-lazy-loading-product-and-hero-images/
+					?>
 					<figure>
 						<picture>
 							<source media="(min-width: 64em)" srcset="<?php echo $image_large; ?>">
-							<img src="<?php echo $image_small; ?>" alt="<?php echo $image_alt ?>" width="<?php echo $image_small_width; ?>" height="<?php echo $image_small_height; ?>" style="background-image: url(<?php echo $base64; ?>)" />
+							<img 
+							src="<?php echo $image_small; ?>" 
+							alt="<?php echo $image_alt ?>" 
+							width="<?php echo $image_small_width; ?>" 
+							height="<?php echo $image_small_height; ?>" 
+							style="background-image: url(<?php echo $base64; ?>)" 
+							fetchpriority="high"
+							/>
 						</picture>
 					</figure>
 				</div>
