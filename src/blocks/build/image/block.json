@@ -1,0 +1,19 @@
+{
+  "name": "acf/dgwltd-image",
+  "title": "DGW.ltd Image",
+  "description": "Image block",
+  "style": "file:./image.css",
+  "category": "theme",
+  "icon": "format-image",
+  "apiVersion": 2,
+  "supports": {
+    "jsx": true,
+    "align": false,
+    "anchor": true
+  },
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "image.php"
+  },
+  "align": "full"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "acf/dgwltd-embed",
+  "title": "DGW.ltd Embed",
+  "description": "Embed block",
+  "style": "file:./embed.css",
+  "viewScript": "file:./embed.js",
+  "category": "theme",
+  "icon": "format-video",
+  "apiVersion": 2,
+  "supports": {
+    "jsx": true,
+    "align": false,
+    "anchor": true
+  },
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "embed.php"
+  },
+  "align": "full"
+}

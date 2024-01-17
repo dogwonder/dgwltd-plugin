@@ -3,6 +3,7 @@
     "title": "DGW.ltd Embed",
     "description": "Embed block",
     "style": "file:./embed.css",
+    "viewScript": "file:./embed.js",
     "category": "theme",
     "icon": "format-video",
     "apiVersion": 2,

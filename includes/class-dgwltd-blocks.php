@@ -189,7 +189,7 @@ class Dgwltd_Blocks {
 
 		$plugin_acf = new Dgwltd_Blocks_ACF();
 
-		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_block_scripts');
+		// $this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_block_scripts');
 		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_blocks' );
 		// $this->loader->add_action( 'init', $plugin_acf, 'dgwltd_acf_get_blocks' );
 		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_options_page' );
@@ -216,8 +216,10 @@ class Dgwltd_Blocks {
 
 		
 		$this->loader->add_filter('script_loader_tag', $plugin_public, 'dgwltd_add_type_attribute', 10, 3);
+
+		//We load these in the theme, so we don't need these in this instance
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_scripts' );
+		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_scripts' );
 		
 
 	}

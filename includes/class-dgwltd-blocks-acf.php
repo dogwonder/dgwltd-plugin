@@ -13,23 +13,24 @@ class Dgwltd_Blocks_ACF {
 
 	public function dgwltd_register_wp_block_scripts() {
 
-		//As our JS files aren't built in libraries, we have to manually wp_register_script for that file before the block.json 
-		wp_register_script( 'hero', DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'hero/hero.js' );
+		//If we need to have to manually wp_register_script for a file before the block.json 
+		//We don't need to here as we are using @wordpress/scripts build process and viewScript in block.json is enough
+		// wp_register_script( 'script', DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/block-name/script.js' );
 
 	}
 
 	public function dgwltd_register_wp_blocks() {
 
-		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'accordion/block.json' );
-		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'anchor/block.json' );
-		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'featured-boxes/block.json' );
-		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'call-to-action/block.json' );
-		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'embed/block.json' );
-		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'feature/block.json' );
-		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'hero/block.json' );
-		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'image/block.json' );
-		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'related/block.json' );
-		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'summary-list/block.json' );
+		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/accordion/block.json' );
+		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/anchor/block.json' );
+		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/featured-boxes/block.json' );
+		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/call-to-action/block.json' );
+		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/embed/block.json' );
+		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/feature/block.json' );
+		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/hero/block.json' );
+		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/image/block.json' );
+		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/related/block.json' );
+		register_block_type( DGWLTD_BLOCKS_PLUGIN_BLOCKS . 'build/summary-list/block.json' );
 
 	}
 
