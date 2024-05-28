@@ -1,0 +1,19 @@
+{
+    "name": "acf/dgwltd-accordion",
+    "title": "DGW.ltd Accordion",
+    "description": "Show and hide sections block",
+    "style": "file:./accordion.css",
+    "category": "theme",
+    "icon": "menu",
+    "apiVersion": 2,
+    "supports": {
+        "jsx": true, 
+        "align": false,
+        "anchor": true
+    },
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "accordion.php"
+    },
+    "align": "full"
+}

@@ -1,0 +1,19 @@
+{
+    "name": "acf/dgwltd-featured-boxes",
+    "title": "DGW.ltd Featured boxes",
+    "description": "Feature specific types of content in a grid",
+    "style": "file:./featured-boxes.css",
+    "category": "theme",
+    "icon": "menu",
+    "apiVersion": 2,
+    "supports": {
+        "jsx": true, 
+        "align": false,
+        "anchor": true
+    },
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "featured-boxes.php"
+    },
+    "align": "full"
+}

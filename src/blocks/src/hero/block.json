@@ -1,0 +1,36 @@
+{
+    "name": "acf/dgwltd-hero",
+    "title": "DGW.ltd Hero",
+    "description": "Hero block",
+    "style": "file:./hero.css",
+    "viewScript": "file:./hero.js",
+    "category": "theme",
+    "icon": "tide",
+    "apiVersion": 2,
+    "supports": {
+        "jsx": true, 
+        "align": false, 
+        "alignText": true, 
+        "anchor": true,
+        "color": {
+            "text": true,
+            "background": true,
+            "link": true
+        },
+        "multiple": false
+    },
+    "styles": [
+        { "name": "default", "label": "Default", "isDefault": true },
+        { "name": "monochrome", "label": "Monochrome" }
+    ],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "hero.php"
+    },
+    "attributes": {
+        "align": {
+            "type": "string",
+            "default": "full"
+        }
+    }
+}

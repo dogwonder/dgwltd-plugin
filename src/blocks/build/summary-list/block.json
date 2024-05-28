@@ -1,0 +1,19 @@
+{
+  "name": "acf/dgwltd-summary-list",
+  "title": "DGW.ltd Summary list",
+  "description": "Summarise information block",
+  "style": "file:./summary-list.css",
+  "category": "theme",
+  "icon": "list-view",
+  "apiVersion": 2,
+  "supports": {
+    "jsx": true,
+    "align": false,
+    "anchor": true
+  },
+  "acf": {
+    "mode": "edit",
+    "renderTemplate": "summary-list.php"
+  },
+  "align": "full"
+}

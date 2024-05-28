@@ -1,0 +1,19 @@
+{
+    "name": "acf/dgwltd-related",
+    "title": "DGW.ltd Related",
+    "description": "List of related posts or pages block",
+    "style": "file:./related.css",
+    "category": "theme",
+    "icon": "admin-links",
+    "apiVersion": 2,
+    "supports": {
+        "jsx": true, 
+        "align": false,
+        "anchor": true
+    },
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "related.php"
+    },
+    "align": "full"
+}
