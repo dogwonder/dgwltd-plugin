@@ -252,6 +252,32 @@ Blocks
   padding: 0;
 }
 
+//Breadcrumbs
+[data-type='acf/dgwltd-breadcrumbs'] {
+  ol.govuk-breadcrumbs__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 0.25rem;
+    .govuk-breadcrumbs__list-item {
+      display: none;
+    }
+    &:after {
+      content: "Page 1 > Page 2 > Page 3...";
+    }
+    
+  }
+  .has-home {
+    ol.govuk-breadcrumbs__list {
+      &:before {
+        content: "Home > ";
+      }
+    }   
+  }
+}
+
+
 //Background image
 .block__background {
   width: 100%;

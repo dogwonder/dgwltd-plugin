@@ -23,6 +23,7 @@ class Dgwltd_Site_ACF {
 
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/accordion/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/anchor/block.json' );
+		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/breadcrumbs/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/featured-boxes/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/call-to-action/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/embed/block.json' );

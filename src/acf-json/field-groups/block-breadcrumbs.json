@@ -1,13 +1,13 @@
 {
-    "key": "group_5e4a9de7ecd6f",
-    "title": "Block: Details",
+    "key": "group_665993470b4d5",
+    "title": "Block: Breadcrumbs",
     "fields": [
         {
-            "key": "field_5e4a9e23a9ed4",
-            "label": "Summary",
-            "name": "summary",
+            "key": "field_665993470c05b",
+            "label": "Show home",
+            "name": "show_home",
             "aria-label": "",
-            "type": "text",
+            "type": "true_false",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,18 +16,19 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "show_in_graphql": 1,
+            "message": "",
+            "default_value": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "ui": 1
         },
         {
-            "key": "field_5e4a9e27a9ed5",
-            "label": "Details",
-            "name": "details",
+            "key": "field_66599c827c47e",
+            "label": "Ancestor",
+            "name": "ancestor",
             "aria-label": "",
-            "type": "wysiwyg",
+            "type": "post_object",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -36,11 +37,16 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "tabs": "visual",
-            "toolbar": "basic",
-            "media_upload": 0,
-            "delay": 0
+            "show_in_graphql": 1,
+            "post_type": "",
+            "post_status": "",
+            "taxonomy": "",
+            "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
         }
     ],
     "location": [
@@ -48,7 +54,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "all"
+                "value": "acf\/dgwltd-breadcrumbs"
             }
         ]
     ],
@@ -62,8 +68,8 @@
     "description": "",
     "show_in_rest": 0,
     "show_in_graphql": 0,
-    "graphql_field_name": "",
+    "graphql_field_name": "blockBreadcrumbs",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1696243321
+    "modified": 1717149286
 }
