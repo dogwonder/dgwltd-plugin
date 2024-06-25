@@ -78,7 +78,6 @@ class Dgwltd_Site {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->define_acf_hooks();
-		$this->define_block_patterns_hooks();
 		// We don't want to set any rules yet
 		// $this->define_block_rules();
 
@@ -129,11 +128,6 @@ class Dgwltd_Site {
 		 * The class responsible for defining all actions that occur for building out the custom blocks
 		 */
 		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-acf.php';
-
-		/**
-		 * The class responsible for defining all actions that occur for building out the block patterns
-		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-patterns.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the custom rules
@@ -221,25 +215,6 @@ class Dgwltd_Site {
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_styles' );
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_scripts' );
 		
-
-	}
-
-	/**
-	 * Register all of the hooks related to the block patterns
-	 * of the plugin.
-	 *
-
-	 * @access   private
-	 */
-	private function define_block_patterns_hooks() {
-
-		$plugin_patterns = new Dgwltd_Site_Patterns();
-
-		/**
- 		* Load our custom ones
- 		*/
-		$this->loader->add_action( 'init', $plugin_patterns, 'dgwltd_register_block_categories' );
-		$this->loader->add_action( 'init', $plugin_patterns, 'dgwltd_register_block_patterns' );
 
 	}
 

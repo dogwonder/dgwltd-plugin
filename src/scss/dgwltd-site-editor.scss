@@ -19,6 +19,13 @@ Generic styles
     }
 }
 
+//Editor padding
+//Becuase we use useRootPaddingAwareAlignments and padding false to allow for full width vblocks with not padding we need to add this again for the editor padding on smaller screens where the container is less than the content contentSize
+.editor-styles-wrapper .has-global-padding, 
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+    padding-inline: 1rem  !important;
+}
+
 //Editor margin
 .editor-styles-wrapper > * {
   margin-left: var(--wp--custom--spacing--outer) !important;
@@ -312,20 +319,5 @@ Blocks
   }
   .dgwltd-cta__image img {
     filter: grayscale(100%) contrast(200%);
-  }
-}
-
-
-/***********************
-Block Patterns
-***********************/
-
-//Columns 
-.dgwltd-block-group {
-  &.dgwltd-block-group--dark {
-    h2 > a,
-    h3 > a {
-      color:white;
-    }
   }
 }
