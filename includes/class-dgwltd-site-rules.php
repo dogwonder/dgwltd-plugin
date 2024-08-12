@@ -11,6 +11,74 @@
  */
 class Dgwltd_Site_Rules {
 
+	/**
+	 * This function modifies the theme JSON data by disabling color settings
+	 * for all users and then specifically enabling settings for users with the 
+	 * capability to edit_theme_options (Administrators).
+	 *
+	 * @param object $theme_json The original theme JSON data.
+	 * @return object The modified theme JSON data.
+	 */
+	public function dgwltd_restrict_color_settings_to_administrators( $theme_json ) {
+
+		// First disable color settings for everyone. This will override
+		// any settings that might have been supplied by the theme.
+		$default_settings = array(
+			'version'  => 2,
+			'settings' => array(
+				'color' => array(
+					'custom' => false
+				),
+			),
+		);
+	
+		$theme_json->update_with( $default_settings );
+	
+		// If the current user has the correct permissions, enable color settings.
+		if ( current_user_can( 'edit_theme_options' ) ) {
+			$administrator_settings = array(
+				'version'  => 2,
+				'settings' => array(
+					'color' => array(
+						'custom' => true
+					),
+				),
+			);
+	
+			$theme_json->update_with( $administrator_settings );
+		}
+	
+		// Return the modified theme JSON data.
+		return $theme_json;
+	}
+
+	// For the filter to work properly, it must be run after theme setup.
+	public function dgwltd_apply_theme_json_user_filters() {
+
+		// Check to make sure the theme has a theme.json file.
+		if ( wp_theme_has_theme_json() ) {
+			add_filter( 'wp_theme_json_data_user', array($this, 'dgwltd_restrict_color_settings_to_administrators') );
+		}
+		
+	}
+	
+	/**
+	* Allow-list the block types available in the inserter.
+	*
+	* This means only the blocks that you allow will be shown. Defaults to all WordPress 6.0 blocks.
+	* Different editors can be targeted using the $editor_context argument.
+	*
+	* See https://make.wordpress.org/core/2021/06/16/block-editor-api-changes-to-support-multiple-admin-screens-in-wp-5-8/
+	*
+	* @param bool|string[] Array of block type slugs, or boolean to enable/disable all. Default true (all registered blocktypes supported).
+	* @param WP_Block_Editor_Context The current block editor context.
+	*
+	* @return string[] List of allowed block type slugs.
+	*/
+	public function dgwltd_register_block_rules( $allowed_block_types, $editor_context ) {
+		return dgwltd_get_registered_core_blocks();
+	}
+
 	// Define the post types and the allowed blocks
 	// public function dgwltd_register_block_rules( $allowed_block_types ) {
 
@@ -36,22 +104,6 @@ class Dgwltd_Site_Rules {
 
 	// }
 
-	/**
-	* Allow-list the block types available in the inserter.
-	*
-	* This means only the blocks that you allow will be shown. Defaults to all WordPress 6.0 blocks.
-	* Different editors can be targeted using the $editor_context argument.
-	*
-	* See https://make.wordpress.org/core/2021/06/16/block-editor-api-changes-to-support-multiple-admin-screens-in-wp-5-8/
-	*
-	* @param bool|string[] Array of block type slugs, or boolean to enable/disable all. Default true (all registered blocktypes supported).
-	* @param WP_Block_Editor_Context The current block editor context.
-	*
-	* @return string[] List of allowed block type slugs.
-	*/
-	public function dgwltd_register_block_rules( $allowed_block_types, $editor_context ) {
-		return dgwltd_get_registered_core_blocks();
-	}
 
 	/**
 	* Get a list of the slugs of all Core blocks in WordPress 6.0.

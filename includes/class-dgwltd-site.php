@@ -78,8 +78,7 @@ class Dgwltd_Site {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->define_acf_hooks();
-		// We don't want to set any rules yet
-		// $this->define_block_rules();
+		$this->define_site_rules();
 
 	}
 
@@ -164,7 +163,7 @@ class Dgwltd_Site {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Dgwltd_Site_Admin( $this->get_Dgwltd_Site(), $this->get_version() );
+		$plugin_admin = new Dgwltd_Site_Admin( $this->get_dgwltd_Site(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_styles' );
 		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_scripts' );
@@ -206,15 +205,16 @@ class Dgwltd_Site {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Dgwltd_Site_Public( $this->get_Dgwltd_Site(), $this->get_version() );
+		$plugin_public = new Dgwltd_Site_Public( $this->get_dgwltd_Site(), $this->get_version() );
 
-		
 		$this->loader->add_filter('script_loader_tag', $plugin_public, 'dgwltd_add_type_attribute', 10, 3);
 
-		//We load these in the theme, so we don't need these in this instance
+		// We load these in the theme, so we don't need these in this instance
 		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_styles' );
-		// $this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_scripts' );
-		
+
+		// Load theme scripts
+		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_scripts' );
+
 
 	}
 
@@ -226,14 +226,19 @@ class Dgwltd_Site {
 
 	 * @access   private
 	 */
-	private function define_block_rules() {
+	private function define_site_rules() {
 
 		$plugin_rules = new Dgwltd_Site_Rules();
 
 		/**
  		* Allow-list the block types available in the inserter.
  		*/
-		$this->loader->add_filter( 'allowed_block_types_all', $plugin_rules, 'dgwltd_register_block_rules' );
+		// $this->loader->add_filter( 'allowed_block_types_all', $plugin_rules, 'dgwltd_register_block_rules' );
+
+		/**
+ 		* Apply user filters to theme.json data.
+ 		*/
+		$this->loader->add_action( 'after_setup_theme', $plugin_rules, 'dgwltd_apply_theme_json_user_filters' );
 
 		
 	}
@@ -253,7 +258,7 @@ class Dgwltd_Site {
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_Dgwltd_Site() {
+	public function get_dgwltd_Site() {
 		return $this->Dgwltd_Site;
 	}
 
