@@ -1,0 +1,18 @@
+{
+    "name": "acf/dgwltd-cards-query",
+    "parent": [ "acf/dgwltd-cards" ], 
+    "title": "DGW.ltd - Query",
+    "description": "Feature specific types of content in a grid",
+    "category": "theme",
+    "icon": "menu",
+    "apiVersion": 2,
+    "acf": {
+        "mode": "edit",
+        "renderTemplate": "query.php"
+    }, 
+    "supports": {
+        "jsx": true, 
+        "align": [ "none" ],
+        "anchor": true
+    }
+}

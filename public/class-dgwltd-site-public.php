@@ -239,4 +239,29 @@ class Dgwltd_Site_Public {
 		return $rgb; // returns an array with the rgb values
 	}
 
+	/*
+	 * Setup the card type mappings.
+	 *
+	 */
+	public static function dgwltd_get_card_type_mappings() {
+		//Card type
+		$cardTypeMappings = [
+			'default' => [
+				'has_image' => true, 
+				'has_kicker' => true,
+				'has_description' => true,
+				'grid_classes' => "",
+				'heading_level' => "h2",
+				'thumbnail_size' => "dgwltd-medium-card"
+			],
+			'news-summary-card' => [ 
+				'has_kicker' => false, 
+				'has_category' => true, 
+				'has_description' => true,
+				'has_date' => true
+			]
+		];
+		return $cardTypeMappings;
+	}
+
 }

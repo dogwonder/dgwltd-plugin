@@ -2,15 +2,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: DGW.ltd: Site\n"
-"POT-Creation-Date: 2022-08-18 23:39+0100\n"
-"PO-Revision-Date: 2022-08-18 23:38+0100\n"
+"POT-Creation-Date: 2024-08-12 11:39+0100\n"
+"PO-Revision-Date: 2024-08-12 11:39+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4.4\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: dgwltd-site.php\n"
@@ -22,65 +22,36 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 
-#: includes/class-dgwltd-site-patterns.php:25
-msgctxt "Block pattern category"
-msgid "DGW.ltd"
+#: src/blocks/build/breadcrumbs/breadcrumbs.php:51
+#: src/blocks/src/breadcrumbs/breadcrumbs.php:51
+msgid "Home"
 msgstr ""
 
-#: includes/class-dgwltd-site-patterns.php:40
-msgid "Supporters"
+#: src/blocks/build/breadcrumbs/breadcrumbs.php:81
+#: src/blocks/src/breadcrumbs/breadcrumbs.php:81
+msgid "Search results"
 msgstr ""
 
-#: includes/class-dgwltd-site-patterns.php:41
-msgid "A group of images and links to list supporters."
+#: src/blocks/build/breadcrumbs/breadcrumbs.php:83
+#: src/blocks/src/breadcrumbs/breadcrumbs.php:83
+msgid "404, page not found"
 msgstr ""
 
-#: includes/class-dgwltd-site-patterns.php:61
-#: includes/class-dgwltd-site-patterns.php:78
-#: includes/class-dgwltd-site-patterns.php:95
-#: includes/class-dgwltd-site-patterns.php:112
-#: includes/class-dgwltd-site-patterns.php:171
-#: includes/class-dgwltd-site-patterns.php:184
-#: includes/class-dgwltd-site-patterns.php:197
-#: includes/class-dgwltd-site-patterns.php:232
-#: includes/class-dgwltd-site-patterns.php:245
-#: includes/class-dgwltd-site-patterns.php:258
-msgid "Pencil drawing of Don Quixote"
-msgstr ""
-
-#: includes/class-dgwltd-site-patterns.php:133
-msgid "FAQ"
-msgstr ""
-
-#: includes/class-dgwltd-site-patterns.php:134
-msgid "Columns for commonly asked questions."
-msgstr ""
-
-#: includes/class-dgwltd-site-patterns.php:156
-msgid "Columns - dark"
-msgstr ""
-
-#: includes/class-dgwltd-site-patterns.php:157
-msgid "Columns for content with a dark background colour"
-msgstr ""
-
-#: includes/class-dgwltd-site-patterns.php:217
-msgid "Columns - light"
-msgstr ""
-
-#: includes/class-dgwltd-site-patterns.php:218
-msgid "Columns for content with a light background colour"
-msgstr ""
-
-#: src/blocks/hero/hero.php:152
+#: src/blocks/build/hero/hero.php:156 src/blocks/src/hero/hero.php:156
 msgid "Watch"
 msgstr ""
 
-#: src/blocks/hero/hero.php:244
-msgid "Play the video"
+#: src/blocks/build/hero/hero.php:208 src/blocks/src/hero/hero.php:208
+msgid "Watch the video"
 msgstr ""
 
-#: src/blocks/related/related.php:32
+#: src/blocks/build/hero/hero.php:212 src/blocks/build/hero/hero.php:221
+#: src/blocks/src/hero/hero.php:212 src/blocks/src/hero/hero.php:221
+msgid "Video modal"
+msgstr ""
+
+#: src/blocks/build/related/related.php:29
+#: src/blocks/src/related/related.php:29
 msgid "Related"
 msgstr ""
 
