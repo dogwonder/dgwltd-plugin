@@ -59,7 +59,6 @@ $is_featured = ( $featured == $card ) ? true : false;
 			<?php if($has_meta) : ?>
 				<div class="dgwltd-card__meta">
 					<?php dgwltd_posted_on(); ?>
-					<?php dgwltd_get_taxonomy_terms($card, 'category'); ?>
 				</div>
 			<?php endif; ?>
 
