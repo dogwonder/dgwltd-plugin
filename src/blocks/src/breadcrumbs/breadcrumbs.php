@@ -7,6 +7,7 @@
  * @param   bool $is_preview True during AJAX preview.
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
+
 $block_id = $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
@@ -23,13 +24,18 @@ global $post;
 // Custom ancestor
 $custom_ancestor = get_field( 'ancestor' ) ?? false;
 
-$currentpost_id = $post->ID;
-
-// get ancestors of current post
-$ancestors = get_post_ancestors( $post->ID );
-
-// Post parent ID (which can be 0 if there is no parent)
-$parent = wp_get_post_parent_id( $currentpost_id );
+if ( isset( $post ) && ! is_null( $post ) ) {
+    $currentpost_id = $post->ID;
+	// get ancestors of current post
+	$ancestors = get_post_ancestors( $post->ID );
+	// Post parent ID (which can be 0 if there is no parent)
+	$parent = wp_get_post_parent_id( $currentpost_id );
+} else {
+    // Handle the case where $post is not set or is null
+    $currentpost_id = 0; // or any default value or error handling
+	$ancestors = [];
+	$parent = 0;
+}
 
 // Show home true / false
 $show_home = get_field( 'show_home') ?? false;
@@ -95,3 +101,4 @@ $block_classes_arr  = array( $class_name );
 	</div>
 
 </div>
+<?php wp_reset_postdata(); // Reset post data ?>
