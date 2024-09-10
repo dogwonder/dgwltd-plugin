@@ -25,8 +25,8 @@ class Dgwltd_Site_ACF {
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/anchor/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/breadcrumbs/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/call-to-action/block.json' );
-		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . '/build/cards/block.json' );
-    	register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . '/build/cards/query/block.json' );
+		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/cards/block.json' );
+    	register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/cards/query/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/embed/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/feature/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/hero/block.json' );
