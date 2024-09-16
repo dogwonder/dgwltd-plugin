@@ -13,13 +13,14 @@ import { select, subscribe } from '@wordpress/data';
 (function () {
   'use strict';
 
-  const updateFeaturedCards = (block, featured_card_id) => {
+  const updateFeaturedCards = (block, featured_id, saved_field_id) => {
+    
     let cards = [];
     let featured = [];
     let cards_options = block.querySelectorAll('.values [data-id]');
-    let featured_input = block.parentNode.querySelector('.acf-field-' + featured_card_id + ' .acf-input select');
-    let featured_input_options = block.parentNode.querySelectorAll('.acf-field-' + featured_card_id + ' .acf-input select option');
-    let featured_card = acf.getField('field_6682bce463a69');
+    let featured_input = block.parentNode.querySelector('.acf-field-' + featured_id + ' .acf-input select');
+    let featured_input_options = block.parentNode.querySelectorAll('.acf-field-' + featured_id + ' .acf-input select option');
+    let featured_card = acf.getField(saved_field_id);
 
     // Update cards array
     Array.prototype.forEach.call(cards_options, function (item) {
@@ -73,11 +74,11 @@ import { select, subscribe } from '@wordpress/data';
     });
 
     // Save the selection to the block field
-    saveFeaturedSelection(block, featured_card_id, featured_input.value);
+    saveFeaturedSelection(block, featured_id, featured_input.value);
   };
 
-  const saveFeaturedSelection = (block, featured_card_id, selectedValue) => {
-    let featured_card = acf.getField('field_6682bce463a69');
+  const saveFeaturedSelection = (block, featured_id, selectedValue) => {
+    let featured_card = acf.getField(featured_id);
     if (featured_card) {
       // Save the selected value to the block field
       featured_card.val(selectedValue);
@@ -85,29 +86,40 @@ import { select, subscribe } from '@wordpress/data';
   };
 
   const acfUpdatePostSelection = (elem) => {
+    
     if (typeof acf == 'undefined') { return; }
 
-    var cards_id = '657b1c0185c4b';
-    var featured_card_id = '66703ce0f4c81';
+    var cards_id = '657b1c0185c4b'; //Relationship field
+    var featured_id = '66703ce0f4c81'; // Populated select field
+    var saved_id = '6682bce463a69'; //Hidden field to save the selected card
 
-    var allHighlights = acf.findFields({ key: 'field_' + cards_id });
+    var cards_field_id = 'field_' + cards_id;
+    var featured_field_id = 'field_' + featured_id;
+    var saved_field_id = 'field_' + saved_id;
+
+    var allHighlights = acf.findFields({ key: cards_field_id });
 
     // If there are no highlights fields then exit
     if (!allHighlights) { return; }
 
     Array.prototype.forEach.call(allHighlights, function (block, i) {
-      // Initial update on page load
-      updateFeaturedCards(block, featured_card_id);
 
-      // Listener for changes
-      block.addEventListener('click', function () {
-        updateFeaturedCards(block, featured_card_id);
-      });
+      // Initial update on page load
+      updateFeaturedCards(block, featured_id, saved_field_id);
+      
+      // Get the cards field
+      let cards_field = acf.getField(cards_field_id);
+      if (cards_field) {
+        // Listen for changes in the cards field
+        cards_field.on('change', function () {
+          updateFeaturedCards(block, featured_id, saved_field_id);
+        });
+      }
 
       // If the select field changes, update the featured card
-      let featured_input = block.parentNode.querySelector('.acf-field-' + featured_card_id + ' .acf-input select');
+      let featured_input = block.parentNode.querySelector('.acf-field-' + featured_id + ' .acf-input select');
       featured_input.addEventListener('change', function () {
-        saveFeaturedSelection(block, featured_card_id, featured_input.value);
+        saveFeaturedSelection(block, saved_field_id, featured_input.value);
       });
     });
   };

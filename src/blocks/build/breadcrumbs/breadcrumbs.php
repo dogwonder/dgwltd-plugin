@@ -8,8 +8,6 @@
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
 
-global $post;
-
 $block_id = $block['id'];
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
@@ -103,3 +101,4 @@ $block_classes_arr  = array( $class_name );
 	</div>
 
 </div>
+<?php wp_reset_postdata(); // Reset post data ?>
