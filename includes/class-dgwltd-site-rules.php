@@ -21,6 +21,8 @@ class Dgwltd_Site_Rules {
 	 */
 	public function dgwltd_restrict_color_settings_to_administrators( $theme_json ) {
 
+		//Via https://developer.wordpress.org/news/2023/07/05/how-to-modify-theme-json-data-using-server-side-filters/
+
 		// First disable color settings for everyone. This will override
 		// any settings that might have been supplied by the theme.
 		$default_settings = array(
