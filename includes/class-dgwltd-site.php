@@ -79,6 +79,7 @@ class Dgwltd_Site {
 		$this->define_public_hooks();
 		$this->define_acf_hooks();
 		$this->define_site_rules();
+		$this->define_site_wp_cli();
 
 	}
 
@@ -132,6 +133,11 @@ class Dgwltd_Site {
 		 * The class responsible for defining all actions that occur for building out the custom rules
 		 */
 		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-rules.php';
+
+		/**
+		 * The class responsible for defining all actions that occur for custom WP CLI commands
+		 */
+		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-wp-cli.php';
 
 		$this->loader = new Dgwltd_Site_Loader();
 
@@ -243,6 +249,13 @@ class Dgwltd_Site {
 		$this->loader->add_action( 'after_setup_theme', $plugin_rules, 'dgwltd_apply_theme_json_user_filters' );
 
 		
+	}
+
+	private function define_site_wp_cli() {
+		
+		$plugin_wp_cli = new Dgwltd_Site_WP_CLI();
+
+		$this->loader->add_action( 'init', $plugin_wp_cli, 'dgwltd_register_wp_cli_commands' );
 	}
 
 	/**
