@@ -1,6 +1,6 @@
 {
     "key": "group_5fbe8e72e901a",
-    "title": "Block: Feature",
+    "title": "Block: Banner",
     "fields": [
         {
             "key": "field_622f8fafe240b",
@@ -113,7 +113,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/dgwltd-feature"
+                "value": "acf\/dgwltd-banner"
             }
         ]
     ],
@@ -127,8 +127,8 @@
     "description": "",
     "show_in_rest": 0,
     "show_in_graphql": 0,
-    "graphql_field_name": "block:Feature",
+    "graphql_field_name": "block:Banner",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1696243323
+    "modified": 1727258143
 }

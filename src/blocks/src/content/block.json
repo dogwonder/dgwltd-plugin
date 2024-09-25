@@ -1,16 +1,16 @@
 {
-    "name": "acf/dgwltd-call-to-action",
-    "title": "DGW.ltd Call-to-Action",
-    "description": "Call-to-Action to action block",
-    "style": "file:./call-to-action.css",
+    "name": "acf/dgwltd-content",
+    "title": "DGW.ltd Content block",
+    "description": "Content block",
+    "style": "file:./content.css",
     "category": "theme",
     "icon": "schedule",
     "apiVersion": 2,
     "supports": {
         "jsx": true, 
-        "align": [ "full" ],
+        "align": [ "none" ],
         "alignText": false, 
-        "anchor": true,
+        "anchor": true, 
         "color": {
             "text": true,
             "background": true,
@@ -19,11 +19,12 @@
     },
     "styles": [
         { "name": "default", "label": "Default", "isDefault": true },
-        { "name": "monochrome", "label": "Monochrome" }
+        { "name": "illustrative", "label": "Illustrative" }, 
+        { "name": "photographic", "label": "Photographic" }
     ],
     "acf": {
         "mode": "preview",
-        "renderTemplate": "call-to-action.php"
+        "renderTemplate": "content.php"
     },
-    "align": "full"
+    "align": "none"
 }

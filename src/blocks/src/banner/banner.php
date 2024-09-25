@@ -1,6 +1,6 @@
 <?php
 /**
- * Feature Block Template.
+ * Banner Block Template.
  *
  * @param   array $block The block settings and attributes.
  * @param   string $content The block inner HTML (empty).
@@ -12,7 +12,7 @@ if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
 // Create class attribute allowing for custom "className" and "align" values. and "align" values.
-$class_name = 'dgwltd-block dgwltd-feature';
+$class_name = 'dgwltd-block dgwltd-banner';
 if ( ! empty( $block['className'] ) ) {
 	$class_name .= ' ' . $block['className'];
 }
@@ -90,7 +90,7 @@ $block_template = array(
 				?>
 				<?php if ( $overlay ) : ?>
 				<style>
-					#<?php echo $block_id; ?>.dgwltd-feature:before {
+					#<?php echo $block_id; ?>.dgwltd-banner:before {
 						display: block;
 						z-index: 2;
 						content: '';
@@ -121,10 +121,10 @@ $block_template = array(
 					</div>
 			<?php endif; ?>    
 
-			<div class="dgwltd-feature__wrapper">
-				<div class="dgwltd-feature__inner">   
+			<div class="dgwltd-banner__wrapper">
+				<div class="dgwltd-banner__inner">   
 
-				<div class="dgwltd-feature__content">
+				<div class="dgwltd-banner__content">
 					<InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" template="<?php echo esc_attr( wp_json_encode( $block_template ) ); ?>" />
 				</div>
 				

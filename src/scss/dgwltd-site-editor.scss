@@ -41,18 +41,14 @@ Generic styles
 /***********************
 Blocks
 ***********************/
-[data-type='acf/dgwltd-hero'], 
-[data-type='acf/dgwltd-feature'], 
-[data-type='acf/dgwltd-call-to-action'], 
-[data-type='acf/dgwltd-featured-boxes'] {
-
+[data-type*='acf/dgwltd-'] {
   box-sizing: border-box;
   max-width: 100%;
   width: clamp(16rem, 95vw, 70rem);
   border: 1px solid var(--wp--preset--color--dark);
+  padding: var(--wp--custom--spacing--outer); //Allow us to focus on the content
   border-radius: 0;
   background-color:white;
-  
   .wp-block {
     max-width: 100%;
   }
@@ -128,8 +124,9 @@ Blocks
 
 //Full width
 [data-type='acf/dgwltd-hero'], 
-[data-type='acf/dgwltd-feature'], 
-[data-type='acf/dgwltd-call-to-action'] {
+[data-type='acf/dgwltd-banner'], 
+[data-type='acf/dgwltd-promo-card'], 
+[data-type='acf/dgwltd-content'] {
   &.alignfull {
     width: clamp(16rem, 95vw, 100%);
     .acf-innerblocks-container {
@@ -141,7 +138,7 @@ Blocks
 
 //Hero & Feature
 [data-type='acf/dgwltd-hero'], 
-[data-type='acf/dgwltd-feature'] {
+[data-type='acf/dgwltd-banner'] {
   > .has-background, 
   > .has-image {
     position: relative;
@@ -175,31 +172,103 @@ Blocks
   }
 }
 
-//Call-to-Action
-[data-type='acf/dgwltd-call-to-action'] {
+//Content
+[data-type='acf/dgwltd-promo-card'] {
+  .dgwltd-section-title {
+    text-decoration: none;
+  } 
+  .has-image, 
+  .has-embed,
+  .has-video {
+    .dgwltd-promo-card__inner {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: relative;
+      gap: 1.25rem;
+      .wp-block-heading {
+        font-size: var(--wp--preset--font-size--5);
+      }
+      .dgwltd-promo-card__content {
+        flex-basis: 40%
+      }
+    }
+    &[data-state='reversed'] {
+      .dgwltd-promo-card__inner {
+        flex-direction: row-reverse;
+      }
+    }
+  }
+  .has-image {
+    .dgwltd-promo-card__inner {
+      .dgwltd-promo-card__image {
+        img {
+          width: 100%;
+        }
+      }
+    }
+    .dgwltd-promo-card__content {
+      padding: 2rem;
+    }
+  }
+  .has-embed,
+  .has-video {
+    .dgwltd-promo-card__inner {
+      .dgwltd-promo-card__video {
+        video {
+          width: 100%;
+        }
+      }
+    }
+    
+  }
+  &.is-style-light {
+    .dgwltd-promo-card__content {
+        background-color: var(--wp--preset--color--dark);
+        color: var(--wp--preset--color--light);
+    }
+  }
+  &.is-style-dark {
+    background-color: var(--wp--preset--color--dark);
+    .dgwltd-promo-card__content {
+        background-color: var(--wp--preset--color--light);
+        color: var(--wp--preset--color--dark);
+    }
+  }
+  &.is-style-dark-neon {
+      background-color: var(--wp--preset--color--dark);
+      .dgwltd-promo-card__content {
+        background-color: var(--wp--preset--color--neon);
+        .wp-element-button {
+          background-color: transparent;
+          border-color: var(--wp--preset--color--dark) !important;
+        }
+      }
+  }
+}
 
-  .dgwltd-cta__content {
+//Content
+[data-type='acf/dgwltd-content'] {
+
+  .dgwltd-content-block__content {
     padding:1rem;
   }
   
   .has-image {
+
     padding:0;
-    .govuk-grid-row {
-      margin: 0;
-    }
-    [class^="govuk-grid-column-"] {
-      padding: 20px;
-    }
-    .dgwltd-cta__inner {
+
+    .dgwltd-content-block__inner {
       padding: 0;
       display: flex;
       flex-direction: row;
     }
-    .dgwltd-cta__content {
+    
+    .dgwltd-content-block__content {
       padding:20px;
       flex-basis: 50%;
     }
-    .dgwltd-cta__image {
+    .dgwltd-content-block__image {
       margin: 0;
       flex-basis: 50%;
     }
@@ -220,34 +289,11 @@ Blocks
   [data-state='reversed'] {
     display: flex;
     flex-direction: column-reverse;
-    .dgwltd-cta__image {
+    .dgwltd-content-block__image {
       order: 1;
     }
-    .dgwltd-cta__content {
+    .dgwltd-content-block__content {
       order: 2;
-    }
-  }
-
-}
-  
-//Featured-boxes
-[data-type='acf/dgwltd-featured-boxes'] {
-  padding: 1rem 1.25rem;
-  .dgwltd-featured-boxes__inner {
-    //Auto grid
-    margin-top: 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
-    grid-gap: 1.25rem;
-    .dgwltd-card__heading {
-      font-size: 2rem;
-    }
-    .dgwltd-card__inner {
-      background-color:white;
-      padding: 0;
-    }
-    .dgwltd-card__image {
-      margin: 0;
     }
   }
 
@@ -317,7 +363,7 @@ Blocks
   .block__background img {
     filter: grayscale(100%) contrast(200%);
   }
-  .dgwltd-cta__image img {
+  .dgwltd-content__image img {
     filter: grayscale(100%) contrast(200%);
   }
 }

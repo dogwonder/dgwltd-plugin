@@ -46,21 +46,15 @@ if($overlay) {
 }
 
 // Heights
-$has_height = get_field( 'has_height' ) ? : '';
 $vertical_height = get_field( 'vertical_height' ) ? : '';
 
 // Classes
 $block_image   = $image ? 'has-image ' : '';
 $block_video   = $video ? 'has-video ' : '';
-$block_height = $has_height ? 'has-height ' : '';
-
-if($block_height) {
-	$block_height  = $vertical_height ? 'height--' . $vertical_height : '';
-}
 $block_overlay  = $overlay ? 'has-overlay ' : '';
 
 // Class list
-$block_classes_arr = array( $class_name, $block_classes, $block_image, $block_video, $block_height, $block_overlay);
+$block_classes_arr = array( $class_name, $block_classes, $block_image, $block_video, $block_overlay);
 
 // JSX Innerblocks - https://www.billerickson.net/innerblocks-with-acf-blocks/
 $allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/list', 'core/button' );
@@ -147,8 +141,8 @@ $block_template = array(
 				<div class="dgwltd-hero__inner">   
 
 					<div class="dgwltd-hero__content stack">
-						<InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" template="<?php echo esc_attr( wp_json_encode( $block_template ) ); ?>" />
 
+						<InnerBlocks allowedBlocks="<?php echo esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" template="<?php echo esc_attr( wp_json_encode( $block_template ) ); ?>" />
 						
 						<?php if ( ! empty( $video ) && $has_video ) : ?>
 							<div class="dgwltd-hero__play">

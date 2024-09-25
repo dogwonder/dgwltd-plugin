@@ -1,8 +1,8 @@
 {
-  "name": "acf/dgwltd-feature",
-  "title": "DGW.ltd Feature",
-  "description": "Feature block",
-  "style": "file:./feature.css",
+  "name": "acf/dgwltd-banner",
+  "title": "DGW.ltd Banner",
+  "description": "Banner block",
+  "style": "file:./banner.css",
   "category": "theme",
   "icon": "cover-image",
   "apiVersion": 2,
@@ -30,7 +30,7 @@
   ],
   "acf": {
     "mode": "preview",
-    "renderTemplate": "feature.php"
+    "renderTemplate": "banner.php"
   },
   "attributes": {
     "align": {
