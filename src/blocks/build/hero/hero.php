@@ -45,9 +45,6 @@ if($overlay) {
 	$overlay_rgba_full = 'rgba(' . $hex2rgb[0] . ',' . $hex2rgb[1] . ',' . $hex2rgb[2] . ', 0)';
 }
 
-// Heights
-$vertical_height = get_field( 'vertical_height' ) ? : '';
-
 // Classes
 $block_image   = $image ? 'has-image ' : '';
 $block_video   = $video ? 'has-video ' : '';

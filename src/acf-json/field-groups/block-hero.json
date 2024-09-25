@@ -115,36 +115,6 @@
             "height": ""
         },
         {
-            "key": "field_5f0587bee98dc",
-            "label": "Vertical height",
-            "name": "vertical_height",
-            "aria-label": "",
-            "type": "range",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_623d968845b39",
-                        "operator": "==",
-                        "value": "1"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "show_in_graphql": 1,
-            "default_value": "",
-            "min": "",
-            "max": "",
-            "step": 10,
-            "prepend": "",
-            "append": ""
-        },
-        {
             "key": "field_622f910f92ad7",
             "label": "Overlay",
             "name": "overlay",
@@ -208,5 +178,5 @@
     "graphql_field_name": "",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1727252953
+    "modified": 1727274698
 }

@@ -1,42 +1,49 @@
+//Utilities
+%full-width {
+  max-width: 100% !important;
+  width: 100% !important;
+  .dgwltd-block {
+    max-width: var(--wp--custom--width--container);
+    margin-inline: auto;
+  }
+}
+
 /***********************
 Generic styles
 ***********************/
-.dgwltd-button {
-    display: inline-block;
-    color: var(--wp--preset--color--light);
-    background-color: black;
-    box-shadow: 0 2px 0 var(--wp--preset--color--dark);
-    border: 0;
-    font-weight: bold;
-    font-size: 1rem;
-    line-height: 1em;
-    padding: 1rem 1.25rem;
-    text-decoration: none;
-    &:link,
-    &:visited,
-    &:active {
-      color: var(--wp--preset--color--light);
-    }
+.editor-styles-wrapper {
+  margin-inline: 1rem;
 }
 
-//Editor padding
 //Becuase we use useRootPaddingAwareAlignments and padding false to allow for full width vblocks with not padding we need to add this again for the editor padding on smaller screens where the container is less than the content contentSize
 .editor-styles-wrapper .has-global-padding, 
-.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > :where(:not(.alignleft):not(.alignright):not(.alignfull)) {
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > :where(:not(.alignleft):not(.alignright):not(.alignfull):not(.acf-block-component)) {
     padding-inline: 1rem  !important;
 }
 
-//Editor margin
-.editor-styles-wrapper > * {
-  margin-left: var(--wp--custom--spacing--outer) !important;
-  margin-right: var(--wp--custom--spacing--outer) !important;
+//Limit the width of the blocks in the editor to allow some breathing space
+.editor-styles-wrapper .editor-editor-canvas__post-title-wrapper > *, 
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > * {
+  width: clamp(16rem,95vw,var(--wp--custom--width--container));
 }
 
-//Remove border so it doesn't look weird when a different colour is used
-.wp-block-button__link {
-  border: 0 !important;
+.dgwltd-button {
+  display: inline-block;
+  color: var(--wp--preset--color--light);
+  background-color: black;
+  box-shadow: 0 2px 0 var(--wp--preset--color--dark);
+  border: 0;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 1em;
+  padding: 1rem 1.25rem;
+  text-decoration: none;
+  &:link,
+  &:visited,
+  &:active {
+    color: var(--wp--preset--color--light);
+  }
 }
-
 
 /***********************
 Blocks
@@ -44,20 +51,7 @@ Blocks
 [data-type*='acf/dgwltd-'] {
   box-sizing: border-box;
   max-width: 100%;
-  width: clamp(16rem, 95vw, 70rem);
-  border: 1px solid var(--wp--preset--color--dark);
-  padding: var(--wp--custom--spacing--outer); //Allow us to focus on the content
-  border-radius: 0;
-  background-color:white;
-  .wp-block {
-    max-width: 100%;
-  }
-  .wp-block-button {
-    margin-left:0;
-  }
-  .acf-block-preview {
-    padding: 0;
-  }
+  width: clamp(16rem, 95vw, var(--wp--custom--width--container));
   .acf-innerblocks-container {
     > h1, 
     > h2, 
@@ -79,19 +73,18 @@ Blocks
   .has-background, 
   .has-image {
     .acf-innerblocks-container {
-      padding-top: 5rem;
-      padding-bottom: 5rem;
+      padding-block: var(--wp--custom--spacing--xl);
     }
   }
   .has-video {
     .acf-innerblocks-container {
-      padding-bottom: 0;
+      padding-block-end: 0;
     }
     .dgwltd-hero__play {
       z-index: 3;
       position: relative;
       margin: var(--wp--custom--spacing--medium) auto 0;
-      max-width: 70rem;
+      max-width: var(--wp--custom--width--container);
       .dgwltd-button {
         display: inline-flex;
         justify-content: space-between;
@@ -122,27 +115,13 @@ Blocks
   }
 }
 
-//Full width
-[data-type='acf/dgwltd-hero'], 
-[data-type='acf/dgwltd-banner'], 
-[data-type='acf/dgwltd-promo-card'], 
-[data-type='acf/dgwltd-content'] {
-  &.alignfull {
-    width: clamp(16rem, 95vw, 100%);
-    .acf-innerblocks-container {
-      max-width: 70rem;
-      margin: 0 auto;
-    }
-  }
-}
-
 //Hero & Feature
 [data-type='acf/dgwltd-hero'], 
 [data-type='acf/dgwltd-banner'] {
   > .has-background, 
   > .has-image {
     position: relative;
-    padding: 1.25rem;
+    padding: var(--wp--custom--spacing--gap);
     background-size: cover;
     &:before {
       content: "";
@@ -185,23 +164,38 @@ Blocks
       flex-direction: row;
       align-items: center;
       position: relative;
-      gap: 1.25rem;
+      gap: var(--wp--custom--spacing--gap);
       .wp-block-heading {
-        font-size: var(--wp--preset--font-size--5);
+        font-size: var(--wp--preset--font-size--lg);
       }
       .dgwltd-promo-card__content {
-        flex-basis: 40%
+        z-index: 2;
+        flex-basis: 60%;
+        background-color: var(--wp--preset--color--primary);
+      }
+      .wp-element-button {
+        border-color: var(--wp--preset--color--dark);
       }
     }
     &[data-state='reversed'] {
       .dgwltd-promo-card__inner {
         flex-direction: row-reverse;
+        .dgwltd-promo-card__image {
+          margin-inline-start: 0;
+          margin-inline-end: calc(var(--wp--custom--spacing--xl) * -1);
+        }
       }
     }
   }
+  
   .has-image {
     .dgwltd-promo-card__inner {
       .dgwltd-promo-card__image {
+        z-index: 1;
+        margin-inline-start: calc(var(--wp--custom--spacing--xl) * -1);
+        figure {
+          margin: 0;
+        }
         img {
           width: 100%;
         }
@@ -211,6 +205,7 @@ Blocks
       padding: 2rem;
     }
   }
+  
   .has-embed,
   .has-video {
     .dgwltd-promo-card__inner {
@@ -222,42 +217,34 @@ Blocks
     }
     
   }
+
+  &.is-style-dark {
+      padding: var(--wp--custom--spacing--gap);
+      background-color: var(--wp--preset--color--dark);
+      .dgwltd-promo-card__content {
+          background-color: var(--wp--preset--color--light);
+          color: var(--wp--preset--color--dark);
+      }
+  }
+
   &.is-style-light {
     .dgwltd-promo-card__content {
         background-color: var(--wp--preset--color--dark);
         color: var(--wp--preset--color--light);
-    }
-  }
-  &.is-style-dark {
-    background-color: var(--wp--preset--color--dark);
-    .dgwltd-promo-card__content {
-        background-color: var(--wp--preset--color--light);
-        color: var(--wp--preset--color--dark);
-    }
-  }
-  &.is-style-dark-neon {
-      background-color: var(--wp--preset--color--dark);
-      .dgwltd-promo-card__content {
-        background-color: var(--wp--preset--color--neon);
         .wp-element-button {
-          background-color: transparent;
-          border-color: var(--wp--preset--color--dark) !important;
+            color: var(--wp--preset--color--primary);
+            border-color: var(--wp--preset--color--primary);
         }
-      }
-  }
+    }
+  } 
+
 }
 
 //Content
 [data-type='acf/dgwltd-content'] {
-
-  .dgwltd-content-block__content {
-    padding:1rem;
-  }
   
   .has-image {
-
     padding:0;
-
     .dgwltd-content-block__inner {
       padding: 0;
       display: flex;
@@ -265,7 +252,7 @@ Blocks
     }
     
     .dgwltd-content-block__content {
-      padding:20px;
+      padding-inline-end: var(--wp--custom--spacing--gap);
       flex-basis: 50%;
     }
     .dgwltd-content-block__image {
@@ -294,6 +281,8 @@ Blocks
     }
     .dgwltd-content-block__content {
       order: 2;
+      padding-inline-start: var(--wp--custom--spacing--gap);
+      padding-inline-end: 0;
     }
   }
 

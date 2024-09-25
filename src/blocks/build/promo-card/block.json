@@ -35,16 +35,8 @@
       "label": "Dark"
     },
     {
-      "name": "dark-primary",
-      "label": "Dark Primary"
-    },
-    {
       "name": "light",
       "label": "Light"
-    },
-    {
-      "name": "light-primary",
-      "label": "Light Primary"
     }
   ],
   "align": "none"
