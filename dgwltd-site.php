@@ -14,7 +14,7 @@
  * @wordpress-plugin
  * Plugin Name:       DGW.ltd: Site
  * Plugin URI:        https://wp.dgw.ltd
- * Description:       A collection of custom ACF blocks
+ * Description:       Accompanying plugin for the DGW.ltd theme
  * Version:           1.0.4
  * Author:            Dogwonder Ltd
  * Author URI:        https://richholman.com
