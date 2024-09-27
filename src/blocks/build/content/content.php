@@ -72,14 +72,12 @@ $block_template = array(
 					$image_small_width  = esc_attr( $image['sizes']['dgwltd-small-width'] );
 					$image_small_height = esc_attr( $image['sizes']['dgwltd-small-height'] );
 					// For Low quality image placeholders (LQIP)
-					$type   = pathinfo( $image_tiny, PATHINFO_EXTENSION );
-					$data   = file_get_contents( $image_tiny );
-					$base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
+					$base64Image  = Dgwltd_Site_Public::dgwltd_image_to_base64_data_uri( $image_tiny );
 					?>
 				<figure class="dgwltd-content-block__image">
 					<picture class="frame">
 						<source media="(min-width: 769px)" srcset="<?php echo ( $image_medium ? $image_medium : $image_small ); ?>">
-						<img src="<?php echo $image_small; ?>" width="<?php echo $image_small_width; ?>" height="<?php echo $image_small_height; ?>" alt="<?php echo ( $image_alt ? $image_alt : '' ); ?>" loading="lazy" style="background-image: url(<?php echo $base64; ?>)" />
+						<img src="<?php echo $image_small; ?>" width="<?php echo $image_small_width; ?>" height="<?php echo $image_small_height; ?>" alt="<?php echo ( $image_alt ? $image_alt : '' ); ?>" loading="lazy" style="background-image: url(<?php echo $base64Image; ?>)" />
 					</picture>
 				</figure>
 			<?php endif; ?>    

@@ -91,9 +91,7 @@ $block_template = array(
 				$image_width       = esc_attr( $image['width'] );
 				$image_height      = esc_attr( $image['height'] );
 				// For Low quality image placeholders (LQIP)
-				$type   = pathinfo( $image_tiny, PATHINFO_EXTENSION );
-				$data   = file_get_contents( $image_tiny );
-				$base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
+				$base64Image  = Dgwltd_Site_Public::dgwltd_image_to_base64_data_uri( $image_tiny );
 				?>
 				<link rel="preload" href="<?php echo $image_small; ?>" as="image" media="(max-width: 39.6875em)">
 				<link rel="preload" href="<?php echo $image_large; ?>" as="image" media="(min-width: 40.0625em)">
@@ -125,7 +123,7 @@ $block_template = array(
 							alt="<?php echo $image_alt ?>" 
 							width="<?php echo $image_small_width; ?>" 
 							height="<?php echo $image_small_height; ?>" 
-							style="background-image: url(<?php echo $base64; ?>)" 
+							style="background-image: url(<?php echo $base64Image; ?>)" 
 							fetchpriority="high"
 							/>
 						</picture>
@@ -160,7 +158,7 @@ $block_template = array(
 </div>
 
 <?php if ( ! empty( $video ) && $has_video) : 
-$parse = parse_url( $video );
+$parse = wp_parse_url( $video );
 
 if ( $parse['host'] == 'youtu.be' ) {
 	$video_type = 'youtube';

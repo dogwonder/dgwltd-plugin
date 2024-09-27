@@ -84,9 +84,7 @@ $block_template = array(
 				$image_width       = esc_attr( $image['width'] );
 				$image_height      = esc_attr( $image['height'] );
 				// For Low quality image placeholders (LQIP)
-				$type   = pathinfo( $image_tiny, PATHINFO_EXTENSION );
-				$data   = file_get_contents( $image_tiny );
-				$base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
+				$base64Image  = Dgwltd_Site_Public::dgwltd_image_to_base64_data_uri( $image_tiny );
 				?>
 				<?php if ( $overlay ) : ?>
 				<style>
@@ -109,12 +107,12 @@ $block_template = array(
 						<picture>
 							<source media="(min-width: 900px)" srcset="<?php echo $image_large; ?>">
 							<img 
-							src="<?php echo $image_small; ?>" 
+							src="#" 
 							width="<?php echo $image_small_width; ?>" 
 							height="<?php echo $image_small_height; ?>" 
 							alt="<?php echo $image_alt ?>" 
 							loading="lazy" 
-							style="background-image: url(<?php echo $base64; ?>)" 
+							style="background-image: url(<?php echo $base64Image; ?>)" 
 							/>
 						</picture>
 						</figure>

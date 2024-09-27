@@ -97,7 +97,7 @@ class Dgwltd_Site_Public {
 	public static function dgwltd_parse_video_uri( $url ) {
 
 		// Parse the url
-		$parse = parse_url( $url );
+		$parse = wp_parse_url( $url );
 
 		// Set blank variables
 		$video_type = '';
@@ -157,6 +157,100 @@ class Dgwltd_Site_Public {
 			return false;
 
 		}
+	}
+
+	public static function dgwltd_image_to_base64_data_uri( $imagePath ) {
+		// Ensure the WordPress Filesystem API is available
+		if ( ! function_exists( 'WP_Filesystem' ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+		}
+	
+		// Initialize the Filesystem API
+		global $wp_filesystem;
+		if ( ! WP_Filesystem() ) {
+			error_log( 'Failed to initialize WordPress Filesystem API.' );
+			return false;
+		}
+	
+		// Determine if the path is a URL or a local file
+		if ( filter_var( $imagePath, FILTER_VALIDATE_URL ) ) {
+			// It's a remote URL; use wp_remote_get
+			$response = wp_remote_get( $imagePath );
+	
+			if ( is_wp_error( $response ) ) {
+				error_log( 'wp_remote_get failed: ' . $response->get_error_message() );
+				return false;
+			}
+	
+			$http_code = wp_remote_retrieve_response_code( $response );
+			if ( $http_code !== 200 ) {
+				error_log( "wp_remote_get returned HTTP code {$http_code} for URL: {$imagePath}" );
+				return false;
+			}
+	
+			$fileData = wp_remote_retrieve_body( $response );
+			if ( empty( $fileData ) ) {
+				error_log( "Empty response body from URL: {$imagePath}" );
+				return false;
+			}
+	
+			// Attempt to get MIME type from headers
+			$mimeType = wp_remote_retrieve_header( $response, 'content-type' );
+	
+			if ( empty( $mimeType ) ) {
+				// Fallback to using FileInfo if MIME type is not provided
+				$finfo = finfo_open( FILEINFO_MIME_TYPE );
+				if ( $finfo ) {
+					$mimeType = finfo_buffer( $finfo, $fileData );
+					finfo_close( $finfo );
+				}
+			}
+		} else {
+			// It's a local file path; use WordPress Filesystem API
+			if ( ! $wp_filesystem->exists( $imagePath ) ) {
+				error_log( "File does not exist: {$imagePath}" );
+				return false;
+			}
+	
+			if ( ! $wp_filesystem->is_readable( $imagePath ) ) {
+				error_log( "File is not readable: {$imagePath}" );
+				return false;
+			}
+	
+			// Use WordPress's wp_check_filetype function to get the MIME type
+			$filetype = wp_check_filetype( basename( $imagePath ) );
+			$mimeType = $filetype['type'];
+	
+			if ( empty( $mimeType ) ) {
+				error_log( "Unable to determine MIME type for file: {$imagePath}" );
+				return false;
+			}
+	
+			// Get the file contents using WordPress Filesystem API
+			$fileData = $wp_filesystem->get_contents( $imagePath );
+			if ( $fileData === false ) {
+				error_log( "Failed to read file contents: {$imagePath}" );
+				return false;
+			}
+		}
+	
+		// Ensure the MIME type is an image
+		if ( strpos( $mimeType, 'image/' ) !== 0 ) {
+			error_log( "File is not an image: {$imagePath}" );
+			return false;
+		}
+	
+		// Encode the data to Base64
+		$base64Data = base64_encode( $fileData );
+		if ( $base64Data === false ) {
+			error_log( "Base64 encoding failed for file: {$imagePath}" );
+			return false;
+		}
+	
+		// Construct the data URI
+		$dataURI = "data:{$mimeType};base64,{$base64Data}";
+	
+		return $dataURI;
 	}
 
 	/**

@@ -440,19 +440,29 @@ class Dgwltd_Site_WP_CLI {
 
                 // Ensure the output directory exists
                 $directory = dirname($output_path);
-                if (!is_dir($directory)) {
-                    if (!wp_mkdir_p($directory)) {
-                        WP_CLI::error("Failed to create directory: {$directory}");
+                global $wp_filesystem;
+
+                 // Initialize the WP_Filesystem API
+                if ( ! function_exists( 'WP_Filesystem' ) ) {
+                    require_once ABSPATH . 'wp-admin/includes/file.php';
+                }
+
+                WP_Filesystem();
+
+                if ( ! $wp_filesystem->is_dir( $directory ) ) {
+                    if ( ! $wp_filesystem->mkdir( $directory ) ) {
+                        WP_CLI::error( "Failed to create directory: {$directory}" );
                         return;
                     }
                 }
 
                 // Write CSS to file
-                if (false === file_put_contents($output_path, $css)) {
-                    WP_CLI::error("Failed to write to {$output_path}");
+                if ( ! $wp_filesystem->put_contents( $output_path, $css, FS_CHMOD_FILE ) ) {
+                    WP_CLI::error( "Failed to write to {$output_path}" );
                 } else {
-                    WP_CLI::success("Global styles exported to {$output_path}");
+                    WP_CLI::success( "Global styles exported to {$output_path}" );
                 }
+
             });
         }
     }

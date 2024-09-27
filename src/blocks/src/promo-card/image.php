@@ -8,9 +8,7 @@ $image_alt         = esc_attr( $image['alt'] );
 $image_width       = esc_attr( $image['width'] );
 $image_height      = esc_attr( $image['height'] );
 // For Low quality image placeholders (LQIP)
-$type   = pathinfo( $image_tiny, PATHINFO_EXTENSION );
-$data   = file_get_contents( $image_tiny );
-$base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
+$base64Image  = Dgwltd_Site_Public::dgwltd_image_to_base64_data_uri( $image_tiny );
 ?>
 <div class="dgwltd-promo-card__image">
     <figure>
@@ -22,7 +20,7 @@ $base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
             height="<?php echo $image_small_height; ?>" 
             alt="<?php echo $image_alt ?>" 
             loading="lazy" 
-            style="background-image: url(<?php echo $base64; ?>)" 
+            style="background-image: url(<?php echo $base64Image; ?>)" 
             />
         </picture>
     </figure>
