@@ -44,9 +44,9 @@ class Dgwltd_Site {
 	 *
 
 	 * @access   protected
-	 * @var      string    $Dgwltd_Site    The string used to uniquely identify this plugin.
+	 * @var      string    $dgwltd_site    The string used to uniquely identify this plugin.
 	 */
-	protected $Dgwltd_Site;
+	protected $dgwltd_site;
 
 	/**
 	 * The current version of the plugin.
@@ -71,7 +71,7 @@ class Dgwltd_Site {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->Dgwltd_Site = 'dgwltd-site';
+		$this->dgwltd_site = 'dgwltd-site';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -274,7 +274,7 @@ class Dgwltd_Site {
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_dgwltd_Site() {
-		return $this->Dgwltd_Site;
+		return $this->dgwltd_site;
 	}
 
 	/**

@@ -27,9 +27,9 @@ class Dgwltd_Site_Public {
 	 *
 
 	 * @access   private
-	 * @var      string    $Dgwltd_Site    The ID of this plugin.
+	 * @var      string    $dgwltd_site    The ID of this plugin.
 	 */
-	private $Dgwltd_Site;
+	private $dgwltd_site;
 
 
 	/**
@@ -45,12 +45,12 @@ class Dgwltd_Site_Public {
 	 * Initialize the class and set its properties.
 	 *
 
-	 * @param      string $Dgwltd_Site       The name of the plugin.
+	 * @param      string $dgwltd_site       The name of the plugin.
 	 * @param      string $version    The version of this plugin.
 	 */
-	public function __construct( $Dgwltd_Site, $version ) {
+	public function __construct( $dgwltd_site, $version ) {
 
-		$this->Dgwltd_Site = $Dgwltd_Site;
+		$this->Dgwltd_Site = $dgwltd_site;
 		$this->version       = $version;
 
 	}

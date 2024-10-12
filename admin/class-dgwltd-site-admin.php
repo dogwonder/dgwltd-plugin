@@ -27,9 +27,9 @@ class Dgwltd_Site_Admin {
 	 *
 
 	 * @access   private
-	 * @var      string    $Dgwltd_Site    The ID of this plugin.
+	 * @var      string    $dgwltd_site    The ID of this plugin.
 	 */
-	private $Dgwltd_Site;
+	private $dgwltd_site;
 
 	/**
 	 * The version of this plugin.
@@ -44,12 +44,12 @@ class Dgwltd_Site_Admin {
 	 * Initialize the class and set its properties.
 	 *
 
-	 * @param      string $Dgwltd_Site       The name of this plugin.
+	 * @param      string $dgwltd_site       The name of this plugin.
 	 * @param      string $version    The version of this plugin.
 	 */
-	public function __construct( $Dgwltd_Site, $version ) {
+	public function __construct( $dgwltd_site, $version ) {
 
-		$this->Dgwltd_Site = $Dgwltd_Site;
+		$this->dgwltd_site = $dgwltd_site;
 		$this->version       = $version;
 
 	}
@@ -71,7 +71,7 @@ class Dgwltd_Site_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->Dgwltd_Site, plugin_dir_url( __FILE__ ) . 'css/dgwltd-site-editor.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->dgwltd_site, plugin_dir_url( __FILE__ ) . 'css/dgwltd-site-editor.css', array(), $this->version, 'all' );
 
 	}
 

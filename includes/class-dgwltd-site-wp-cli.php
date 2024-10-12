@@ -115,12 +115,32 @@ class Dgwltd_Site_WP_CLI {
                 // Process font families
                 if (isset($settings["typography"]["fontFamilies"]["theme"])) {
                     foreach ($settings["typography"]["fontFamilies"]["theme"] as $font) {
-                        $font_families_array[] = [
-                            "fontFamily" => $font["fontFamily"],
-                            "slug" => $font["slug"],
-                        ];
+                            // Initialize an array to hold the font faces
+                            $font_faces_array = [];
+
+                            // Loop through each font face
+                            if (isset($font["fontFace"]) && is_array($font["fontFace"])) {
+                                foreach ($font["fontFace"] as $face) {
+                                    $font_faces_array[] = [
+                                        "fontFamily" => $face["fontFamily"],
+                                        "fontWeight" => $face["fontWeight"],
+                                        "fontStyle" => $face["fontStyle"],
+                                        "fontDisplay" => $face["fontDisplay"],
+                                        "src" => $face["src"]
+                                    ];
+                                }
+                            }
+
+                            // Add to the main array
+                            $font_families_array[] = [
+                                "fontFamily" => $font["fontFamily"],
+                                "slug" => $font["slug"],
+                                "fontFace" => $font_faces_array
+                            ];
                     }
                 }
+
+                
 
                 // Process font sizes with fluid support
                 if (isset($settings["typography"]["fontSizes"]["theme"])) {
@@ -255,7 +275,7 @@ class Dgwltd_Site_WP_CLI {
                             "type" => "font-family",
                             "slug" => $font['slug'],
                             "value" => $font['fontFamily'],
-                        ];
+                        ];    
                     }
                 }
 
@@ -312,8 +332,23 @@ class Dgwltd_Site_WP_CLI {
                 // Convert items array to data
                 $data = $items;
 
+                $css = "";
+                foreach ($font_families_array as $font) {
+                    foreach ($font["fontFace"] as $face) {
+                        // Construct the font-face CSS
+                        $css .= "@font-face {\n";
+                        $css .= "    font-family: " . $font["fontFamily"] . ";\n";
+                        $css .= "    font-weight: " . $face["fontWeight"] . ";\n";
+                        $css .= "    font-style: " . $face["fontStyle"] . ";\n";
+                        $css .= "    font-display: " . $face["fontDisplay"] . ";\n";
+                        $src = str_replace('file:./dist/', './dist/', $face["src"][0]);
+                        $css .= "    src: url('" . $src . "');\n"; // Assuming single src
+                        $css .= "}\n\n";
+                    }
+                }
+
                 // Generate CSS
-                $css = ":root {\n";
+                $css .= ":root {\n";
 
                 $mappings = [
                     'widths' => '--wp--custom--width--',
@@ -341,6 +376,8 @@ class Dgwltd_Site_WP_CLI {
                 // Process the 'color' styles for body
                 if (isset($raw_theme_data["styles"])) {
                     $css .= "body {\n";
+
+
                     if (isset($raw_theme_data["styles"]["color"]["text"])) {
                         $css .= "    color: {$raw_theme_data['styles']['color']['text']};\n";
                     }
@@ -408,6 +445,7 @@ class Dgwltd_Site_WP_CLI {
                                         $padding = $values['padding'];
                                         $css .= "    padding: {$padding['top']} {$padding['right']} {$padding['bottom']} {$padding['left']};\n";
                                     }
+
                                     break;
 
                                 case 'typography':

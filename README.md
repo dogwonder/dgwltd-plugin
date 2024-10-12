@@ -1,4 +1,4 @@
-# DGW.ltd blocks plugin
+# DGW.ltd plugin
 
 Based on https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
 
