@@ -8,20 +8,21 @@
   "scripts": {
     "clean:theme:css": "trash \"./public/css/**\"",
     "clean:admin:css": "trash \"./admin/css/**\"",
-    "clean:scripts": "trash \"./public/scripts/**/*\"",
+    "clean:blocks": "trash \"./dist/blocks/**\"",
+    "clean": "run-s clean:*",
     "css:theme": "sass ./src/scss/dgwltd-site-theme.scss ./public/css/dgwltd-site-theme.css",
     "css:editor": "sass ./src/scss/dgwltd-site-editor.scss ./admin/css/dgwltd-site-editor.css",
     "postcss:theme": "postcss ./public/css/dgwltd-site-theme.css --use autoprefixer postcss-custom-properties cssnano --map --verbose --dir ./public/css/",
     "postcss:editor": "postcss ./admin/css/dgwltd-site-editor.css --use autoprefixer postcss-custom-properties cssnano --map --verbose --dir ./admin/css/",
-    "scripts:concat": "concat ./src/scripts/dgwltd-site.js -o ./public/scripts/dgwltd-site.js",
-    "scripts:minify": "uglifyjs ./src/scripts/dgwltd-site.js --compress --output ./public/scripts/dgwltd-site.min.js",
+    "scripts:build": "wp-scripts build ./admin/scripts/dgwltd-site-editor.js ./public/scripts/dgwltd-site-theme.js --output-path=./dist",
     "blocks:develop": "wp-scripts start --webpack-src-dir=./src/blocks/src --webpack-copy-php --output-path=./src/blocks/build",
     "blocks:build": "wp-scripts build --webpack-src-dir=./src/blocks/src --webpack-copy-php --output-path=./src/blocks/build",
     "watch": "onchange \"**/*.scss\" -- npm run css:* --silent",
     "develop": "concurrently --kill-others \"npm run watch\" \"npm run blocks:develop\"",
-    "build": "NODE_ENV=production run-p clean:* && NODE_ENV=production run-s css:* postcss:* && NODE_ENV=production && run-s scripts:* && NODE_ENV=production run-s blocks:build"
+    "build": "NODE_ENV=production run-p clean:* && NODE_ENV=production run-s css:* postcss:* && NODE_ENV=production && run-s scripts:* && NODE_ENV=production run-s blocks:build && NODE_ENV=production run-s clean"
   },
   "dependencies": {
+    "@10up/block-components": "^1.19.3",
     "@wordpress/scripts": "^26.19.0",
     "autoprefixer": "^10.4.5",
     "concat": "^1.0.3",

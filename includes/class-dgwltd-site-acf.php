@@ -22,7 +22,6 @@ class Dgwltd_Site_ACF {
 	public function dgwltd_register_wp_blocks() {
 
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/accordion/block.json' );
-		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/anchor/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/banner/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/breadcrumbs/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/cards/block.json' );
@@ -33,6 +32,9 @@ class Dgwltd_Site_ACF {
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/promo-card/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/related/block.json' );
 		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/summary-list/block.json' );
+
+		//Native
+		register_block_type( DGWLTD_SITE_PLUGIN_BLOCKS . 'build/picker/block.json' );
 
 	}
 

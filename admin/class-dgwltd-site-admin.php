@@ -92,7 +92,7 @@ class Dgwltd_Site_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->Dgwltd_Site, plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->dgwltd_site, plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
 	}
 
 }

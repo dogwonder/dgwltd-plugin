@@ -50,7 +50,7 @@ class Dgwltd_Site_Public {
 	 */
 	public function __construct( $dgwltd_site, $version ) {
 
-		$this->Dgwltd_Site = $dgwltd_site;
+		$this->dgwltd_site = $dgwltd_site;
 		$this->version       = $version;
 
 	}
@@ -61,19 +61,27 @@ class Dgwltd_Site_Public {
 	 */
 	public function dgwltd_enqueue_theme_styles() {
 
-		wp_enqueue_style( $this->Dgwltd_Site, plugin_dir_url( __FILE__ ) . 'css/dgwltd-site-theme.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->dgwltd_site, plugin_dir_url( __FILE__ ) . 'css/dgwltd-site-theme.css', array(), $this->version, 'all' );
 	}
+
 
 	/**
 	 * Register the JavaScript for the public-facing side of the site.
 	 *
 	 */
-	public function dgwltd_enqueue_theme_scripts() {
-		
-		// Remove array('jquery') from wp_enqueue_script as we don't want to be dependant on the WP jQuery core
-		wp_enqueue_script( $this->Dgwltd_Site, plugin_dir_url( __FILE__ ) . 'scripts/dgwltd-site.min.js', array(), $this->version, false );
 
-	}
+	 public function dgwltd_enqueue_theme_scripts()
+	 {
+		 $asset_file = include plugin_dir_path(__DIR__) .
+			 "dist/dgwltd-site-theme.asset.php";
+		 wp_enqueue_script(
+			 $this->dgwltd_site,
+			 DGWLTD_SITE_PLUGIN_URL . "dist/dgwltd-site-theme.js",
+			 $asset_file["dependencies"],
+			 $asset_file["version"],
+			 true
+		 );
+	 }
 
 	/**
 	 * Add type=module to script tags

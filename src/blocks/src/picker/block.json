@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "dgwltd/dgwltd-picker",
+	"version": "0.1.0",
+	"title": "Picker",
+	"category": "widgets",
+	"icon": "table-col-before",
+	"description": "Example block scaffolded with Create Block tool.",
+	"example": {},
+	"supports": {
+		"html": false
+	},
+	"attributes": {
+		"selectedPosts": {
+		"type": "array",
+		"default": []
+		}
+  	},
+	"textdomain": "picker",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}
