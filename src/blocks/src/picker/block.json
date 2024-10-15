@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "dgwltd/dgwltd-picker",
+	"name": "dgwltd/picker",
 	"version": "0.1.0",
 	"title": "Picker",
 	"category": "widgets",
@@ -9,17 +9,27 @@
 	"description": "Example block scaffolded with Create Block tool.",
 	"example": {},
 	"supports": {
-		"html": false
+		"html": false,
+		"color": {
+			"background": true,
+			"text": true
+		},
+		"align": ["wide", "full"],
+		"spacing": {
+			"padding": true,
+			"margin": true
+		}
 	},
 	"attributes": {
 		"selectedPosts": {
-		"type": "array",
-		"default": []
+			"type": "array",
+			"default": []
 		}
   	},
-	"textdomain": "picker",
+	"textdomain": "dgwltd-site",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",
 	"style": "file:./style-index.css",
+	"render": "file:./render.php",
 	"viewScript": "file:./view.js"
 }

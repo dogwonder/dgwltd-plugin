@@ -4,6 +4,16 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-picker {
-	border: 1px dotted #f00;
+.wp-block-dgwltd-picker {
+	// border: 1px dotted #f00;
+	ul {
+		padding: 0;
+	}
+	li {
+		margin: 0;
+	}
+	h3 {
+		margin: 0;
+		flex: 1;
+	}
 }
