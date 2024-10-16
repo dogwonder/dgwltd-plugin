@@ -1,8 +1,8 @@
 // edit.js
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { useCallback } from '@wordpress/element';
-import { PanelBody, Button } from '@wordpress/components';
+import { useCallback, useState } from '@wordpress/element';
+import { SelectControl, PanelBody, Button } from '@wordpress/components';
 import { Icon, arrowUp, arrowDown, dragHandle, close } from '@wordpress/icons';
 import { CSS } from '@dnd-kit/utilities';
 import { DndContext, closestCenter, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
@@ -22,68 +22,69 @@ const Edit = (props) => {
 
 
     const { attributes, setAttributes } = props;
-    const { selectedPosts } = attributes;
+    const { selectedPosts = [], contentType = 'news' } = attributes;
+
     const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
     // Sortable Item Component
-const SortableItem = ({ id, post, index, movePostUp, movePostDown, removePost }) => {
-    const {
-        attributes,
-        listeners,
-        setNodeRef,
-        transform,
-        transition,
-        isDragging,
-    } = useSortable({ id });
+    const SortableItem = ({ id, post, index, movePostUp, movePostDown, removePost }) => {
+        const {
+            attributes,
+            listeners,
+            setNodeRef,
+            transform,
+            transition,
+            isDragging,
+        } = useSortable({ id });
 
-    const style = {
-        transform: CSS.Transform.toString(transform),
-		transition,
-		border: isDragging ? '2px dashed #ddd' : '2px dashed transparent',
-		paddingTop: '10px',
-		paddingBottom: '10px',
-		display: 'flex',
-		alignItems: 'center',
-		paddingLeft: '8px',
+        const style = {
+            transform: CSS.Transform.toString(transform),
+            transition,
+            border: isDragging ? '2px dashed #ddd' : '2px dashed transparent',
+            paddingTop: '10px',
+            paddingBottom: '10px',
+            display: 'flex',
+            alignItems: 'center',
+            paddingLeft: '8px',
+        };
+
+        return (
+            <div ref={setNodeRef} style={style} {...attributes} className='wp-block-dgwltd-picker__item'>
+                <div {...listeners} style={{ cursor: 'grab', marginTop: '8px', marginRight: '8px' }}>
+                    <Icon icon={dragHandle} />
+                </div>
+                <PostContext postId={post.id} postType={post.type} isEditable={false}>
+                    <PostFeaturedImage className="wp-block-dgwltd-picker__featured_image" />
+                    <PostTitle tagName="h3" className="wp-block-dgwltd-picker__title" />
+                </PostContext>
+                <div>
+                    <Button
+                        onClick={() => movePostUp(index)}
+                        disabled={index === 0}
+                        aria-label={__('Move Up', 'dgwltd-site')}
+                    >
+                        <Icon icon={arrowUp} />
+                    </Button>
+                    <Button
+                        onClick={() => movePostDown(index)}
+                        disabled={index === selectedPosts.length - 1} // Adjusted based on usage in Edit
+                        aria-label={__('Move Down', 'dgwltd-site')}
+                        style={{ marginLeft: '4px' }}
+                    >
+                        <Icon icon={arrowDown} />
+                    </Button>
+                    <Button
+                        onClick={() => removePost(post.id)}
+                        isDestructive
+                        aria-label={__('Remove Post', 'dgwltd-site')}
+                        style={{ marginLeft: '4px' }}
+                    >
+                        <Icon icon={close} />
+                    </Button>
+                </div>
+            </div>
+        );
     };
-
-    return (
-        <div ref={setNodeRef} style={style} {...attributes} className='wp-block-dgwltd-picker__item'>
-            <div {...listeners} style={{ cursor: 'grab', marginTop: '8px', marginRight: '8px' }}>
-                <Icon icon={dragHandle} />
-            </div>
-            <PostContext postId={post.id} postType={post.type} isEditable={false}>
-                <PostFeaturedImage className="wp-block-dgwltd-picker__featured_image" />
-                <PostTitle tagName="h3" className="wp-block-dgwltd-picker__title" />
-            </PostContext>
-            <div>
-                <Button
-                    onClick={() => movePostUp(index)}
-                    disabled={index === 0}
-                    aria-label={__('Move Up', 'dgwltd-site')}
-                >
-                    <Icon icon={arrowUp} />
-                </Button>
-                <Button
-                    onClick={() => movePostDown(index)}
-                    disabled={index === selectedPosts.length - 1} // Adjusted based on usage in Edit
-                    aria-label={__('Move Down', 'dgwltd-site')}
-                    style={{ marginLeft: '4px' }}
-                >
-                    <Icon icon={arrowDown} />
-                </Button>
-                <Button
-                    onClick={() => removePost(post.id)}
-                    isDestructive
-                    aria-label={__('Remove Post', 'dgwltd-site')}
-                    style={{ marginLeft: '4px' }}
-                >
-                    <Icon icon={close} />
-                </Button>
-            </div>
-        </div>
-    );
-};
 
     // Handler to manage selection changes
     const onPickChange = useCallback(
@@ -145,6 +146,16 @@ const SortableItem = ({ id, post, index, movePostUp, movePostDown, removePost })
         <>
             <InspectorControls>
                 <PanelBody title={__('Select Posts', 'dgwltd-site')}>
+                    <SelectControl
+                        label={__('Content Type', 'dgwltd-site')}
+                        value={contentType}
+                        options={[
+                            { label: __('News', 'dgwltd-site'), value: 'news' },
+                            { label: __('Event', 'dgwltd-site'), value: 'event' },
+                            { label: __('Blog', 'dgwltd-site'), value: 'blog' },
+                        ]}
+                        onChange={(value) => setAttributes({ contentType: value })} // Save the selected content type
+                    />
                     <ContentPicker
                         selectedItems={selectedPosts}
                         onPickChange={onPickChange}

@@ -21,7 +21,11 @@
 		"selectedPosts": {
 			"type": "array",
 			"default": []
-		}
+		},
+        "contentType": {
+            "type": "string",
+            "default": "news"
+        }
   	},
 	"textdomain": "dgwltd-site",
 	"editorScript": "file:./index.js",

@@ -1,0 +1,42 @@
+{
+  "name": "acf/dgwltd-content",
+  "title": "DGW.ltd Content block",
+  "description": "Content block",
+  "style": "file:./content.css",
+  "category": "theme",
+  "icon": "schedule",
+  "apiVersion": 2,
+  "supports": {
+    "jsx": true,
+    "align": [
+      "none"
+    ],
+    "alignText": false,
+    "anchor": true,
+    "color": {
+      "text": true,
+      "background": true,
+      "link": true
+    }
+  },
+  "styles": [
+    {
+      "name": "default",
+      "label": "Default",
+      "isDefault": true
+    },
+    {
+      "name": "illustrative",
+      "label": "Illustrative"
+    },
+    {
+      "name": "photographic",
+      "label": "Photographic"
+    }
+  ],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "content.php"
+  },
+  "align": "none"
+}
