@@ -3,20 +3,87 @@ import { __ } from '@wordpress/i18n';
 import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
 import { useCallback } from '@wordpress/element';
 import { PanelBody, Button } from '@wordpress/components';
-import { ContentPicker, PostContext, PostTitle } from '@10up/block-components';
+import { Icon, arrowUp, arrowDown, dragHandle, close } from '@wordpress/icons';
+import { CSS } from '@dnd-kit/utilities';
+import { DndContext, closestCenter, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
+import { arrayMove, SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
 
 /**
- * Lets webpack process CSS, SASS or SCSS files referenced in JavaScript files.
- * All files containing `style` keyword are bundled together. The code used
- * gets applied both to the front of your site and to the editor.
- *
- * @see https://www.npmjs.com/package/@wordpress/scripts#using-css
+ * @see https://github.com/10up/block-components/tree/develop?tab=readme-ov-file
+ */
+import { ContentPicker, PostContext, PostTitle, PostFeaturedImage } from '@10up/block-components';
+
+/**
+ * Import necessary styles
  */
 import './editor.scss';
 
 const Edit = (props) => {
+
+
     const { attributes, setAttributes } = props;
     const { selectedPosts } = attributes;
+    const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
+
+    // Sortable Item Component
+const SortableItem = ({ id, post, index, movePostUp, movePostDown, removePost }) => {
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+        isDragging,
+    } = useSortable({ id });
+
+    const style = {
+        transform: CSS.Transform.toString(transform),
+		transition,
+		border: isDragging ? '2px dashed #ddd' : '2px dashed transparent',
+		paddingTop: '10px',
+		paddingBottom: '10px',
+		display: 'flex',
+		alignItems: 'center',
+		paddingLeft: '8px',
+    };
+
+    return (
+        <div ref={setNodeRef} style={style} {...attributes} className='wp-block-dgwltd-picker__item'>
+            <div {...listeners} style={{ cursor: 'grab', marginTop: '8px', marginRight: '8px' }}>
+                <Icon icon={dragHandle} />
+            </div>
+            <PostContext postId={post.id} postType={post.type} isEditable={false}>
+                <PostFeaturedImage className="wp-block-dgwltd-picker__featured_image" />
+                <PostTitle tagName="h3" className="wp-block-dgwltd-picker__title" />
+            </PostContext>
+            <div>
+                <Button
+                    onClick={() => movePostUp(index)}
+                    disabled={index === 0}
+                    aria-label={__('Move Up', 'dgwltd-site')}
+                >
+                    <Icon icon={arrowUp} />
+                </Button>
+                <Button
+                    onClick={() => movePostDown(index)}
+                    disabled={index === selectedPosts.length - 1} // Adjusted based on usage in Edit
+                    aria-label={__('Move Down', 'dgwltd-site')}
+                    style={{ marginLeft: '4px' }}
+                >
+                    <Icon icon={arrowDown} />
+                </Button>
+                <Button
+                    onClick={() => removePost(post.id)}
+                    isDestructive
+                    aria-label={__('Remove Post', 'dgwltd-site')}
+                    style={{ marginLeft: '4px' }}
+                >
+                    <Icon icon={close} />
+                </Button>
+            </div>
+        </div>
+    );
+};
 
     // Handler to manage selection changes
     const onPickChange = useCallback(
@@ -32,7 +99,6 @@ const Edit = (props) => {
                 // Check for duplicates based on 'id'
                 const exists = updatedPosts.some((post) => post.id === item.id);
                 if (!exists) {
-                    console.log(item);
                     updatedPosts.push({ id: item.id, type: item.type });
                 }
             });
@@ -42,44 +108,43 @@ const Edit = (props) => {
         [selectedPosts, setAttributes]
     );
 
-    // Handler to remove a post from the selectedPosts array
-    const removePost = useCallback(
-        (postId) => {
-            const updatedPosts = selectedPosts.filter((post) => post.id !== postId);
-            setAttributes({ selectedPosts: updatedPosts });
-        },
-        [selectedPosts, setAttributes]
-    );
+    // Function to move a post up in the list
+    const movePostUp = (index) => {
+        if (index === 0) return;
+        const updatedPosts = arrayMove(selectedPosts, index, index - 1);
+        setAttributes({ selectedPosts: updatedPosts });
+    };
 
-    // Handlers to move posts up and down in the list
-    const movePostUp = useCallback(
-        (index) => {
-            if (index === 0) return; // Already at the top
-            const updatedPosts = [...selectedPosts];
-            const temp = updatedPosts[index - 1];
-            updatedPosts[index - 1] = updatedPosts[index];
-            updatedPosts[index] = temp;
-            setAttributes({ selectedPosts: updatedPosts });
-        },
-        [selectedPosts, setAttributes]
-    );
+    // Function to move a post down in the list
+    const movePostDown = (index) => {
+        if (index === selectedPosts.length - 1) return;
+        const updatedPosts = arrayMove(selectedPosts, index, index + 1);
+        setAttributes({ selectedPosts: updatedPosts });
+    };
 
-    const movePostDown = useCallback(
-        (index) => {
-            if (index === selectedPosts.length - 1) return; // Already at the bottom
-            const updatedPosts = [...selectedPosts];
-            const temp = updatedPosts[index + 1];
-            updatedPosts[index + 1] = updatedPosts[index];
-            updatedPosts[index] = temp;
-            setAttributes({ selectedPosts: updatedPosts });
-        },
-        [selectedPosts, setAttributes]
-    );
+    // Function to remove a post from the list
+    const removePost = (id) => {
+        const updatedPosts = selectedPosts.filter((post) => post.id !== id);
+        setAttributes({ selectedPosts: updatedPosts });
+    };
+
+    // Handler for drag end event
+    const handleDragEnd = ({ active, over }) => {
+        if (over && active.id !== over.id) {
+            const oldIndex = selectedPosts.findIndex((post) => `draggable-${post.id}` === active.id);
+            const newIndex = selectedPosts.findIndex((post) => `draggable-${post.id}` === over.id);
+
+            if (oldIndex !== -1 && newIndex !== -1) {
+                const updatedPosts = arrayMove(selectedPosts, oldIndex, newIndex);
+                setAttributes({ selectedPosts: updatedPosts });
+            }
+        }
+    };
 
     return (
         <>
             <InspectorControls>
-                <PanelBody title={__('Select Posts', 'myplugin')}>
+                <PanelBody title={__('Select Posts', 'dgwltd-site')}>
                     <ContentPicker
                         selectedItems={selectedPosts}
                         onPickChange={onPickChange}
@@ -90,45 +155,28 @@ const Edit = (props) => {
                     />
                 </PanelBody>
             </InspectorControls>
-            <div { ...useBlockProps() }>
-                {selectedPosts && selectedPosts.length > 0 ? (
-                    <ul>
-                        {selectedPosts.map((post, index) => (
-                            <li key={post.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-                                <PostContext postId={post.id} postType={post.type} isEditable={false} >
-                                    <PostTitle tagName="h3" className="wp-block-example-hero__title" />
-                                </PostContext>
-                                <div>
-                                    <Button
-                                        onClick={() => movePostUp(index)}
-                                        disabled={index === 0}
-                                        aria-label={__('Move Up', 'dgwltd-site')}
-                                    >
-                                        ↑
-                                    </Button>
-                                    <Button
-                                        onClick={() => movePostDown(index)}
-                                        disabled={index === selectedPosts.length - 1}
-                                        aria-label={__('Move Down', 'dgwltd-site')}
-                                        style={{ marginLeft: '4px' }}
-                                    >
-                                        ↓
-                                    </Button>
-                                    <Button
-                                        onClick={() => removePost(post.id)}
-                                        isDestructive
-                                        aria-label={__('Remove Post', 'dgwltd-site')}
-                                        style={{ marginLeft: '4px' }}
-                                    >
-                                        ✕
-                                    </Button>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                ) : (
-                    <p>{__('No posts selected', 'dgwltd-site')}</p>
-                )}
+            <div {...useBlockProps()}>
+                <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+                    <SortableContext items={selectedPosts.map(post => `draggable-${post.id}`)} strategy={verticalListSortingStrategy}>
+                        {selectedPosts && selectedPosts.length > 0 ? (
+                            <div className="wp-block-dgwltd-picker__list">
+                                {selectedPosts.map((post, index) => (
+                                    <SortableItem
+                                        key={post.id}
+                                        id={`draggable-${post.id}`}
+                                        post={post}
+                                        index={index}
+                                        movePostUp={movePostUp}
+                                        movePostDown={movePostDown}
+                                        removePost={removePost}
+                                    />
+                                ))}
+                            </div>
+                        ) : (
+                            <p>{__('No posts selected', 'dgwltd-site')}</p>
+                        )}
+                    </SortableContext>
+                </DndContext>
             </div>
         </>
     );

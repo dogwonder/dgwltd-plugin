@@ -5,15 +5,19 @@
  */
 
 .wp-block-dgwltd-picker {
-	// border: 1px dotted #f00;
-	ul {
-		padding: 0;
-	}
-	li {
+	&__item {
 		margin: 0;
+		display: flex;
+		gap: 1rem;
 	}
-	h3 {
+	&__title {
 		margin: 0;
 		flex: 1;
+	}
+	&__featured_image, 
+	.components-placeholder {
+		aspect-ratio: 1 / 1;
+		width: 6rem;
+		height: auto;
 	}
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
+ * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render and https://github.com/bacoords/example-dynamic-block/
  * $attributes (array): The block attributes.
  * $content (string): The block default content.
  * $block (WP_Block): The block instance.

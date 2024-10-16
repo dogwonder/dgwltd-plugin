@@ -6,7 +6,7 @@
   "title": "Picker",
   "category": "widgets",
   "icon": "table-col-before",
-  "description": "Example block scaffolded with Create Block tool.",
+  "description": "Block component that allows you to pick posts and pages",
   "example": {},
   "supports": {
     "html": false,
@@ -14,14 +14,8 @@
       "background": true,
       "text": true
     },
-    "align": [
-      "wide",
-      "full"
-    ],
-    "spacing": {
-      "padding": true,
-      "margin": true
-    }
+    "align": false,
+    "anchor": true
   },
   "attributes": {
     "selectedPosts": {
