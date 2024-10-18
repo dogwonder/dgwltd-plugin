@@ -18,13 +18,21 @@
     "anchor": true
   },
   "attributes": {
-    "selectedPosts": {
-      "type": "array",
-      "default": []
+    "heading": {
+      "type": "string",
+      "default": "Selected posts"
     },
     "contentType": {
       "type": "string",
       "default": "news"
+    },
+    "favouritePost": {
+      "type": "number",
+      "default": null
+    },
+    "selectedPosts": {
+      "type": "array",
+      "default": []
     }
   },
   "textdomain": "dgwltd-site",

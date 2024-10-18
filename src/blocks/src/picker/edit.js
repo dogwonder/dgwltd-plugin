@@ -1,9 +1,9 @@
 // edit.js
 import { __ } from '@wordpress/i18n';
-import { useBlockProps, InspectorControls } from '@wordpress/block-editor';
-import { useCallback, useState } from '@wordpress/element';
+import { useBlockProps, InspectorControls, RichText} from '@wordpress/block-editor';
+import { useCallback } from '@wordpress/element';
 import { SelectControl, PanelBody, Button } from '@wordpress/components';
-import { Icon, arrowUp, arrowDown, dragHandle, close } from '@wordpress/icons';
+import { Icon, arrowUp, arrowDown, dragHandle, starEmpty, starFilled, close } from '@wordpress/icons';
 import { CSS } from '@dnd-kit/utilities';
 import { DndContext, closestCenter, MouseSensor, TouchSensor, useSensor, useSensors } from '@dnd-kit/core';
 import { arrayMove, SortableContext, verticalListSortingStrategy, useSortable } from '@dnd-kit/sortable';
@@ -22,7 +22,7 @@ const Edit = (props) => {
 
 
     const { attributes, setAttributes } = props;
-    const { selectedPosts = [], contentType = 'news' } = attributes;
+    const { selectedPosts = [], contentType = 'news', heading = __('Selected Posts', 'dgwltd-site'), favouritePost = null  } = attributes; // Ensure selectedPosts, contentType, and heading are initialized
 
     const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
@@ -67,11 +67,18 @@ const Edit = (props) => {
                     </Button>
                     <Button
                         onClick={() => movePostDown(index)}
-                        disabled={index === selectedPosts.length - 1} // Adjusted based on usage in Edit
+                        disabled={index === selectedPosts.length - 1} 
                         aria-label={__('Move Down', 'dgwltd-site')}
                         style={{ marginLeft: '4px' }}
                     >
                         <Icon icon={arrowDown} />
+                    </Button>
+                    <Button
+                        onClick={() => setFavouritePost(post.id)}
+                        aria-label={__('Set as Favourite', 'dgwltd-site')}
+                        style={{ marginLeft: '4px' }}
+                    >
+                        {post.id === favouritePost ? <Icon icon={starFilled} /> : <Icon icon={starEmpty} />}
                     </Button>
                     <Button
                         onClick={() => removePost(post.id)}
@@ -87,7 +94,7 @@ const Edit = (props) => {
     };
 
     // Handler to manage selection changes
-    const onPickChange = useCallback(
+    const onSearchPick = useCallback(
         (pickedContent) => {
             if (!pickedContent || !pickedContent.length) {
                 return;
@@ -129,6 +136,10 @@ const Edit = (props) => {
         setAttributes({ selectedPosts: updatedPosts });
     };
 
+    const setFavouritePost = (postId) => {
+        setAttributes({ favouritePost: postId });
+    };
+
     // Handler for drag end event
     const handleDragEnd = ({ active, over }) => {
         if (over && active.id !== over.id) {
@@ -158,7 +169,7 @@ const Edit = (props) => {
                     />
                     <ContentPicker
                         selectedItems={selectedPosts}
-                        onPickChange={onPickChange}
+                        onPickChange={onSearchPick}
                         mode="post"
                         hideLabelFromVision={false}
                         label={__('Please select Posts or Pages:', 'dgwltd-site')}
@@ -167,6 +178,12 @@ const Edit = (props) => {
                 </PanelBody>
             </InspectorControls>
             <div {...useBlockProps()}>
+                <RichText
+                    tagName="h2"
+                    value={heading}
+                    onChange={(value) => setAttributes({ heading: value })}
+                    placeholder={__('Enter heading...', 'dgwltd-site')}
+                />
                 <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                     <SortableContext items={selectedPosts.map(post => `draggable-${post.id}`)} strategy={verticalListSortingStrategy}>
                         {selectedPosts && selectedPosts.length > 0 ? (

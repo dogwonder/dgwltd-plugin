@@ -6,8 +6,13 @@
  * $block (WP_Block): The block instance.
 */
 
+
+$heading = $attributes['heading'] ?? '';
+$content_type = $attributes['contentType'] ?? 'post';
+
 $posts = $attributes['selectedPosts'];
 $post_ids = wp_list_pluck( $posts, 'id' );
+
 
 $query_args = [
     'post_type' => 'any',
@@ -18,6 +23,10 @@ $query_args = [
 $query = new WP_Query( $query_args );
 ?>
 <div <?php echo get_block_wrapper_attributes(); ?>>
+    <div class="stack">
+    <?php if ( $heading ) : ?>
+        <h2><?php echo esc_html( $heading ); ?></h2>
+    <?php endif; ?>
     <?php if ( $query->have_posts() ) : ?>
         <ul>
             <?php while ( $query->have_posts() ) : $query->the_post(); ?>
@@ -32,4 +41,5 @@ $query = new WP_Query( $query_args );
     <?php else : ?>
         <p><?php esc_html_e( 'No posts selected', 'dgwltd-site' ); ?></p>
     <?php endif; ?>
+    </div>
 </div>
