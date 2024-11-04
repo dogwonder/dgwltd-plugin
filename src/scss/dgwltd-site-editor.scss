@@ -145,7 +145,7 @@ Blocks
       background-color: white;
       opacity: 0.5;
     }
-    .block__background {
+    .dgwltd-block__background {
       z-index:1;
     }
   }
@@ -321,7 +321,7 @@ Blocks
 
 
 //Background image
-.block__background {
+.dgwltd-block__background {
   width: 100%;
   height: 100%;
   z-index: 1;
@@ -349,7 +349,7 @@ Blocks
 
 //Block style varients - styles in block.json
 .is-style-monochrome {
-  .block__background img {
+  .dgwltd-block__background img {
     filter: grayscale(100%) contrast(200%);
   }
   .dgwltd-content__image img {
