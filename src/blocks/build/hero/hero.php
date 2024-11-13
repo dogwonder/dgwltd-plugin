@@ -54,7 +54,7 @@ $block_overlay  = $overlay ? 'has-overlay ' : '';
 $block_classes_arr = array( $class_name, $block_classes, $block_image, $block_video, $block_overlay);
 
 // JSX Innerblocks - https://www.billerickson.net/innerblocks-with-acf-blocks/
-$allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/list', 'core/button' );
+$allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/list', 'core/buttons', 'core/button' );
 $block_template = array(
 	array(
 		'core/heading',
@@ -111,7 +111,7 @@ $block_template = array(
 					}
 					</style>
 				<?php endif; ?>
-				<div class="block__background">
+				<div class="dgwltd-block__background">
 					<?php 
 					//Don't lazyload this https://cloudfour.com/thinks/stop-lazy-loading-product-and-hero-images/
 					?>

@@ -102,7 +102,7 @@ $block_template = array(
 					}
 				</style>
 				<?php endif; ?>  
-					<div class="block__background">
+					<div class="dgwltd-block__background">
 						<figure>
 						<picture>
 							<source media="(min-width: 900px)" srcset="<?php echo $image_large; ?>">
