@@ -11,6 +11,18 @@
  */
 class Dgwltd_Site_Rules {
 
+	public function dgwltd_restrict_heading_levels( $args, $block_type ) {
+     
+		if ( 'core/heading' !== $block_type ) {
+			return $args;
+		}
+	 
+		// Remove H1, H5,and H6.
+		$args['attributes']['levelOptions']['default'] = [ 2, 3, 4 ];
+		 
+		return $args;
+	}
+
 	/**
 	 * This function modifies the theme JSON data by disabling color settings
 	 * for all users and then specifically enabling settings for users with the 

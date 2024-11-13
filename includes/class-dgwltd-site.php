@@ -248,6 +248,11 @@ class Dgwltd_Site {
  		*/
 		$this->loader->add_action( 'after_setup_theme', $plugin_rules, 'dgwltd_apply_theme_json_user_filters' );
 
+		/**
+ 		* Restict headings
+ 		*/
+		 $this->loader->add_filter( 'register_block_type_args', $plugin_rules, 'dgwltd_restrict_heading_levels', 10, 2 );
+
 		
 	}
 
