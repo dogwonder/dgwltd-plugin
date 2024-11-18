@@ -61,6 +61,7 @@
             "max": 0,
             "layout": "row",
             "button_label": "Add summary list item",
+            "rows_per_page": 20,
             "sub_fields": [
                 {
                     "key": "field_5e622649452e8",
@@ -191,8 +192,7 @@
                     "new_lines": "",
                     "parent_repeater": "field_5e622636452e7"
                 }
-            ],
-            "rows_per_page": 20
+            ]
         }
     ],
     "location": [
@@ -212,10 +212,10 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 0,
+    "show_in_rest": 1,
     "show_in_graphql": 0,
-    "graphql_field_name": "",
+    "graphql_field_name": "block:SummaryList",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1696243330
+    "modified": 1731662284
 }
