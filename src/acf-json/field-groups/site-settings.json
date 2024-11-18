@@ -22,9 +22,9 @@
             "acfe_field_group_condition": 0,
             "sub_fields": [
                 {
-                    "key": "field_62729571e4b3d",
-                    "label": "Facebook link",
-                    "name": "facebook_link",
+                    "key": "field_673b642eaa791",
+                    "label": "Bluesky",
+                    "name": "bluesky",
                     "aria-label": "",
                     "type": "url",
                     "instructions": "",
@@ -36,14 +36,39 @@
                         "id": ""
                     },
                     "default_value": "",
+                    "allow_in_bindings": 0,
                     "placeholder": "",
-                    "translations": "copy_once",
-                    "acfe_field_group_condition": 0
+                    "show_in_graphql": 1,
+                    "graphql_description": "",
+                    "graphql_field_name": "bluesky",
+                    "graphql_non_null": 0
+                },
+                {
+                    "key": "field_62729571e4b3d",
+                    "label": "Facebook",
+                    "name": "facebook",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 1,
+                    "placeholder": "",
+                    "show_in_graphql": 1,
+                    "graphql_description": "",
+                    "graphql_field_name": "facebook",
+                    "graphql_non_null": 0
                 },
                 {
                     "key": "field_628f8737c1010",
-                    "label": "Github link",
-                    "name": "github_link",
+                    "label": "Github",
+                    "name": "github",
                     "aria-label": "",
                     "type": "url",
                     "instructions": "",
@@ -55,13 +80,17 @@
                         "id": ""
                     },
                     "default_value": "",
+                    "allow_in_bindings": 1,
                     "placeholder": "",
-                    "acfe_field_group_condition": 0
+                    "show_in_graphql": 1,
+                    "graphql_description": "",
+                    "graphql_field_name": "github",
+                    "graphql_non_null": 0
                 },
                 {
                     "key": "field_62729587e4b3f",
-                    "label": "Instagram link",
-                    "name": "instagram_link",
+                    "label": "Instagram",
+                    "name": "instagram",
                     "aria-label": "",
                     "type": "url",
                     "instructions": "",
@@ -73,14 +102,17 @@
                         "id": ""
                     },
                     "default_value": "",
+                    "allow_in_bindings": 1,
                     "placeholder": "",
-                    "translations": "copy_once",
-                    "acfe_field_group_condition": 0
+                    "show_in_graphql": 1,
+                    "graphql_description": "",
+                    "graphql_field_name": "instagram",
+                    "graphql_non_null": 0
                 },
                 {
                     "key": "field_627295afe4b42",
-                    "label": "Linkedin link",
-                    "name": "linkedin_link",
+                    "label": "Linkedin",
+                    "name": "linkedin",
                     "aria-label": "",
                     "type": "url",
                     "instructions": "",
@@ -92,14 +124,17 @@
                         "id": ""
                     },
                     "default_value": "",
+                    "allow_in_bindings": 1,
                     "placeholder": "",
-                    "translations": "copy_once",
-                    "acfe_field_group_condition": 0
+                    "show_in_graphql": 1,
+                    "graphql_description": "",
+                    "graphql_field_name": "linkedin",
+                    "graphql_non_null": 0
                 },
                 {
                     "key": "field_63c030ab9f01c",
                     "label": "Mastodon",
-                    "name": "mastodon_link",
+                    "name": "mastodon",
                     "aria-label": "",
                     "type": "url",
                     "instructions": "",
@@ -110,14 +145,18 @@
                         "class": "",
                         "id": ""
                     },
-                    "show_in_graphql": 1,
                     "default_value": "",
-                    "placeholder": ""
+                    "allow_in_bindings": 1,
+                    "placeholder": "",
+                    "show_in_graphql": 1,
+                    "graphql_description": "",
+                    "graphql_field_name": "mastodon",
+                    "graphql_non_null": 0
                 },
                 {
                     "key": "field_62729597e4b40",
-                    "label": "Tiktok link",
-                    "name": "tiktok_link",
+                    "label": "Tiktok",
+                    "name": "tiktok",
                     "aria-label": "",
                     "type": "url",
                     "instructions": "",
@@ -129,33 +168,17 @@
                         "id": ""
                     },
                     "default_value": "",
+                    "allow_in_bindings": 1,
                     "placeholder": "",
-                    "translations": "copy_once",
-                    "acfe_field_group_condition": 0
-                },
-                {
-                    "key": "field_6272957be4b3e",
-                    "label": "Twitter link",
-                    "name": "twitter_link",
-                    "aria-label": "",
-                    "type": "url",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "default_value": "",
-                    "placeholder": "",
-                    "translations": "copy_once",
-                    "acfe_field_group_condition": 0
+                    "show_in_graphql": 1,
+                    "graphql_description": "",
+                    "graphql_field_name": "tiktok",
+                    "graphql_non_null": 0
                 },
                 {
                     "key": "field_627295a5e4b41",
-                    "label": "Youtube link",
-                    "name": "youtube_link",
+                    "label": "Youtube",
+                    "name": "youtube",
                     "aria-label": "",
                     "type": "url",
                     "instructions": "",
@@ -167,9 +190,12 @@
                         "id": ""
                     },
                     "default_value": "",
+                    "allow_in_bindings": 1,
                     "placeholder": "",
-                    "translations": "copy_once",
-                    "acfe_field_group_condition": 0
+                    "show_in_graphql": 1,
+                    "graphql_description": "",
+                    "graphql_field_name": "youtube",
+                    "graphql_non_null": 0
                 }
             ]
         }
@@ -196,5 +222,5 @@
     "graphql_field_name": "siteSettings",
     "map_graphql_types_from_location_rules": 0,
     "graphql_types": "",
-    "modified": 1731662273
+    "modified": 1731945879
 }
