@@ -78,6 +78,7 @@ class Dgwltd_Site {
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
 		$this->define_acf_hooks();
+		$this->define_block_hooks();
 		$this->define_site_rules();
 
 	}
@@ -124,9 +125,14 @@ class Dgwltd_Site {
 		require_once DGWLTD_SITE_PLUGIN_DIR . 'public/class-dgwltd-site-public.php';
 
 		/**
-		 * The class responsible for defining all actions that occur for building out the custom blocks
+		 * The class responsible for defining all custom ACF functionality
 		 */
 		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-acf.php';
+
+		/**
+		 * The class responsible for defining all actions that occur for building out the custom blocks
+		 */
+		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-blocks.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the custom rules
@@ -195,6 +201,20 @@ class Dgwltd_Site {
 		$this->loader->add_filter( 'acf/json/save_file_name', $plugin_acf, 'dgwltd_acf_json_filename', 10, 3 );
 
 		$this->loader->add_filter('acf/prepare_field/name=featured_card_id', $plugin_acf, 'dgwltd_acf_field_wrapper_class');
+
+	}
+
+	/**
+	 * Register all of the hooks related to the Custom blocks area functionality
+	 * of the plugin.
+	 *
+
+	 * @access   private
+	 */
+	private function define_block_hooks() {
+
+		$plugin_blocks = new Dgwltd_Site_Blocks();
+		add_filter( 'render_block_core/gallery', $plugin_blocks, 'dgwltd_utility_edit_gallery_markup', 10, 3 );
 
 	}
 
