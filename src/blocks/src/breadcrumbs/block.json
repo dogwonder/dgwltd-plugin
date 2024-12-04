@@ -4,7 +4,7 @@
     "description": "Breadcrumbs listing block",
     "category": "theme",
     "icon": "admin-links",
-    "apiVersion": 2,
+    "apiVersion": 3,
     "supports": {
         "jsx": true, 
         "alignText": false, 

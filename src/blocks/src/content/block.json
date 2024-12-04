@@ -5,7 +5,7 @@
     "style": "file:./content.css",
     "category": "theme",
     "icon": "schedule",
-    "apiVersion": 2,
+    "apiVersion": 3,
     "supports": {
         "jsx": true, 
         "align": [ "none" ],

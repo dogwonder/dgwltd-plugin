@@ -5,7 +5,7 @@
     "style": "file:./related.css",
     "category": "theme",
     "icon": "admin-links",
-    "apiVersion": 2,
+    "apiVersion": 3,
     "supports": {
         "jsx": true, 
         "align": false,

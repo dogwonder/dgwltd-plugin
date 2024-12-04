@@ -6,7 +6,7 @@
     "viewScript": "file:./hero.js",
     "category": "theme",
     "icon": "tide",
-    "apiVersion": 2,
+    "apiVersion": 3,
     "supports": {
         "jsx": true, 
         "align": false, 

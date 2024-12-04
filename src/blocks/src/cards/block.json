@@ -6,7 +6,7 @@
     "editorScript": "file:./index.js",
     "category": "theme",
     "icon": "tagcloud",
-    "apiVersion": 2,
+    "apiVersion": 3,
     "acf": {
         "mode": "preview",
         "renderTemplate": "render.php"

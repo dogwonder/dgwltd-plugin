@@ -6,7 +6,7 @@
     "viewScript": "file:./promo-card.js",
     "category": "theme",
     "icon": "format-aside",
-    "apiVersion": 2,
+    "apiVersion": 3,
     "supports": {
         "jsx": true, 
         "align": [ "none" ],

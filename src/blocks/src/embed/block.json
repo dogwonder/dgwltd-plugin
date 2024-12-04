@@ -6,7 +6,7 @@
     "viewScript": "file:./embed.js",
     "category": "theme",
     "icon": "format-video",
-    "apiVersion": 2,
+    "apiVersion": 3,
     "supports": {
         "jsx": true, 
         "align": false,
