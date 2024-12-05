@@ -5,7 +5,7 @@
   "style": "file:./banner.css",
   "category": "theme",
   "icon": "cover-image",
-  "apiVersion": 2,
+  "apiVersion": 3,
   "supports": {
     "jsx": true,
     "align": false,

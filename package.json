@@ -14,7 +14,7 @@
     "css:editor": "sass ./src/scss/dgwltd-site-editor.scss ./admin/css/dgwltd-site-editor.css",
     "postcss:theme": "postcss ./public/css/dgwltd-site-theme.css --use autoprefixer postcss-custom-properties cssnano --map --verbose --dir ./public/css/",
     "postcss:editor": "postcss ./admin/css/dgwltd-site-editor.css --use autoprefixer postcss-custom-properties cssnano --map --verbose --dir ./admin/css/",
-    "scripts:build": "wp-scripts build ./admin/scripts/dgwltd-site-editor.js ./public/scripts/dgwltd-site-theme.js --output-path=./dist",
+    "scripts:build": "wp-scripts build ./admin/scripts/dgwltd-site-editor.js ./admin/scripts/dgwltd-site-variations.js ./public/scripts/dgwltd-site-theme.js --output-path=./dist",
     "blocks:develop": "wp-scripts start --webpack-src-dir=./src/blocks/src --webpack-copy-php --output-path=./src/blocks/build",
     "blocks:build": "wp-scripts build --webpack-src-dir=./src/blocks/src --webpack-copy-php --output-path=./src/blocks/build",
     "watch": "onchange \"**/*.scss\" -- npm run css:* --silent",

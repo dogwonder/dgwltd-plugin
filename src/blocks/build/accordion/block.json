@@ -5,7 +5,7 @@
   "style": "file:./accordion.css",
   "category": "theme",
   "icon": "menu",
-  "apiVersion": 2,
+  "apiVersion": 3,
   "supports": {
     "jsx": true,
     "align": false,

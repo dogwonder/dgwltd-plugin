@@ -173,6 +173,7 @@ class Dgwltd_Site {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_styles' );
 		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_scripts' );
+		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'dgwltd_enqueue_variations_scripts' );
 
 		
 	}
@@ -214,7 +215,10 @@ class Dgwltd_Site {
 	private function define_block_hooks() {
 
 		$plugin_blocks = new Dgwltd_Site_Blocks();
+		
+		//Add data attributes to gallery block
 		add_filter( 'render_block_core/gallery', $plugin_blocks, 'dgwltd_utility_edit_gallery_markup', 10, 3 );
+		
 
 	}
 

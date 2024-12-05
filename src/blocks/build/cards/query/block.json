@@ -7,7 +7,7 @@
   "description": "Feature specific types of content in a grid",
   "category": "theme",
   "icon": "menu",
-  "apiVersion": 2,
+  "apiVersion": 3,
   "acf": {
     "mode": "edit",
     "renderTemplate": "query.php"

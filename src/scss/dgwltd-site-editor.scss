@@ -22,8 +22,8 @@ Generic styles
 }
 
 //Limit the width of the blocks in the editor to allow some breathing space
-.editor-styles-wrapper .editor-editor-canvas__post-title-wrapper > *, 
-.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > * {
+.editor-styles-wrapper .editor-editor-canvas__post-title-wrapper > *:not(.alignfull), 
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container > *:not(.alignfull) {
   width: clamp(16rem,95vw,var(--wp--custom--width--container));
 }
 
@@ -240,60 +240,6 @@ Blocks
 
 }
 
-//Content
-[data-type='acf/dgwltd-content'] {
-  
-  .has-image {
-    padding:0;
-    .dgwltd-content-block__inner {
-      padding: 0;
-      display: flex;
-      flex-direction: row;
-    }
-    
-    .dgwltd-content-block__content {
-      padding-inline-end: var(--wp--custom--spacing--gap);
-      flex-basis: 50%;
-    }
-    .dgwltd-content-block__image {
-      margin: 0;
-      flex-basis: 50%;
-    }
-    .frame {
-      aspect-ratio: 1 / 1;
-      height: 100%;
-    }
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      margin: 0;
-    }
-    
-  }
-
-  [data-state='reversed'] {
-    display: flex;
-    flex-direction: column-reverse;
-    .dgwltd-content-block__image {
-      order: 1;
-    }
-    .dgwltd-content-block__content {
-      order: 2;
-      padding-inline-start: var(--wp--custom--spacing--gap);
-      padding-inline-end: 0;
-    }
-  }
-
-}
-
-//Anchor
-[data-type='acf/dgwltd-anchor'] {
-  border: 0;
-  padding: 0;
-}
-
 //Breadcrumbs
 [data-type='acf/dgwltd-breadcrumbs'] {
   ol.govuk-breadcrumbs__list {
@@ -318,6 +264,14 @@ Blocks
     }   
   }
 }
+
+//Variations
+.dgwltd-block-cover {
+  .wp-block-cover__inner-container {
+    width: clamp(16rem,95vw,var(--wp--custom--width--container));
+  }
+}
+
 
 
 //Background image

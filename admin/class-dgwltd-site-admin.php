@@ -92,7 +92,36 @@ class Dgwltd_Site_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->dgwltd_site, plugin_dir_url( __FILE__ ) . 'js/admin.js', array( 'jquery' ), $this->version, false );
+		$asset_file = include plugin_dir_path(__DIR__) .
+			 "dist/dgwltd-site-editor.asset.php";
+		 wp_enqueue_script(
+			 $this->dgwltd_site,
+			 DGWLTD_SITE_PLUGIN_URL . "dist/dgwltd-site-editor.js",
+			 $asset_file["dependencies"],
+			 $asset_file["version"],
+			 true
+		 );
+
 	}
+	
+	/**
+	 * Register the JavaScript for blocks variation
+	 *
+	 */
+	public function dgwltd_enqueue_variations_scripts() {
+
+		$asset_file = include plugin_dir_path(__DIR__) .
+			 "dist/dgwltd-site-variations.asset.php";
+		 wp_enqueue_script(
+			 $this->dgwltd_site,
+			 DGWLTD_SITE_PLUGIN_URL . "dist/dgwltd-site-variations.js",
+			 $asset_file["dependencies"],
+			 $asset_file["version"],
+			 true
+		 );
+		
+	}
+
+
 
 }
