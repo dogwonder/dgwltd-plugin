@@ -9,7 +9,7 @@
  */
 
 // Create id attribute allowing for custom "anchor" value.
-$block_id = $block['id'];
+$block_id = $block["id"] . '-' . uniqid();
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
@@ -46,11 +46,11 @@ $block_classes_arr = array( $class_name, $block_classes );
 			<div class="govuk-accordion__section">
 
 					<div class="govuk-accordion__section-header">
-					<h2 class="govuk-accordion__section-heading">
-						<span class="govuk-accordion__section-button" id="accordion-default-heading-<?php echo get_row_index(); ?>">
-							<?php echo $accordion_section_heading; ?>
-						</span>
-					</h2>
+						<h2 class="govuk-accordion__section-heading">
+							<span class="govuk-accordion__section-button" id="accordion-default-heading-<?php echo get_row_index(); ?>">
+								<?php echo $accordion_section_heading; ?>
+							</span>
+						</h2>
 					</div>
 
 					<div id="accordion-default-content-<?php echo get_row_index(); ?>" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-<?php echo get_row_index(); ?>">

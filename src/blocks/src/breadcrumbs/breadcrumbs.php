@@ -8,7 +8,7 @@
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
 
-$block_id = $block['id'];
+$block_id = $block["id"] . '-' . uniqid();
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }

@@ -43,4 +43,28 @@ class Dgwltd_Site_Blocks {
     
     }
 
+    public function dgwltd_utility_edit_accordion_markup( $block_content, $block, $instance ) {
+
+        // create a new instance of the WP_HTML_Tag_Processor class.
+        $tags = new WP_HTML_Tag_Processor( $block_content );
+    
+        // Generate a random ID for the details element, via the post ID
+        $details_id = 'details-' . get_the_ID();
+    
+        // loop through each details block
+        while ( $tags->next_tag( [ array( 'tag_name' => 'details' ) ] ) ) {
+
+            // add an attribute for the current image count.
+            $tags->set_attribute( 'name', $details_id );
+    
+        }
+    
+        // save the manipulated HTML back to the block content.
+        $block_content = $tags->get_updated_html();
+    
+        // return the block content.
+        return $block_content;
+    
+    }
+
 }

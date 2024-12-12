@@ -1,6 +1,6 @@
 {
   "name": "dgwltd",
-  "version": "0.0.1",
+  "version": "1.0.11",
   "description": "## Requirements",
   "main": "gulpfile.js",
   "author": "",
@@ -19,7 +19,7 @@
     "blocks:build": "wp-scripts build --webpack-src-dir=./src/blocks/src --webpack-copy-php --output-path=./src/blocks/build",
     "watch": "onchange \"**/*.scss\" -- npm run css:* --silent",
     "develop": "concurrently --kill-others \"npm run watch\" \"npm run blocks:develop\"",
-    "build": "NODE_ENV=production run-p clean:* && NODE_ENV=production run-s css:* postcss:* && NODE_ENV=production && run-s scripts:* && NODE_ENV=production run-s blocks:build && NODE_ENV=production run-s clean"
+    "build": "NODE_ENV=production run-p clean:* && NODE_ENV=production run-s css:* postcss:* && NODE_ENV=production && run-s scripts:* && NODE_ENV=production run-s blocks:build && NODE_ENV=production run-s clean && NODE_ENV=production $(npm version patch --no-git-tag-version)"
   },
   "dependencies": {
     "@10up/block-components": "^1.19.3",

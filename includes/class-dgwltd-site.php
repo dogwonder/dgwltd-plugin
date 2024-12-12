@@ -217,7 +217,10 @@ class Dgwltd_Site {
 		$plugin_blocks = new Dgwltd_Site_Blocks();
 		
 		//Add data attributes to gallery block
-		add_filter( 'render_block_core/gallery', $plugin_blocks, 'dgwltd_utility_edit_gallery_markup', 10, 3 );
+		// $this->loader->add_filter( 'render_block_core/gallery', $plugin_blocks, 'dgwltd_utility_edit_gallery_markup', 10, 3 );
+
+		//Add name to accordion block to enable exclusive mode
+		$this->loader->add_filter( 'render_block_core/details', $plugin_blocks, 'dgwltd_utility_edit_accordion_markup', 10, 3 );
 		
 
 	}

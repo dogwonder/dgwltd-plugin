@@ -15,7 +15,7 @@
  * Plugin Name:       DGW.ltd: Site
  * Plugin URI:        https://wp.dgw.ltd
  * Description:       Accompanying plugin for the DGW.ltd theme
- * Version:           1.0.4
+ * Version: 		  1.0.5
  * Author:            Dogwonder Ltd
  * Author URI:        https://richholman.com
  * License:           GPL-2.0+
@@ -34,7 +34,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugin constants
  */
-define( 'DGWLTD_SITE_VERSION', '1.1.0' );
+$versionData = wp_remote_get(plugin_dir_url( __FILE__ ) . 'package.json');
+if (is_wp_error($versionData)) {
+    $pkgVersion = '0.0.1';
+} else {
+    $versionContents = wp_remote_retrieve_body($versionData);
+    $package = json_decode($versionContents, true);
+    $pkgVersion = $package['version'] ?? '0.0.1';
+}
+
+define( 'DGWLTD_SITE_VERSION', $pkgVersion );
 define( 'DGWLTD_SITE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DGWLTD_SITE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DGWLTD_SITE_PLUGIN_BLOCKS', DGWLTD_SITE_PLUGIN_DIR . 'src/blocks/' );

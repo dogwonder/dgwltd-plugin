@@ -7,7 +7,7 @@
  * @param   bool $is_preview True during AJAX preview.
  * @param   (int|string) $post_id The post ID this block is saved to.
  */
-$block_id = $block['id'];
+$block_id = $block["id"] . '-' . uniqid();
 if ( ! empty( $block['anchor'] ) ) {
 	$block_id = $block['anchor'];
 }
@@ -107,7 +107,7 @@ $block_template = array(
 						<picture>
 							<source media="(min-width: 900px)" srcset="<?php echo $image_large; ?>">
 							<img 
-							src="#" 
+							src="<?php echo $image_small; ?>" 
 							width="<?php echo $image_small_width; ?>" 
 							height="<?php echo $image_small_height; ?>" 
 							alt="<?php echo $image_alt ?>" 

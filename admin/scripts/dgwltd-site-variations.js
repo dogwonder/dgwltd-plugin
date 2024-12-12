@@ -13,6 +13,17 @@ const heroIcon = wp.element.createElement(
 	)
 );
 
+const accordionIcon = wp.element.createElement(
+	wp.primitives.SVG,
+	{ xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 448 512" },
+	wp.element.createElement(
+		wp.primitives.Path,
+		{
+			d: "M0 64l448 0 0 64L0 128 0 64zM0 224l448 0 0 64L0 288l0-64zM448 384l0 64L0 448l0-64 448 0z",
+		}
+	)
+);
+
 registerBlockVariation(
 	'core/cover',
 	{
@@ -38,5 +49,38 @@ registerBlockVariation(
 				} 
 			],
 		],
+	}
+);
+
+// Register a group block variation
+registerBlockVariation(
+	'core/group',
+	{
+		name: 'dgwltd-accordion',
+		title: 'DGW.ltd Details Accordion',
+		icon: accordionIcon,
+		attributes: {
+            className: 'dgwltd-block-accordion',
+		}, 
+		innerBlocks: [
+			[
+				'core/paragraph', 
+				{
+					content: 'Show all sections'
+				}
+			], 
+			[
+				'core/details'
+			], 
+			[
+				'core/details'
+			], 
+			[
+				'core/details'
+			], 
+			[
+				'core/details'
+			]
+		]
 	}
 );
