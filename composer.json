@@ -4,13 +4,7 @@
   "description": "Plugin for custom blocks",
   "license": "MIT", 
   "require": {
-      "composer/installers": "^1.4",
-      "squizlabs/php_codesniffer": "^3.5",
+    "squizlabs/php_codesniffer": "^3.5",
     "afragen/git-updater-lite": "^1.0"
-  },
-  "config": {
-    "allow-plugins": {
-      "composer/installers": true
-    }
   }
 }
