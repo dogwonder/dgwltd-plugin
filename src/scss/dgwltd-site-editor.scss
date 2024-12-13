@@ -265,13 +265,28 @@ Blocks
   }
 }
 
+//Cards
+[data-type='acf/dgwltd-cards'] {
+  .dgwltd-cards__grid {
+    display: grid;
+    gap: var(--wp--custom--spacing--lg);
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  }
+  .dgwltd-card { 
+    &__heading {
+      font-size: var(--wp--preset--font-size--heading);
+      line-height: var(--wp--custom--typography--line-height--headings--lg);
+    }
+  }
+}
+
+
 //Variations
 .dgwltd-block-cover {
   .wp-block-cover__inner-container {
     width: clamp(16rem,95vw,var(--wp--custom--width--container));
   }
 }
-
 
 
 //Background image
