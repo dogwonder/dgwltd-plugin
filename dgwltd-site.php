@@ -48,6 +48,9 @@ define( 'DGWLTD_SITE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DGWLTD_SITE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DGWLTD_SITE_PLUGIN_BLOCKS', DGWLTD_SITE_PLUGIN_DIR . 'src/blocks/' );
 
+require_once DGWLTD_SITE_PLUGIN_DIR . '/vendor/autoload.php';
+( new \Fragen\Git_Updater\Lite( __FILE__ ) )->run('https://wp.dgw.ltd/wp-json/git-updater/v1/plugins-api/?slug=dgwltd-site');
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-dgwltd-site-activator.php
