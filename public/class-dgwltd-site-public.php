@@ -3,7 +3,7 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * @link       https://wp.dgw.ltd
+ * @link       https://dgw.ltd
  * @since      1.0.0
  *
  * @package    Dgwltd_Site

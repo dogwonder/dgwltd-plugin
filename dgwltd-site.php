@@ -7,13 +7,13 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin. Based on http://wppb.io // https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
  *
- * @link              https://wp.dgw.ltd
+ * @link              https://dgw.ltd
  * @since             1.0.0
  * @package           Dgwltd_Site
  *
  * @wordpress-plugin
  * Plugin Name:       DGW.ltd: Site
- * Plugin URI:        https://wp.dgw.ltd
+ * Plugin URI:        https://dgw.ltd
  * Description:       Accompanying plugin for the DGW.ltd theme
  * Version: 		  1.0.5
  * Author:            Dogwonder Ltd

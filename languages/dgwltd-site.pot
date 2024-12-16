@@ -60,7 +60,7 @@ msgid "DGW.ltd: Site"
 msgstr ""
 
 #. Plugin URI of the plugin/theme
-msgid "https://wp.dgw.ltd"
+msgid "https://dgw.ltd"
 msgstr ""
 
 #. Description of the plugin/theme

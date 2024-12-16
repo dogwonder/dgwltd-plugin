@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://wp.dgw.ltd
+ * @link       https://dgw.ltd
  * @since      1.0.0
  *
  * @package    Dgwltd_Site
