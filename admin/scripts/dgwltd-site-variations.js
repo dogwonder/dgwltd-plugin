@@ -1,5 +1,5 @@
 
-import { unregisterBlockVariation, registerBlockVariation } from '@wordpress/blocks';
+import { registerBlockVariation, registerBlockStyle } from '@wordpress/blocks';
 import domReady from '@wordpress/dom-ready';
 
 const heroIcon = wp.element.createElement(
@@ -84,3 +84,31 @@ registerBlockVariation(
 		]
 	}
 );
+
+
+//Register a block style
+const styles = [
+    {
+        name: 'default',
+        label: 'Default',
+        isDefault: true,
+    },
+    {
+        name: 'html',
+        label: 'HTML',
+    },
+    {
+        name: 'css',
+        label: 'CSS',
+    }, 
+	{
+		name: 'js',
+		label: 'JS'
+	}, 
+	{
+		name: 'php',
+		label: 'PHP'
+	}
+];
+
+wp.blocks.registerBlockStyle("core/code", [...styles]);

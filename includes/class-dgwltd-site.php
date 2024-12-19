@@ -221,6 +221,9 @@ class Dgwltd_Site {
 
 		//Add name to accordion block to enable exclusive mode
 		$this->loader->add_filter( 'render_block_core/details', $plugin_blocks, 'dgwltd_utility_edit_accordion_markup', 10, 3 );
+
+		//Add Prism syntax highlighting to code block
+		$this->loader->add_filter( 'render_block_core/code', $plugin_blocks, 'dgwltd_utility_edit_code_markup', 10, 3 );
 		
 
 	}

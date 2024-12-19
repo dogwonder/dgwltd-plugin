@@ -67,4 +67,37 @@ class Dgwltd_Site_Blocks {
     
     }
 
+    public function dgwltd_utility_edit_code_markup( $block_content, $block, $instance ) {
+
+        // create a new instance of the WP_HTML_Tag_Processor class.
+        $tags = new WP_HTML_Tag_Processor( $block_content );
+
+        $styles = ['html', 'css', 'js', 'php'];
+
+        // loop through each image block.
+        while ( $tags->next_tag( [ 'class_name' => 'wp-block-code' ] ) ) {
+    
+            //Find the CSS class
+            $class = $tags->get_attribute('class');
+            //This returns wp-block-code is-style-html I just want to get the is-style- part
+            $style = str_replace('wp-block-code is-style-', '', $class);
+            
+            // Check if the current tag has children and navigate to the child <code> tag
+            if ( $tags->next_tag( [ 'tag_name' => 'code' ], true ) ) {
+                // Add the class to the child <code> tag
+                $tags->set_attribute( 'class', 'language-' . $style );
+            }
+             
+    
+        }
+
+        // save the manipulated HTML back to the block content.
+        $block_content = $tags->get_updated_html();
+    
+        // return the block content.
+        return $block_content;
+
+       
+    }
+
 }

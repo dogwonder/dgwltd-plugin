@@ -25,6 +25,7 @@ Generic styles
 .editor-styles-wrapper .editor-editor-canvas__post-title-wrapper > *:not(.alignfull), 
 .editor-styles-wrapper .block-editor-block-list__layout.is-root-container > *:not(.alignfull) {
   width: clamp(16rem,95vw,var(--wp--custom--width--container));
+  margin-inline: auto;
 }
 
 .dgwltd-button {
