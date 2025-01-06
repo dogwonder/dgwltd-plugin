@@ -91,12 +91,3 @@ function run_dgwltd_site() {
 
 }
 run_dgwltd_site();
-
-/**
-* Git updater
-**/
-require_once DGWLTD_SITE_PLUGIN_DIR . 'vendor/afragen/git-updater-lite/Lite.php';
-add_filter( 'gul_update_server', function () {
-    return 'https://wp.dgw.ltd';
-});
-( new \Fragen\Git_Updater\Lite( __FILE__ ) )->run();
