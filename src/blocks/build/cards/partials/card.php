@@ -23,7 +23,7 @@ $is_featured = ( $featured == $card ) ? true : false;
 ?>
 <div class="dgwltd-card <?php echo has_post_thumbnail( $card )
     ? " has-post-thumbnail"
-    : ""; ?> card-<?php echo $card_index; ?><?php echo ( $is_featured ) ? ' is-featured' : ''; ?>"> 
+    : ""; ?> card-<?php echo $card_index; ?><?php echo ( $is_featured ) ? ' is-featured' : ''; ?>" data-url="<?php echo esc_url( get_permalink( $card ) ); ?>"> 
 	<div class="dgwltd-card__inner">
 
 	<?php if ($has_image): ?>

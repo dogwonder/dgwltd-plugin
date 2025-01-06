@@ -111,4 +111,4 @@ const styles = [
 	}
 ];
 
-wp.blocks.registerBlockStyle("core/code", [...styles]);
+registerBlockStyle("core/code", [...styles]);

@@ -74,7 +74,7 @@ class Dgwltd_Site_Blocks {
 
         $styles = ['html', 'css', 'js', 'php'];
 
-        // loop through each image block.
+        // loop through each code block.
         while ( $tags->next_tag( [ 'class_name' => 'wp-block-code' ] ) ) {
     
             //Find the CSS class
