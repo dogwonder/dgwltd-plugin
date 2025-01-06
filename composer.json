@@ -4,6 +4,7 @@
   "description": "Plugin for custom blocks",
   "license": "MIT", 
   "require": {
-    "squizlabs/php_codesniffer": "^3.5"
+    "squizlabs/php_codesniffer": "^3.5",
+    "afragen/git-updater-lite": "^1.4"
   }
 }
