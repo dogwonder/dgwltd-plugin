@@ -15,7 +15,7 @@
  * Plugin Name:       DGW.ltd: Site
  * Plugin URI:        https://dgw.ltd
  * Description:       Accompanying plugin for the DGW.ltd theme
- * Version: 		  1.0.7
+ * Version: 		  1.0.8
  * Author:            Dogwonder Ltd
  * Author URI:        https://richholman.com
  * License:           GPL-2.0+
