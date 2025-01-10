@@ -106,8 +106,16 @@ const styles = [
 		label: 'JS'
 	}, 
 	{
+		name: 'json',
+		label: 'JSON'
+	}, 
+	{
 		name: 'php',
 		label: 'PHP'
+	},
+	{
+		name: 'twig',
+		label: 'TWIG'
 	}
 ];
 

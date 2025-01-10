@@ -10,6 +10,8 @@ import 'prismjs/components/prism-markup-templating';
 import 'prismjs/components/prism-css';
 import 'prismjs/components/prism-php';
 import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-twig';
 
 // Option 2: Import an extra theme (included in the 'prism-themes' package)
 // import 'prism-themes/themes/prism-coldark-dark.css';
