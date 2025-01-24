@@ -2,7 +2,7 @@
 import Alpine from 'alpinejs';
 
 //Optional import AlpineJS plugins
-//import focus from '@alpinejs/focus'
+//Import focus from '@alpinejs/focus'
 
 // Import Prism.js
 import 'prismjs';
