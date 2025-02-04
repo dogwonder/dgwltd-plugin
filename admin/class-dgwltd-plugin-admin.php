@@ -71,7 +71,7 @@ class Dgwltd_Site_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->dgwltd_site, plugin_dir_url( __FILE__ ) . 'css/dgwltd-site-editor.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->dgwltd_site, plugin_dir_url( __FILE__ ) . 'css/dgwltd-plugin-editor.css', array(), $this->version, 'all' );
 
 	}
 
@@ -93,10 +93,10 @@ class Dgwltd_Site_Admin {
 		 */
 
 		$asset_file = include plugin_dir_path(__DIR__) .
-			 "dist/dgwltd-site-editor.asset.php";
+			 "dist/dgwltd-plugin-editor.asset.php";
 		 wp_enqueue_script(
 			 $this->dgwltd_site,
-			 DGWLTD_SITE_PLUGIN_URL . "dist/dgwltd-site-editor.js",
+			 DGWLTD_SITE_PLUGIN_URL . "dist/dgwltd-plugin-editor.js",
 			 $asset_file["dependencies"],
 			 $asset_file["version"],
 			 true
@@ -111,10 +111,10 @@ class Dgwltd_Site_Admin {
 	public function dgwltd_enqueue_variations_scripts() {
 
 		$asset_file = include plugin_dir_path(__DIR__) .
-			 "dist/dgwltd-site-variations.asset.php";
+			 "dist/dgwltd-plugin-variations.asset.php";
 		 wp_enqueue_script(
 			 $this->dgwltd_site,
-			 DGWLTD_SITE_PLUGIN_URL . "dist/dgwltd-site-variations.js",
+			 DGWLTD_SITE_PLUGIN_URL . "dist/dgwltd-plugin-variations.js",
 			 $asset_file["dependencies"],
 			 $asset_file["version"],
 			 true

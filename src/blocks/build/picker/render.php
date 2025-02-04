@@ -39,7 +39,7 @@ $query = new WP_Query( $query_args );
         </ul>
         <?php wp_reset_postdata(); ?>
     <?php else : ?>
-        <p><?php esc_html_e( 'No posts selected', 'dgwltd-site' ); ?></p>
+        <p><?php esc_html_e( 'No posts selected', 'dgwltd-plugin' ); ?></p>
     <?php endif; ?>
     </div>
 </div>

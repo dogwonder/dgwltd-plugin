@@ -71,7 +71,7 @@ class Dgwltd_Site {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->dgwltd_site = 'dgwltd-site';
+		$this->dgwltd_site = 'dgwltd-plugin';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -105,39 +105,39 @@ class Dgwltd_Site {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-loader.php';
+		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-i18n.php';
+		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'admin/class-dgwltd-site-admin.php';
+		require_once DGWLTD_SITE_PLUGIN_DIR . 'admin/class-dgwltd-plugin-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'public/class-dgwltd-site-public.php';
+		require_once DGWLTD_SITE_PLUGIN_DIR . 'public/class-dgwltd-plugin-public.php';
 
 		/**
 		 * The class responsible for defining all custom ACF functionality
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-acf.php';
+		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-acf.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the custom blocks
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-blocks.php';
+		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-blocks.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the custom rules
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-rules.php';
+		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-rules.php';
 
 		$this->loader = new Dgwltd_Site_Loader();
 

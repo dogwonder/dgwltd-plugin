@@ -22,7 +22,7 @@ const Edit = (props) => {
 
 
     const { attributes, setAttributes } = props;
-    const { selectedPosts = [], contentType = 'news', heading = __('Selected Posts', 'dgwltd-site'), favouritePost = null  } = attributes; // Ensure selectedPosts, contentType, and heading are initialized
+    const { selectedPosts = [], contentType = 'news', heading = __('Selected Posts', 'dgwltd-plugin'), favouritePost = null  } = attributes; // Ensure selectedPosts, contentType, and heading are initialized
 
     const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor));
 
@@ -61,21 +61,21 @@ const Edit = (props) => {
                     <Button
                         onClick={() => movePostUp(index)}
                         disabled={index === 0}
-                        aria-label={__('Move Up', 'dgwltd-site')}
+                        aria-label={__('Move Up', 'dgwltd-plugin')}
                     >
                         <Icon icon={arrowUp} />
                     </Button>
                     <Button
                         onClick={() => movePostDown(index)}
                         disabled={index === selectedPosts.length - 1} 
-                        aria-label={__('Move Down', 'dgwltd-site')}
+                        aria-label={__('Move Down', 'dgwltd-plugin')}
                         style={{ marginLeft: '4px' }}
                     >
                         <Icon icon={arrowDown} />
                     </Button>
                     <Button
                         onClick={() => setFavouritePost(post.id)}
-                        aria-label={__('Set as Favourite', 'dgwltd-site')}
+                        aria-label={__('Set as Favourite', 'dgwltd-plugin')}
                         style={{ marginLeft: '4px' }}
                     >
                         {post.id === favouritePost ? <Icon icon={starFilled} /> : <Icon icon={starEmpty} />}
@@ -83,7 +83,7 @@ const Edit = (props) => {
                     <Button
                         onClick={() => removePost(post.id)}
                         isDestructive
-                        aria-label={__('Remove Post', 'dgwltd-site')}
+                        aria-label={__('Remove Post', 'dgwltd-plugin')}
                         style={{ marginLeft: '4px' }}
                     >
                         <Icon icon={close} />
@@ -156,14 +156,14 @@ const Edit = (props) => {
     return (
         <>
             <InspectorControls>
-                <PanelBody title={__('Select Posts', 'dgwltd-site')}>
+                <PanelBody title={__('Select Posts', 'dgwltd-plugin')}>
                     <SelectControl
-                        label={__('Content Type', 'dgwltd-site')}
+                        label={__('Content Type', 'dgwltd-plugin')}
                         value={contentType}
                         options={[
-                            { label: __('News', 'dgwltd-site'), value: 'news' },
-                            { label: __('Event', 'dgwltd-site'), value: 'event' },
-                            { label: __('Blog', 'dgwltd-site'), value: 'blog' },
+                            { label: __('News', 'dgwltd-plugin'), value: 'news' },
+                            { label: __('Event', 'dgwltd-plugin'), value: 'event' },
+                            { label: __('Blog', 'dgwltd-plugin'), value: 'blog' },
                         ]}
                         onChange={(value) => setAttributes({ contentType: value })} // Save the selected content type
                     />
@@ -172,7 +172,7 @@ const Edit = (props) => {
                         onPickChange={onSearchPick}
                         mode="post"
                         hideLabelFromVision={false}
-                        label={__('Please select Posts or Pages:', 'dgwltd-site')}
+                        label={__('Please select Posts or Pages:', 'dgwltd-plugin')}
                         contentTypes={['post', 'page']}
                     />
                 </PanelBody>
@@ -182,7 +182,7 @@ const Edit = (props) => {
                     tagName="h2"
                     value={heading}
                     onChange={(value) => setAttributes({ heading: value })}
-                    placeholder={__('Enter heading...', 'dgwltd-site')}
+                    placeholder={__('Enter heading...', 'dgwltd-plugin')}
                 />
                 <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
                     <SortableContext items={selectedPosts.map(post => `draggable-${post.id}`)} strategy={verticalListSortingStrategy}>
@@ -201,7 +201,7 @@ const Edit = (props) => {
                                 ))}
                             </div>
                         ) : (
-                            <p>{__('No posts selected', 'dgwltd-site')}</p>
+                            <p>{__('No posts selected', 'dgwltd-plugin')}</p>
                         )}
                     </SortableContext>
                 </DndContext>

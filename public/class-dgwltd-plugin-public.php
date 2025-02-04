@@ -61,7 +61,7 @@ class Dgwltd_Site_Public {
 	 */
 	public function dgwltd_enqueue_theme_styles() {
 
-		wp_enqueue_style( $this->dgwltd_site, plugin_dir_url( __FILE__ ) . 'css/dgwltd-site-theme.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->dgwltd_site, plugin_dir_url( __FILE__ ) . 'css/dgwltd-plugin-theme.css', array(), $this->version, 'all' );
 	}
 
 
@@ -73,10 +73,10 @@ class Dgwltd_Site_Public {
 	 public function dgwltd_enqueue_theme_scripts()
 	 {
 		 $asset_file = include plugin_dir_path(__DIR__) .
-			 "dist/dgwltd-site-theme.asset.php";
+			 "dist/dgwltd-plugin-theme.asset.php";
 		 wp_enqueue_script(
 			 $this->dgwltd_site,
-			 DGWLTD_SITE_PLUGIN_URL . "dist/dgwltd-site-theme.js",
+			 DGWLTD_SITE_PLUGIN_URL . "dist/dgwltd-plugin-theme.js",
 			 $asset_file["dependencies"],
 			 $asset_file["version"],
 			 true
@@ -89,7 +89,7 @@ class Dgwltd_Site_Public {
 	 */
 	public function dgwltd_add_type_attribute($tag, $handle, $src) {
 		// if not your script, do nothing and return original $tag
-		if ( 'dgwltd-site' !== $handle ) {
+		if ( 'dgwltd-plugin' !== $handle ) {
 			return $tag;
 		}
 		// change the script tag by adding type="module" and return it.

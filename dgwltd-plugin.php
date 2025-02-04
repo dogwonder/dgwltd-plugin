@@ -12,7 +12,7 @@
  * @package           Dgwltd_Site
  *
  * @wordpress-plugin
- * Plugin Name:       DGW.ltd: Site
+ * Plugin Name:       DGW.ltd: Plugin
  * Plugin URI:        https://dgw.ltd
  * Description:       Accompanying plugin for the DGW.ltd theme
  * Version: 		  1.0.8
@@ -22,7 +22,7 @@
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * GitHub Plugin URI: https://github.com/dogwonder/dgwltd-plugin
  * Primary Branch: main 
- * Text Domain:       dgwltd-site
+ * Text Domain:       dgwltd-plugin
  * Domain Path:       /languages
  */
 
@@ -50,19 +50,19 @@ define( 'DGWLTD_SITE_PLUGIN_BLOCKS', DGWLTD_SITE_PLUGIN_DIR . 'src/blocks/' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-dgwltd-site-activator.php
+ * This action is documented in includes/class-dgwltd-plugin-activator.php
  */
 function activate_dgwltd_site() {
-	require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-activator.php';
+	require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-activator.php';
 	Dgwltd_Site_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-dgwltd-site-deactivator.php
+ * This action is documented in includes/class-dgwltd-plugin-deactivator.php
  */
 function deactivate_dgwltd_site() {
-	require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site-deactivator.php';
+	require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-deactivator.php';
 	Dgwltd_Site_Deactivator::deactivate();
 }
 
@@ -73,7 +73,7 @@ register_deactivation_hook( __FILE__, 'deactivate_dgwltd_site' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-site.php';
+require DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin.php';
 
 /**
  * Begins execution of the plugin.
