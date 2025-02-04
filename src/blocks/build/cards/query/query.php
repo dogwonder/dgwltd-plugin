@@ -38,7 +38,7 @@ if ($picker) {
 }
 
 // Get the mappings
-$cardTypeMappings = Dgwltd_Site_Public::dgwltd_get_card_type_mappings();
+$cardTypeMappings = DGWLTD_PLUGIN_Public::dgwltd_get_card_type_mappings();
 
 // Initialize flags and classes with default settings
 extract($cardTypeMappings['default']);
@@ -184,7 +184,7 @@ if ($block_type == "picker"): ?>
         foreach ($picker as $card): ?>
 			<?php
             $card = $card->ID;
-            require DGWLTD_SITE_PLUGIN_BLOCKS . 'build/cards/partials/card.php';
+            require DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/cards/partials/card.php';
             $card_index++;
             ?>
 		<?php endforeach; 
@@ -201,7 +201,7 @@ if ($block_type == "picker"): ?>
          $cards_query->the_post();
          $card_index = $cards_query->current_post + 1;
          $card = get_the_ID();
-         require DGWLTD_SITE_PLUGIN_BLOCKS . 'build/cards/partials/card.php';
+         require DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/cards/partials/card.php';
      endwhile;
      wp_reset_postdata();
  else:
@@ -217,7 +217,7 @@ if ($block_type == "picker"): ?>
      $total_pages = $cards_query->max_num_pages;
      $prev_url = get_previous_posts_page_link();
 	 $next_url = get_next_posts_page_link();
-     require DGWLTD_SITE_PLUGIN_BLOCKS . 'build/cards/partials/pagination.php';
+     require DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/cards/partials/pagination.php';
  endif; ?>
 	<?php wp_reset_query(); ?>	
 <?php endif; ?>

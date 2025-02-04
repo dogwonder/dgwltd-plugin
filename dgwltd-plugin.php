@@ -43,37 +43,37 @@ if (is_wp_error($versionData)) {
     $pkgVersion = $package['version'] ?? '0.0.1';
 }
 
-define( 'DGWLTD_SITE_VERSION', $pkgVersion );
-define( 'DGWLTD_SITE_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'DGWLTD_SITE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'DGWLTD_SITE_PLUGIN_BLOCKS', DGWLTD_SITE_PLUGIN_DIR . 'src/blocks/' );
+define( 'DGWLTD_PLUGIN_VERSION', $pkgVersion );
+define( 'DGWLTD_PLUGIN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'DGWLTD_PLUGIN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'DGWLTD_PLUGIN_PLUGIN_BLOCKS', DGWLTD_PLUGIN_PLUGIN_DIR . 'src/blocks/' );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-dgwltd-plugin-activator.php
  */
-function activate_dgwltd_site() {
-	require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-activator.php';
-	Dgwltd_Site_Activator::activate();
+function activate_dgwltd_plugin() {
+	require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-activator.php';
+	DGWLTD_PLUGIN_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-dgwltd-plugin-deactivator.php
  */
-function deactivate_dgwltd_site() {
-	require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-deactivator.php';
-	Dgwltd_Site_Deactivator::deactivate();
+function deactivate_dgwltd_plugin() {
+	require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-deactivator.php';
+	DGWLTD_PLUGIN_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_dgwltd_site' );
-register_deactivation_hook( __FILE__, 'deactivate_dgwltd_site' );
+register_activation_hook( __FILE__, 'activate_dgwltd_plugin' );
+register_deactivation_hook( __FILE__, 'deactivate_dgwltd_plugin' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin.php';
+require DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin.php';
 
 /**
  * Begins execution of the plugin.
@@ -84,10 +84,10 @@ require DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin.php';
  *
  * @since    1.0.0
  */
-function run_dgwltd_site() {
+function run_dgwltd_plugin() {
 
 	$plugin = new Dgwltd_Site();
 	$plugin->run();
 
 }
-run_dgwltd_site();
+run_dgwltd_plugin();

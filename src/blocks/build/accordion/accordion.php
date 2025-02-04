@@ -20,7 +20,7 @@ if ( ! empty( $block['className'] ) ) {
 }
 
 // Block attributes (set in native block editor)
-$block_attrs  = Dgwltd_Site_Public::dgwltd_get_block_attrs( $block ) ? : '';
+$block_attrs  = DGWLTD_PLUGIN_Public::dgwltd_get_block_attrs( $block ) ? : '';
 $block_classes = $block_attrs['class'] ? $block_attrs['class'] : '';
 $block_styles = $block_attrs['style'] ? $block_attrs['style'] : '';
 

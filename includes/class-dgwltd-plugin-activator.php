@@ -9,7 +9,7 @@
  * @subpackage Dgwltd_Site/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class Dgwltd_Site_Activator {
+class DGWLTD_PLUGIN_Activator {
 
 	/**
 	 * Short Description. (use period)

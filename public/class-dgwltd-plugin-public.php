@@ -20,16 +20,16 @@
  * @subpackage Dgwltd_Site/public
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class Dgwltd_Site_Public {
+class DGWLTD_PLUGIN_Public {
 
 	/**
 	 * The ID of this plugin.
 	 *
 
 	 * @access   private
-	 * @var      string    $dgwltd_site    The ID of this plugin.
+	 * @var      string    $dgwltd_plugin    The ID of this plugin.
 	 */
-	private $dgwltd_site;
+	private $dgwltd_plugin;
 
 
 	/**
@@ -45,12 +45,12 @@ class Dgwltd_Site_Public {
 	 * Initialize the class and set its properties.
 	 *
 
-	 * @param      string $dgwltd_site       The name of the plugin.
+	 * @param      string $dgwltd_plugin       The name of the plugin.
 	 * @param      string $version    The version of this plugin.
 	 */
-	public function __construct( $dgwltd_site, $version ) {
+	public function __construct( $dgwltd_plugin, $version ) {
 
-		$this->dgwltd_site = $dgwltd_site;
+		$this->dgwltd_plugin = $dgwltd_plugin;
 		$this->version       = $version;
 
 	}
@@ -61,7 +61,7 @@ class Dgwltd_Site_Public {
 	 */
 	public function dgwltd_enqueue_theme_styles() {
 
-		wp_enqueue_style( $this->dgwltd_site, plugin_dir_url( __FILE__ ) . 'css/dgwltd-plugin-theme.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->dgwltd_plugin, plugin_dir_url( __FILE__ ) . 'css/dgwltd-plugin-theme.css', array(), $this->version, 'all' );
 	}
 
 
@@ -75,8 +75,8 @@ class Dgwltd_Site_Public {
 		 $asset_file = include plugin_dir_path(__DIR__) .
 			 "dist/dgwltd-plugin-theme.asset.php";
 		 wp_enqueue_script(
-			 $this->dgwltd_site,
-			 DGWLTD_SITE_PLUGIN_URL . "dist/dgwltd-plugin-theme.js",
+			 $this->dgwltd_plugin,
+			 DGWLTD_PLUGIN_PLUGIN_URL . "dist/dgwltd-plugin-theme.js",
 			 $asset_file["dependencies"],
 			 $asset_file["version"],
 			 true

@@ -8,7 +8,7 @@ $image_alt         = esc_attr( $image['alt'] );
 $image_width       = esc_attr( $image['width'] );
 $image_height      = esc_attr( $image['height'] );
 // For Low quality image placeholders (LQIP)
-$base64Image  = Dgwltd_Site_Public::dgwltd_image_to_base64_data_uri( $image_tiny );
+$base64Image  = DGWLTD_PLUGIN_Public::dgwltd_image_to_base64_data_uri( $image_tiny );
 ?>
 <div class="dgwltd-promo-card__image">
     <figure>

@@ -28,7 +28,7 @@ $has_video        = get_field( 'has_video' ) ? : '';
 $video           = get_field( 'video', false, false );
 
 // Block attributes (set in native block editor)
-$block_attrs  = Dgwltd_Site_Public::dgwltd_get_block_attrs( $block ) ? : '';
+$block_attrs  = DGWLTD_PLUGIN_Public::dgwltd_get_block_attrs( $block ) ? : '';
 $block_classes = $block_attrs['class'] ? $block_attrs['class'] : '';
 $block_styles = $block_attrs['style'] ? $block_attrs['style'] : '';
 
@@ -36,7 +36,7 @@ $overlay  = get_field( 'overlay' ) ? : '';
 if($overlay) {
 	//Convert to RGB
 	$overlay_color  = get_field( 'overlay_color' ) ? : '';
-	$hex2rgb = Dgwltd_Site_Public::dgwltd_hex2rgb( $overlay_color );
+	$hex2rgb = DGWLTD_PLUGIN_Public::dgwltd_hex2rgb( $overlay_color );
 	$overlay_opacity  = get_field( 'overlay_opacity' ) ? : '0.7';
 	$overlay_opacity = $overlay_opacity / 100;
 	//Loop through RGB values and add opacity
@@ -91,7 +91,7 @@ $block_template = array(
 				$image_width       = esc_attr( $image['width'] );
 				$image_height      = esc_attr( $image['height'] );
 				// For Low quality image placeholders (LQIP)
-				$base64Image  = Dgwltd_Site_Public::dgwltd_image_to_base64_data_uri( $image_tiny );
+				$base64Image  = DGWLTD_PLUGIN_Public::dgwltd_image_to_base64_data_uri( $image_tiny );
 				?>
 				<link rel="preload" href="<?php echo $image_small; ?>" as="image" media="(max-width: 39.6875em)">
 				<link rel="preload" href="<?php echo $image_large; ?>" as="image" media="(min-width: 40.0625em)">

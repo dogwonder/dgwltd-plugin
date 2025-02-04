@@ -18,7 +18,7 @@ if ( ! empty( $block['className'] ) ) {
 }
 
 // Block attributes (set in native block editor)
-$block_attrs  = dgwltd_Site_Public::dgwltd_get_block_attrs( $block ) ? : '';
+$block_attrs  = DGWLTD_PLUGIN_Public::dgwltd_get_block_attrs( $block ) ? : '';
 $block_classes = $block_attrs['class'] ? $block_attrs['class'] : '';
 $block_styles = $block_attrs['style'] ? $block_attrs['style'] : '';
 
@@ -71,11 +71,11 @@ $block_template = array(
 
 			<?php 
 				if ($type == 'image' && !empty($image)) {
-					require DGWLTD_SITE_PLUGIN_BLOCKS . 'build/promo-card/image.php';
+					require DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/promo-card/image.php';
 				} elseif ($type == 'embed' && !empty($embed)) {
-					require DGWLTD_SITE_PLUGIN_BLOCKS . 'build/promo-card/embed.php';
+					require DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/promo-card/embed.php';
 				} elseif ($type == 'video' && !empty($video)) {
-					require DGWLTD_SITE_PLUGIN_BLOCKS . 'build/promo-card/video.php';
+					require DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/promo-card/video.php';
 				}
 			?>
 		

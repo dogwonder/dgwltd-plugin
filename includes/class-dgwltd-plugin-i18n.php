@@ -10,7 +10,7 @@
  * @subpackage Dgwltd_Site/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class Dgwltd_Site_I18n {
+class DGWLTD_PLUGIN_I18n {
 
 
 	/**

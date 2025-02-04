@@ -45,7 +45,7 @@ $is_featured = ( $featured == $card ) ? true : false;
 		<div class="dgwltd-card__content">
 
 			<?php if ($has_kicker) { ?>
-				<?php require DGWLTD_SITE_PLUGIN_BLOCKS . 'build/cards/partials/taxonomy.php'; ?>
+				<?php require DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/cards/partials/taxonomy.php'; ?>
 			<?php } ?>
 
 			<<?php echo $heading_level ?> class="dgwltd-card__heading">

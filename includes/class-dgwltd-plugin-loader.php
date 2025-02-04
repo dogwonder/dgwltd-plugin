@@ -10,7 +10,7 @@
  * @subpackage Dgwltd_Site/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class Dgwltd_Site_Loader {
+class DGWLTD_PLUGIN_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

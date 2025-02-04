@@ -35,7 +35,7 @@ class Dgwltd_Site {
 	 *
 
 	 * @access   protected
-	 * @var      Dgwltd_Site_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      DGWLTD_PLUGIN_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -44,9 +44,9 @@ class Dgwltd_Site {
 	 *
 
 	 * @access   protected
-	 * @var      string    $dgwltd_site    The string used to uniquely identify this plugin.
+	 * @var      string    $dgwltd_plugin    The string used to uniquely identify this plugin.
 	 */
-	protected $dgwltd_site;
+	protected $dgwltd_plugin;
 
 	/**
 	 * The current version of the plugin.
@@ -66,12 +66,12 @@ class Dgwltd_Site {
 	 *
 	 */
 	public function __construct() {
-		if ( defined( 'DGWLTD_SITE_VERSION' ) ) {
-			$this->version = DGWLTD_SITE_VERSION;
+		if ( defined( 'DGWLTD_PLUGIN_VERSION' ) ) {
+			$this->version = DGWLTD_PLUGIN_VERSION;
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->dgwltd_site = 'dgwltd-plugin';
+		$this->dgwltd_plugin = 'dgwltd-plugin';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -88,10 +88,10 @@ class Dgwltd_Site {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Dgwltd_Site_Loader. Orchestrates the hooks of the plugin.
-	 * - Dgwltd_Site_I18n. Defines internationalization functionality.
-	 * - Dgwltd_Site_Admin. Defines all hooks for the admin area.
-	 * - Dgwltd_Site_Public. Defines all hooks for the public side of the site.
+	 * - DGWLTD_PLUGIN_Loader. Orchestrates the hooks of the plugin.
+	 * - DGWLTD_PLUGIN_I18n. Defines internationalization functionality.
+	 * - DGWLTD_PLUGIN_Admin. Defines all hooks for the admin area.
+	 * - DGWLTD_PLUGIN_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -105,48 +105,48 @@ class Dgwltd_Site {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-loader.php';
+		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-i18n.php';
+		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'admin/class-dgwltd-plugin-admin.php';
+		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'admin/class-dgwltd-plugin-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'public/class-dgwltd-plugin-public.php';
+		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'public/class-dgwltd-plugin-public.php';
 
 		/**
 		 * The class responsible for defining all custom ACF functionality
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-acf.php';
+		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-acf.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the custom blocks
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-blocks.php';
+		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-blocks.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the custom rules
 		 */
-		require_once DGWLTD_SITE_PLUGIN_DIR . 'includes/class-dgwltd-plugin-rules.php';
+		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-rules.php';
 
-		$this->loader = new Dgwltd_Site_Loader();
+		$this->loader = new DGWLTD_PLUGIN_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Dgwltd_Site_I18n class in order to set the domain and to register the hook
+	 * Uses the DGWLTD_PLUGIN_I18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 
@@ -154,7 +154,7 @@ class Dgwltd_Site {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Dgwltd_Site_I18n();
+		$plugin_i18n = new DGWLTD_PLUGIN_I18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -169,7 +169,7 @@ class Dgwltd_Site {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Dgwltd_Site_Admin( $this->get_dgwltd_Site(), $this->get_version() );
+		$plugin_admin = new DGWLTD_PLUGIN_Admin( $this->get_dgwltd_Site(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_styles' );
 		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_scripts' );
@@ -187,7 +187,7 @@ class Dgwltd_Site {
 	 */
 	private function define_acf_hooks() {
 
-		$plugin_acf = new Dgwltd_Site_ACF();
+		$plugin_acf = new DGWLTD_PLUGIN_ACF();
 
 		// $this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_block_scripts');
 		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_blocks' );
@@ -214,7 +214,7 @@ class Dgwltd_Site {
 	 */
 	private function define_block_hooks() {
 
-		$plugin_blocks = new Dgwltd_Site_Blocks();
+		$plugin_blocks = new DGWLTD_PLUGIN_Blocks();
 		
 		//Add data attributes to gallery block
 		// $this->loader->add_filter( 'render_block_core/gallery', $plugin_blocks, 'dgwltd_utility_edit_gallery_markup', 10, 3 );
@@ -237,7 +237,7 @@ class Dgwltd_Site {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Dgwltd_Site_Public( $this->get_dgwltd_Site(), $this->get_version() );
+		$plugin_public = new DGWLTD_PLUGIN_Public( $this->get_dgwltd_Site(), $this->get_version() );
 
 		$this->loader->add_filter('script_loader_tag', $plugin_public, 'dgwltd_add_type_attribute', 10, 3);
 
@@ -260,7 +260,7 @@ class Dgwltd_Site {
 	 */
 	private function define_site_rules() {
 
-		$plugin_rules = new Dgwltd_Site_Rules();
+		$plugin_rules = new DGWLTD_PLUGIN_Rules();
 
 		/**
  		* Allow-list the block types available in the inserter.
@@ -296,14 +296,14 @@ class Dgwltd_Site {
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_dgwltd_Site() {
-		return $this->dgwltd_site;
+		return $this->dgwltd_plugin;
 	}
 
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Dgwltd_Site_Loader    Orchestrates the hooks of the plugin.
+	 * @return    DGWLTD_PLUGIN_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
