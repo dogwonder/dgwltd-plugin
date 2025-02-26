@@ -1,0 +1,17 @@
+{
+  "name": "acf/dgwltd-breadcrumbs",
+  "title": "DGW.ltd Breadcrumbs",
+  "description": "Breadcrumbs listing block",
+  "category": "theme",
+  "icon": "admin-links",
+  "apiVersion": 3,
+  "supports": {
+    "jsx": true,
+    "alignText": false,
+    "color": false
+  },
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "breadcrumbs.php"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "dgwltd/picker",
+  "version": "0.1.0",
+  "title": "Picker",
+  "category": "widgets",
+  "icon": "table-col-before",
+  "description": "Block component that allows you to pick posts and pages",
+  "example": {},
+  "supports": {
+    "html": false,
+    "color": {
+      "background": true,
+      "text": true
+    },
+    "align": false,
+    "anchor": true
+  },
+  "attributes": {
+    "heading": {
+      "type": "string",
+      "default": "Selected posts"
+    },
+    "contentType": {
+      "type": "string",
+      "default": "news"
+    },
+    "favouritePost": {
+      "type": "number",
+      "default": null
+    },
+    "selectedPosts": {
+      "type": "array",
+      "default": []
+    }
+  },
+  "textdomain": "dgwltd-plugin",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "render": "file:./render.php",
+  "viewScript": "file:./view.js"
+}

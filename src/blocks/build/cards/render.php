@@ -14,7 +14,7 @@ if (!empty($block["anchor"])) {
     $block_id = $block["anchor"];
 }
 // Create class attribute allowing for custom "className" and "align" values. and "align" values.
-$class_name = "dgwltd-block dgwltd-cards dgwltd-section";
+$class_name = "dgwltd-block dgwltd-cards";
 if (!empty($block["className"])) {
     $class_name .= " " . $block["className"];
 }
@@ -37,7 +37,7 @@ $block_template = [
         [
             "level" => 2,
             "placeholder" => "Add section title...",
-            "className" => "dgwltd-section-title",
+            "className" => "dgwltd-block-title",
         ],
     ],
     ["acf/dgwltd-cards-query"],

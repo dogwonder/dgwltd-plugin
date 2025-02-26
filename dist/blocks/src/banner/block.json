@@ -1,0 +1,41 @@
+{
+  "name": "acf/dgwltd-banner",
+  "title": "DGW.ltd Banner",
+  "description": "Banner block",
+  "style": "file:./banner.css",
+  "category": "theme",
+  "icon": "cover-image",
+  "apiVersion": 3,
+  "supports": {
+    "jsx": true,
+    "align": false,
+    "alignText": true,
+    "anchor": true,
+    "color": {
+      "text": true,
+      "background": true,
+      "link": true
+    }
+  },
+  "styles": [
+    {
+      "name": "default",
+      "label": "Default",
+      "isDefault": true
+    },
+    {
+      "name": "monochrome",
+      "label": "Monochrome"
+    }
+  ],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "banner.php"
+  },
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": "full"
+    }
+  }
+}

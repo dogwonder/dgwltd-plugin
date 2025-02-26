@@ -36,6 +36,66 @@
             "mime_types": ""
         },
         {
+            "key": "field_67b732c930f0f",
+            "label": "Focal Point X",
+            "name": "focal_point_x",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5eb0434782e52",
+                        "operator": "!=empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_67b732dc30f10",
+            "label": "Focal Point Y",
+            "name": "focal_point_y",
+            "aria-label": "",
+            "type": "number",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5eb0434782e52",
+                        "operator": "!=empty"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "min": "",
+            "max": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "step": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_624af22ca19c1",
             "label": "Background image (mobile)",
             "name": "background_image_mobile",
@@ -173,10 +233,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "show_in_rest": 1,
-    "show_in_graphql": 0,
-    "graphql_field_name": "block:Hero",
-    "map_graphql_types_from_location_rules": 0,
-    "graphql_types": "",
-    "modified": 1731662305
+    "show_in_rest": 0,
+    "modified": 1740059401
 }

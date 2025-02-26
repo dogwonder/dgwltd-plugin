@@ -27,6 +27,10 @@ $image_mobile    = get_field( 'background_image_mobile' ) ? : '';
 $has_video        = get_field( 'has_video' ) ? : '';
 $video           = get_field( 'video', false, false );
 
+// Focal points
+$focal_x = get_field('focal_point_x') ?: 50; // Default to center
+$focal_y = get_field('focal_point_y') ?: 50;
+
 // Block attributes (set in native block editor)
 $block_attrs  = DGWLTD_PLUGIN_Public::dgwltd_get_block_attrs( $block ) ? : '';
 $block_classes = $block_attrs['class'] ? $block_attrs['class'] : '';
@@ -73,7 +77,7 @@ $block_template = array(
 ?>
 
 <div id="<?php echo $block_id; ?>" class="<?php echo esc_attr( implode( ' ', $block_classes_arr ) ); ?>"<?php echo ($block_styles ? ' style="' . $block_styles . '"' : ''); ?>>
-
+			
 			<?php if ( ! empty( $image ) ) : ?>
 				<?php
 				$image_tiny        = $image['sizes']['dgwltd-tiny'];
@@ -111,13 +115,23 @@ $block_template = array(
 					}
 					</style>
 				<?php endif; ?>
+				<?php if ( $focal_x || $focal_y ) : ?>
+					<style>
+						#<?php echo $block_id; ?>.dgwltd-hero img {
+							object-position: <?php echo $focal_x; ?>% <?php echo $focal_y; ?>%;
+						}
+					</style>
+				<?php endif; ?>
 				<div class="dgwltd-block__background">
 					<?php 
 					//Don't lazyload this https://cloudfour.com/thinks/stop-lazy-loading-product-and-hero-images/
 					?>
 					<figure>
 						<picture>
-							<source media="(min-width: 64em)" srcset="<?php echo $image_large; ?>">
+							<source 
+							media="(min-width: 64em)" 
+							srcset="<?php echo $image_large; ?>"
+							>
 							<img 
 							src="<?php echo $image_small; ?>" 
 							alt="<?php echo $image_alt ?>" 

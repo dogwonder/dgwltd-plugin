@@ -70,7 +70,7 @@ $block_classes_arr  = array( $class_name );
 					</a>
 				</li>
 				<?php endforeach; ?>
-			<?php wp_reset_query(); // results query ?>
+			<?php wp_reset_postdata(); // results query ?>
 			<?php endif; ?>
 
 			<?php if($custom_ancestor) : ?>

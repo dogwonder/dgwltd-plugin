@@ -1,1 +1,25 @@
-.wp-block-dgwltd-picker__item{display:flex;gap:1rem;margin:0}.wp-block-dgwltd-picker__title{flex:1;margin:0}.wp-block-dgwltd-picker .components-placeholder,.wp-block-dgwltd-picker__featured_image{aspect-ratio:1/1;height:auto;width:6rem}
+/*!**********************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/blocks/src/picker/editor.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+.wp-block-dgwltd-picker__item {
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+}
+.wp-block-dgwltd-picker__title {
+  margin: 0;
+  flex: 1;
+}
+.wp-block-dgwltd-picker__featured_image,
+.wp-block-dgwltd-picker .components-placeholder {
+  aspect-ratio: 1/1;
+  width: 6rem;
+  height: auto;
+}
+
+/*# sourceMappingURL=index.css.map*/

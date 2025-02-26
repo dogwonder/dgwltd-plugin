@@ -43,6 +43,8 @@ $cardTypeMappings = DGWLTD_PLUGIN_Public::dgwltd_get_card_type_mappings();
 // Initialize flags and classes with default settings
 extract($cardTypeMappings['default']);
 
+// print_r($cardTypeMappings[$cards_type]);
+
 // Override with specific card type settings if available
 if (isset($cardTypeMappings[$cards_type])) {
     foreach ($cardTypeMappings[$cards_type] as $key => $value) {
@@ -219,5 +221,5 @@ if ($block_type == "picker"): ?>
 	 $next_url = get_next_posts_page_link();
      require DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/cards/partials/pagination.php';
  endif; ?>
-	<?php wp_reset_query(); ?>	
+	<?php wp_reset_postdata(); ?>	
 <?php endif; ?>
