@@ -20,6 +20,7 @@ import 'prismjs/components/prism-twig';
 import { animate, scroll } from "motion";
 
 window.Alpine = Alpine;
+Alpine.start();
 
 // CSS selector
 animate(
