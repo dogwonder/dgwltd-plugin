@@ -295,11 +295,6 @@ class Dgwltd_Site {
 	private function define_feature_api() {
 
 		$feature_api = new DGWLTD_FEATURE_API();
-        
-		// Load the WP Feature API
-		$this->loader->add_action( 'plugins_loaded', $feature_api, 'dgwltd_wp_feature_api_init' );
-		// Register features once we know API is initialized
-		$this->loader->add_action('wp_feature_api_init', $feature_api, 'dgwltd_register_features');
 
 	}
 

@@ -19,6 +19,7 @@
     "blocks:build": "wp-scripts build --webpack-src-dir=./src/blocks/src --webpack-copy-php --output-path=./src/blocks/build",
     "watch": "onchange \"**/*.scss\" -- npm run css:* --silent",
     "develop": "concurrently --kill-others \"npm run watch\" \"npm run blocks:develop\"",
+    "wp-env:build": "cd ./vendor/automattic/wp-feature-api && npm install && npm run build && npm run wp-env start", 
     "wp-env": "wp-env",
     "build": "NODE_ENV=production run-p clean:* && NODE_ENV=production run-s css:* postcss:* && NODE_ENV=production && run-s scripts:* && NODE_ENV=production run-s blocks:build && NODE_ENV=production run-s clean && NODE_ENV=production $(npm version patch --no-git-tag-version)"
   },

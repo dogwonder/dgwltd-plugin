@@ -12,19 +12,30 @@
 class DGWLTD_FEATURE_API {
 
     /**
+     * Initialize the class and set its hooks
+     */
+    public function __construct() {
+        // Hook into plugins_loaded to initialize the Feature API
+        add_action('plugins_loaded', array($this, 'dgwltd_wp_feature_api_init'));
+    }
+
+    /**
      * Load the WP Feature API
      */
     public function dgwltd_wp_feature_api_init() {
-
+        // Include the main plugin file - it automatically registers itself
         require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'vendor/automattic/wp-feature-api/wp-feature-api.php';
-
+        
+        // Register features once we know API is initialized
+        add_action('wp_feature_api_init', array($this, 'dgwltd_register_features'));
     }
 
     /**
      * Register features with the WP Feature API
      */
     public function dgwltd_register_features() {
-        wp_register_feature('dgwltd-plugin/example-feature', array(
+        // Create a new feature instance
+        $feature = new WP_Feature('dgwltd-plugin/example-feature', array(
             'name' => 'Example Feature',
             'description' => 'An example feature from my plugin',
             'callback' => array($this, 'dgwltd_plugin_example_feature_callback'),
