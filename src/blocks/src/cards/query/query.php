@@ -38,7 +38,7 @@ if ($picker) {
 }
 
 // Get the mappings
-$cardTypeMappings = DGWLTD_PLUGIN_Public::dgwltd_get_card_type_mappings();
+$cardTypeMappings = DGWLTD_PLUGIN_PUBLIC::dgwltd_get_card_type_mappings();
 
 // Initialize flags and classes with default settings
 extract($cardTypeMappings['default']);

@@ -9,7 +9,7 @@
  * @subpackage Dgwltd_Site/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class DGWLTD_PLUGIN_Rules {
+class DGWLTD_PLUGIN_RULES {
 
 	public function dgwltd_restrict_heading_levels( $args, $block_type ) {
      

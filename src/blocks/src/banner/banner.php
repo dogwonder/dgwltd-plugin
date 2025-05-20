@@ -18,7 +18,7 @@ if ( ! empty( $block['className'] ) ) {
 }
 
 // Block attributes (set in native block editor)
-$block_attrs  = DGWLTD_PLUGIN_Public::dgwltd_get_block_attrs( $block ) ? : '';
+$block_attrs  = DGWLTD_PLUGIN_PUBLIC::dgwltd_get_block_attrs( $block ) ? : '';
 $block_classes = $block_attrs['class'] ? $block_attrs['class'] : '';
 $block_styles = $block_attrs['style'] ? $block_attrs['style'] : '';
 
@@ -84,7 +84,7 @@ $block_template = array(
 				$image_width       = esc_attr( $image['width'] );
 				$image_height      = esc_attr( $image['height'] );
 				// For Low quality image placeholders (LQIP)
-				$base64Image  = DGWLTD_PLUGIN_Public::dgwltd_image_to_base64_data_uri( $image_tiny );
+				$base64Image  = DGWLTD_PLUGIN_PUBLIC::dgwltd_image_to_base64_data_uri( $image_tiny );
 				?>
 				<?php if ( $overlay ) : ?>
 				<style>

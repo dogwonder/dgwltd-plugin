@@ -1,5 +1,5 @@
 <?php 
-$v    = DGWLTD_PLUGIN_Public::dgwltd_parse_video_uri( $embed );
+$v    = DGWLTD_PLUGIN_PUBLIC::dgwltd_parse_video_uri( $embed );
 $vid  = $v['id'];
 ?>
 <div class="dgwltd-promo-card__video">

@@ -1,0 +1,9 @@
+{
+  "name": "dgwltd/dgwltd",
+  "type": "wordpress-plugin",
+  "description": "Blocks plugin",
+  "license": "MIT", 
+  "require": {
+      "automattic/wp-feature-api": "^0.1.4"
+  }
+}

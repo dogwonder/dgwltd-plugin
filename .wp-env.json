@@ -1,0 +1,24 @@
+{
+	"$schema": "./schemas/json/wp-env.json",
+	"core": "WordPress/WordPress",
+	"plugins": [
+		"."
+	],
+	"themes": [
+		"ssh://git@github.com/dogwonder/dgwltd-theme.git"
+	],
+	"plugins": [
+		"https://downloads.wordpress.org/plugin/advanced-custom-fields.6.4.2.zip", 
+		"ssh://git@github.com/dogwonder/dgwltd-plugin.git"
+	],
+	"env": {
+		"development": {
+			"phpmyadminPort": 9000
+		},
+		"tests": {
+			"mappings": {
+				"wp-content/plugins/dgwltd-plugin/vendor/automattic/wp-feature-api": "."
+			}
+		}
+	}
+}

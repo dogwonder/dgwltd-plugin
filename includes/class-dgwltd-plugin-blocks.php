@@ -9,7 +9,7 @@
  * @subpackage Dgwltd_Site/includes
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class DGWLTD_PLUGIN_Blocks {
+class DGWLTD_PLUGIN_BLOCKS {
 
     public function dgwltd_utility_edit_gallery_markup( $block_content, $block, $instance ) {
 

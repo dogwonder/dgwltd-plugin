@@ -20,7 +20,7 @@
  * @subpackage Dgwltd_Site/admin
  * @author     Rich Holman <dogwonder@gmail.com>
  */
-class DGWLTD_PLUGIN_Admin {
+class DGWLTD_PLUGIN_ADMIN {
 
 	/**
 	 * The ID of this plugin.

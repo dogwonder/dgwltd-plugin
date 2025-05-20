@@ -80,6 +80,7 @@ class Dgwltd_Site {
 		$this->define_acf_hooks();
 		$this->define_block_hooks();
 		$this->define_site_rules();
+		$this->define_feature_api();
 
 	}
 
@@ -90,8 +91,8 @@ class Dgwltd_Site {
 	 *
 	 * - DGWLTD_PLUGIN_Loader. Orchestrates the hooks of the plugin.
 	 * - DGWLTD_PLUGIN_I18n. Defines internationalization functionality.
-	 * - DGWLTD_PLUGIN_Admin. Defines all hooks for the admin area.
-	 * - DGWLTD_PLUGIN_Public. Defines all hooks for the public side of the site.
+	 * - DGWLTD_PLUGIN_ADMIN. Defines all hooks for the admin area.
+	 * - DGWLTD_PLUGIN_PUBLIC. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -139,6 +140,11 @@ class Dgwltd_Site {
 		 */
 		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-rules.php';
 
+		/**
+		 * The class responsible for defining all actions that occur for building out the feature API
+		 */
+		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-feature-api.php';
+
 		$this->loader = new DGWLTD_PLUGIN_Loader();
 
 	}
@@ -169,7 +175,7 @@ class Dgwltd_Site {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new DGWLTD_PLUGIN_Admin( $this->get_dgwltd_Site(), $this->get_version() );
+		$plugin_admin = new DGWLTD_PLUGIN_ADMIN( $this->get_dgwltd_Site(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_styles' );
 		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_scripts' );
@@ -214,7 +220,7 @@ class Dgwltd_Site {
 	 */
 	private function define_block_hooks() {
 
-		$plugin_blocks = new DGWLTD_PLUGIN_Blocks();
+		$plugin_blocks = new DGWLTD_PLUGIN_BLOCKS();
 		
 		//Add data attributes to gallery block
 		// $this->loader->add_filter( 'render_block_core/gallery', $plugin_blocks, 'dgwltd_utility_edit_gallery_markup', 10, 3 );
@@ -237,7 +243,7 @@ class Dgwltd_Site {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new DGWLTD_PLUGIN_Public( $this->get_dgwltd_Site(), $this->get_version() );
+		$plugin_public = new DGWLTD_PLUGIN_PUBLIC( $this->get_dgwltd_Site(), $this->get_version() );
 
 		$this->loader->add_filter('script_loader_tag', $plugin_public, 'dgwltd_add_type_attribute', 10, 3);
 
@@ -260,7 +266,7 @@ class Dgwltd_Site {
 	 */
 	private function define_site_rules() {
 
-		$plugin_rules = new DGWLTD_PLUGIN_Rules();
+		$plugin_rules = new DGWLTD_PLUGIN_RULES();
 
 		/**
  		* Allow-list the block types available in the inserter.
@@ -279,6 +285,24 @@ class Dgwltd_Site {
 
 		
 	}
+
+	/**
+	 * Register the WordPress Feature API
+	 *
+	 * @since     1.0.0
+	 * @return    void
+	 */
+	private function define_feature_api() {
+
+		$feature_api = new DGWLTD_FEATURE_API();
+        
+		// Load the WP Feature API
+		$this->loader->add_action( 'plugins_loaded', $feature_api, 'dgwltd_wp_feature_api_init' );
+		// Register features once we know API is initialized
+		$this->loader->add_action('wp_feature_api_init', $feature_api, 'dgwltd_register_features');
+
+	}
+
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
