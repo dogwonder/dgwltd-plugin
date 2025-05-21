@@ -23,8 +23,12 @@ class DGWLTD_FEATURE_API {
      * Load the WP Feature API
      */
     public function dgwltd_wp_feature_api_init() {
-        // Include the main plugin file - it automatically registers itself
+        
+        // Include the main plugin file 
         require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'vendor/automattic/wp-feature-api/wp-feature-api.php';
+
+        // Include the agent file 
+        require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'vendor/automattic/wp-feature-api/demo/wp-feature-api-agent/wp-feature-api-agent.php';
         
         // Register features once we know API is initialized
         add_action('wp_feature_api_init', array($this, 'dgwltd_register_features'));
