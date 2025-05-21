@@ -231,7 +231,6 @@ class Dgwltd_Site {
 		//Add Prism syntax highlighting to code block
 		$this->loader->add_filter( 'render_block_core/code', $plugin_blocks, 'dgwltd_utility_edit_code_markup', 10, 3 );
 		
-
 	}
 
 	/**
@@ -252,7 +251,6 @@ class Dgwltd_Site {
 
 		// Load theme scripts
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'dgwltd_enqueue_theme_scripts' );
-
 
 	}
 
