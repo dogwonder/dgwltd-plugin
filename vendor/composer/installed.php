@@ -3,7 +3,7 @@
         'name' => 'dgwltd/dgwltd',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '53bab2541e28fd8039ab5e9c92baddab8722c683',
+        'reference' => 'fd600c6fd59b58a3166272c62525e861556437a9',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'dgwltd/dgwltd' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '53bab2541e28fd8039ab5e9c92baddab8722c683',
+            'reference' => 'fd600c6fd59b58a3166272c62525e861556437a9',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

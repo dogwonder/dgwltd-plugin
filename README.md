@@ -3,9 +3,14 @@
 Based on https://github.com/DevinVinson/WordPress-Plugin-Boilerplate
 
 
-## WordPress FEature API
+## WordPress Feature API
 
 `npm run wp-env start`
+`npx run wp-env stop`
+
+Add to wp-config.php
+
+`define( 'WP_FEATURE_API_LOAD_DEMO', true );`
 
 ## Todo
 
