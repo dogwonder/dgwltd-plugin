@@ -11,6 +11,8 @@
  */
 class DGWLTD_FEATURE_API {
 
+    //IDEAS: https://www.pootlepress.com/2025/05/5-incredible-things-coming-to-wordpress-through-the-features-api/
+
     /**
      * Load the WP Feature API
      */
@@ -38,84 +40,203 @@ class DGWLTD_FEATURE_API {
         }
     }
 
+
     /**
      * Register features with the WP Feature API
      */
     public function dgwltd_register_features() {
 
-        // Register example feature
-        wp_register_feature(
-            array(
-                'id'          => 'dgwltd-plugin/example-feature',
-                'name'        => 'Example Feature',
-                'description' => 'An example feature from my plugin',
-                'type'        => 'tool', // or WP_Feature::TYPE_TOOL if constant is available
-                'categories'  => array('dgwltd', 'example'),
-                'callback'    => array($this, 'dgwltd_plugin_example_feature_callback'),
-                'input_schema' => array(
-                    'type' => 'object',
-                    'properties' => array(
-                        'example_param' => array(
-                            'type' => 'string',
-                            'description' => 'An example parameter',
-                        ),
-                    ),
+        // Check if Feature API is available
+        if (!function_exists('wp_register_feature')) {
+            error_log('Feature API not available when attempting to register block features');
+            return;
+        }
+
+        // wp_register_feature('dgwltd-plugin/banner', [
+        //     'id' => 'dgwltd-plugin/banner',
+        //     'name'        => 'DGW.ltd Banner',
+        //     'description' => 'Insert a banner block',
+        //     'type'        => 'tool',
+        //     'categories'  => [ 'dgwltd', 'editor', 'blocks', 'patterns' ],
+
+        //     'input_schema'  => [
+        //         'type'       => 'object',
+        //         'properties' => [
+        //             'lede'    => [ 'type' => 'string' ],
+        //             'title'   => [ 'type' => 'string' ],
+        //             'content' => [ 'type' => 'string' ],
+        //         ],
+        //         'required'   => [ 'title' ],
+        //     ],
+
+        //     'output_schema' => [
+        //         'type'       => 'object',
+        //         'properties' => [
+        //             'success'        => [ 'type' => 'boolean' ],
+        //             'blockType'      => [ 'type' => 'string' ],
+        //         ],
+        //         'required'   => [ 'success', 'blockType' ],
+        //     ],
+
+        //     'callback' => function (array $context, WP_Feature $feature) {
+    
+        //             if (empty($context['title'])) {
+        //                 throw new Exception('Title is required for banner block');
+        //             }
+
+        //             try {
+        //                 // Create block HTML server-side
+        //                 $block_content = '';
+                        
+        //                 // Add lede if provided
+        //                 if (!empty($context['lede'])) {
+        //                     $block_content .= '<!-- wp:heading {"level":3} -->';
+        //                     $block_content .= '<h3>' . esc_html($context['lede']) . '</h3>';
+        //                     $block_content .= '<!-- /wp:heading -->';
+        //                 }
+                        
+        //                 // Add title (required)
+        //                 $block_content .= '<!-- wp:heading {"level":2} -->';
+        //                 $block_content .= '<h2>' . esc_html($context['title']) . '</h2>';
+        //                 $block_content .= '<!-- /wp:heading -->';
+                        
+        //                 // Add content if provided
+        //                 if (!empty($context['content'])) {
+        //                     $block_content .= '<!-- wp:paragraph -->';
+        //                     $block_content .= '<p>' . wp_kses_post($context['content']) . '</p>';
+        //                     $block_content .= '<!-- /wp:paragraph -->';
+        //                 }
+
+        //                 return array(
+        //                     'success' => true,
+        //                     'blockType' => 'content-pattern',
+        //                     'blockContent' => $block_content,
+        //                     'message' => 'Content pattern created successfully'
+        //                 );
+
+        //             } catch (Exception $e) {
+        //                 return array(
+        //                     'success' => false,
+        //                     'error' => $e->getMessage()
+        //                 );
+        //             }
+        //         },
+        //     ]
+        // );
+
+        
+        // You see that we're borrowing the terminology from MCP for the `type` of feature. Tools are generally actionable and have effects, whereas resources are generally passive and are used to provide more context. Think of it as the difference between GET and POST requests.
+        
+        // Resources are used to provide more context. Because of this, resources are often registered server-side, because they can expose data over the REST API.
+
+        // Tool to get all block information
+        wp_register_feature('dgwltd-plugin/blocks-info', [
+                'id' => 'dgwltd-plugin/blocks-info',
+                'name' => 'DGW.ltd Blocks Information',
+                'description' => 'Get information about all available DGW.ltd blocks and variations',
+                'type' => 'resource',
+                'categories' => ['dgwltd', 'blocks', 'information'],
+                'input_schema' => [
+                    'type' => ['type' => 'string', 'description' => 'Filter by block type (block or block-variation)'],
+                    'category' => ['type' => 'string', 'description' => 'Filter by block category (content, navigation, embed, etc.)']
+                ],
+                'output_schema' => [
+                    'total' => ['type' => 'number'],
+                    'blocks' => ['type' => 'object']
+                ],
+                'callback' => array($this, 'dgwltd_blocks_info_callback'),
+        ]
+    );
+    
+    }
+
+    /**
+     * Callback for the blocks info tool
+     */
+    public function dgwltd_blocks_info_callback($input) {
+            $blocks = array(
+                'accordion' => array(
+                    'name' => 'DGW.ltd Accordion',
+                    'description' => 'Expandable accordion component based on GOV.UK accordion pattern.',
+                    'category' => 'content',
+                    'type' => 'block'
                 ),
-            )
-        );
-        
-        // Register a site info feature similar to the example
-        wp_register_feature(
-            array(
-                'id'          => 'dgwltd-plugin/site-info',
-                'name'        => 'Site Information',
-                'description' => 'Get basic information about the WordPress site.',
-                'type'        => 'resource', // or WP_Feature::TYPE_RESOURCE if constant is available
-                'categories'  => array('dgwltd', 'site', 'information'),
-                'callback'    => array($this, 'dgwltd_plugin_site_info_callback'),
-            )
-        );
-    
-    }
-    
-    /**
-     * Callback for the example feature
-     *
-     * @param array $input Input parameters for the feature.
-     * @return array Response to be returned
-     */
-    public function dgwltd_plugin_example_feature_callback($input) {
-        // Process the feature request
-        $example_param = isset($input['example_param']) ? $input['example_param'] : '';
-        
-        // Return a response
-        return array(
-            'status' => 'success',
-            'data' => array(
-                'message' => 'Example feature executed successfully with param: ' . $example_param,
-                'timestamp' => current_time('mysql'),
-            ),
-        );
-    }
-    
-    /**
-     * Callback for the site info feature
-     *
-     * @param array $input Input parameters for the feature.
-     * @return array Site information.
-     */
-    public function dgwltd_plugin_site_info_callback($input) {
-        return array(
-            'name'        => get_bloginfo('name'),
-            'description' => get_bloginfo('description'),
-            'url'         => home_url(),
-            'version'     => get_bloginfo('version'),
-            'language'    => get_bloginfo('language'),
-            'timezone'    => wp_timezone_string(),
-            'date_format' => get_option('date_format'),
-            'time_format' => get_option('time_format'),
-            'active_plugins' => get_option('active_plugins'),
-            'active_theme' => get_option('stylesheet'),
-        );
-    }
+                'banner' => array(
+                    'name' => 'DGW.ltd Banner',
+                    'description' => 'Text and background image component similar to hero but less prominent.',
+                    'category' => 'content',
+                    'type' => 'block'
+                ),
+                'breadcrumbs' => array(
+                    'name' => 'DGW.ltd Breadcrumbs',
+                    'description' => 'Navigation breadcrumbs based on GOV.UK breadcrumbs pattern.',
+                    'category' => 'navigation',
+                    'type' => 'block'
+                ),
+                'cards' => array(
+                    'name' => 'DGW.ltd Cards',
+                    'description' => 'Grid of featured cards with title, excerpt and featured image.',
+                    'category' => 'content',
+                    'type' => 'block'
+                ),
+                'embed' => array(
+                    'name' => 'DGW.ltd Embed',
+                    'description' => 'Lightweight embed component for YouTube and Vimeo videos.',
+                    'category' => 'embed',
+                    'type' => 'block'
+                ),
+                'promo-card' => array(
+                    'name' => 'DGW.ltd Promo Card',
+                    'description' => 'Offset image and content block for promotional content.',
+                    'category' => 'content',
+                    'type' => 'block'
+                ),
+                'hero-section' => array(
+                    'name' => 'DGW.ltd Hero Section',
+                    'description' => 'Hero component with large image/video as background and focal point selector.',
+                    'category' => 'content',
+                    'type' => 'block'
+                ),
+                'cover-variation' => array(
+                    'name' => 'DGW.ltd Cover',
+                    'description' => 'Extended cover block with H1 and paragraph text.',
+                    'category' => 'content',
+                    'type' => 'block-variation',
+                    'extends' => 'core/cover'
+                ),
+                'details-accordion-variation' => array(
+                    'name' => 'DGW.ltd Details Accordion',
+                    'description' => 'Paragraph block followed by 4 details blocks.',
+                    'category' => 'content',
+                    'type' => 'block-variation',
+                    'extends' => 'core/details'
+                ),
+                'code-variation' => array(
+                    'name' => 'DGW.ltd Code',
+                    'description' => 'Code block with block styles for syntax highlighting via Prism.css',
+                    'category' => 'content',
+                    'type' => 'block-variation',
+                    'extends' => 'core/code'
+                )
+            );
+
+            // Filter blocks if requested
+            if (isset($input['type']) && !empty($input['type'])) {
+                $blocks = array_filter($blocks, function($block) use ($input) {
+                    return $block['type'] === $input['type'];
+                });
+            }
+
+            if (isset($input['category']) && !empty($input['category'])) {
+                $blocks = array_filter($blocks, function($block) use ($input) {
+                    return $block['category'] === $input['category'];
+                });
+            }
+
+            return array(
+                'total' => count($blocks),
+                'blocks' => $blocks
+            );
+        }
+
 }

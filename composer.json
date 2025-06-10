@@ -2,8 +2,8 @@
   "name": "dgwltd/dgwltd",
   "type": "wordpress-plugin",
   "description": "Blocks plugin",
-  "license": "MIT", 
+  "license": "MIT",
   "require": {
-      "automattic/wp-feature-api": "^0.1.4"
+    "automattic/wp-feature-api": "^0.1.5"
   }
 }

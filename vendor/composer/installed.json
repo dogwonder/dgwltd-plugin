@@ -2,17 +2,17 @@
     "packages": [
         {
             "name": "automattic/wp-feature-api",
-            "version": "v0.1.4",
-            "version_normalized": "0.1.4.0",
+            "version": "0.1.5",
+            "version_normalized": "0.1.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/wp-feature-api.git",
-                "reference": "80333a9ac2e1f1d19fa3b9848604d11fd2f4b6f3"
+                "reference": "6cfb3d642aed1862df8a3b58de6aa90d1d93f3e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Automattic/wp-feature-api/zipball/80333a9ac2e1f1d19fa3b9848604d11fd2f4b6f3",
-                "reference": "80333a9ac2e1f1d19fa3b9848604d11fd2f4b6f3",
+                "url": "https://api.github.com/repos/Automattic/wp-feature-api/zipball/6cfb3d642aed1862df8a3b58de6aa90d1d93f3e4",
+                "reference": "6cfb3d642aed1862df8a3b58de6aa90d1d93f3e4",
                 "shasum": ""
             },
             "require": {
@@ -30,7 +30,7 @@
             "suggest": {
                 "ext-dom": "*"
             },
-            "time": "2025-05-14T17:14:14+00:00",
+            "time": "2025-05-29T18:05:44+00:00",
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -58,7 +58,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Automattic/wp-feature-api/issues",
-                "source": "https://github.com/Automattic/wp-feature-api/tree/v0.1.4"
+                "source": "https://github.com/Automattic/wp-feature-api/tree/0.1.5"
             },
             "install-path": "../automattic/wp-feature-api"
         }

@@ -180,6 +180,7 @@ class Dgwltd_Site {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_styles' );
 		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_scripts' );
 		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'dgwltd_enqueue_variations_scripts' );
+		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'dgwltd_enqueue_feature_api_scripts' );
 
 		
 	}

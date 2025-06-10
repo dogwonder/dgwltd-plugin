@@ -78,6 +78,7 @@ Blocks
   border-radius: 50%;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
 
   box-shadow:
     /* Bottom and right depth effect */

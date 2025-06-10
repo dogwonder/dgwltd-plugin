@@ -1,161 +1,114 @@
 (function () {
   'use strict';
 
-  // Add debounce function
-  function debounce(func, wait) {
+  const { subscribe, select, dispatch } = wp.data;
+
+  // Utility: Debounce function
+  const debounce = (func, wait) => {
     let timeout;
     return function(...args) {
       clearTimeout(timeout);
       timeout = setTimeout(() => func.apply(this, args), wait);
     };
-  }
+  };
 
-  const acfUpdateFocusPosition = () => {  
-    // Get the selected block
-    const selectedBlock = select('core/block-editor').getSelectedBlock();
-    
-    if (!selectedBlock || selectedBlock.name !== 'acf/dgwltd-hero') {
-      console.warn('Selected block is not the hero block.');
-      return;
+  let lastSelectedClientId = null;
+
+  const updateFocalPointVisual = (x, y) => {
+    const focusDot = document.querySelector('.focus-dot');
+    if (focusDot) {
+      focusDot.style.left = `${x}%`;
+      focusDot.style.top = `${y}%`;
+    }
+  };
+
+  const updateFocalPointData = (clientId, attributes, x, y) => {
+
+    const xNum = Number(x);
+    const yNum = Number(y);
+
+    const focalX = Number.isFinite(xNum) ? xNum.toFixed(2) : '50.00';
+    const focalY = Number.isFinite(yNum) ? yNum.toFixed(2) : '50.00';
+
+    const focalXInput = document.querySelector('.acf-field-number[data-name="focal_point_x"] input');
+    const focalYInput = document.querySelector('.acf-field-number[data-name="focal_point_y"] input');
+
+    if (focalXInput && focalYInput) {
+      focalXInput.value = focalX;
+      focalYInput.value = focalY;
+      focalXInput.dispatchEvent(new Event('input', { bubbles: true }));
+      focalYInput.dispatchEvent(new Event('input', { bubbles: true }));
     }
 
-    const { clientId, attributes } = selectedBlock;
+    dispatch('core/block-editor').updateBlockAttributes(clientId, {
+      data: {
+        ...attributes.data,
+        focal_point_x: focalX,
+        focal_point_y: focalY
+      }
+    });
+  };
 
-    if (!attributes || !attributes.data) {
-      console.warn('No ACF data found in the selected block.');
-      return;
-    }
-
-    // Extract the fields
-    const { background_image, focal_point_x, focal_point_y } = attributes.data;
+  const setupFocalPointEditor = (block) => {
+    const { clientId, attributes } = block;
+    const { background_image, focal_point_x = 50, focal_point_y = 50 } = attributes?.data || {};
 
     if (!background_image) {
-      console.warn('No background image found for this block.');
+      console.warn('No background image found.');
       return;
     }
 
-    // Extract the focal point update logic to a reusable function
-    const updateFocalPoint = (x, y) => {
-      const focusDot = document.querySelector('.focus-dot');
-      const focalXInput = document.querySelector('.acf-field-number[data-name="focal_point_x"] input');
-      const focalYInput = document.querySelector('.acf-field-number[data-name="focal_point_y"] input');
-      
-      if (focusDot) {
-        focusDot.style.left = `${x}%`;
-        focusDot.style.top = `${y}%`;
-      }
-      
-      if (focalXInput && focalYInput) {
-        focalXInput.value = x.toFixed(2);
-        focalYInput.value = y.toFixed(2);
-        
-        // Trigger input event to notify ACF of the change
-        focalXInput.dispatchEvent(new Event('input', { bubbles: true }));
-        focalYInput.dispatchEvent(new Event('input', { bubbles: true }));
-        
-        console.log(`Updated Focal Point X: ${x.toFixed(2)}%`);
-        console.log(`Updated Focal Point Y: ${y.toFixed(2)}%`);
-      } else {
-        console.warn("Could not find ACF focal point input fields.");
-      }
-      
-      // Dispatch update to block attributes in the editor
-      dispatch("core/block-editor").updateBlockAttributes(clientId, {
-        data: {
-          ...attributes.data,
-          focal_point_x: x.toFixed(2),
-          focal_point_y: y.toFixed(2)
-        }
-      });
-      
-      console.log("Updated ACF Focal Points in Block:", {
-        focal_point_x: x.toFixed(2),
-        focal_point_y: y.toFixed(2)
-      });
-    };
-
-    // Find the image inside the ACF sidebar
     setTimeout(() => {
       const sidebarImageWrap = document.querySelector('.acf-field-image[data-name="background_image"] .image-wrap');
-      const sidebarImage = sidebarImageWrap ? sidebarImageWrap.querySelector('img') : null;
+      const sidebarImage = sidebarImageWrap?.querySelector('img');
 
-      if (!sidebarImage || !sidebarImageWrap) {
-        console.warn('Could not find the background image in the ACF sidebar field.');
-        return;
-      }
+      if (!sidebarImageWrap || !sidebarImage) return;
 
-      console.log('Background Image Found in Sidebar:', sidebarImage);
-
-      // Create or select the focal point indicator dot
+      // Reuse or create focus dot
       let focusDot = sidebarImageWrap.querySelector('.focus-dot');
       if (!focusDot) {
         focusDot = document.createElement('div');
-        focusDot.classList.add('focus-dot');
+        focusDot.className = 'focus-dot';
         sidebarImageWrap.appendChild(focusDot);
       }
+      focusDot.style.display = 'block';
 
-      // Apply initial position based on saved focal points
-      updateFocalPoint(focal_point_x, focal_point_y);
+      updateFocalPointVisual(focal_point_x, focal_point_y);
 
-      // If a previous event handler exists, remove it
-      if (sidebarImage.dataset.eventAttached === "true") {
-        console.log("Event listener already attached, skipping...");
-        return; // Prevent duplicate event listeners
-      }
+      if (sidebarImage.dataset.focusAttached === "true") return;
 
-      // Define the event handler with debounce
-      const handleImageClick = debounce((event) => {
-        const rect = event.target.getBoundingClientRect();
-        const xCoord = event.clientX - rect.left;
-        const yCoord = event.clientY - rect.top;
+      const handleImageClick = debounce((e) => {
+        const rect = sidebarImage.getBoundingClientRect();
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
 
-        const xAsPercentage = (xCoord / rect.width) * 100;
-        const yAsPercentage = (yCoord / rect.height) * 100;
-
-        // Use the extracted update function
-        updateFocalPoint(xAsPercentage, yAsPercentage);
+        updateFocalPointVisual(x, y);
+        updateFocalPointData(clientId, attributes, x, y);
       }, 150);
 
-      // Attach the event listener only if it hasn't been attached already
       sidebarImage.addEventListener('click', handleImageClick);
-      sidebarImage.dataset.eventAttached = "true"; // Mark the event as attached
-
-      console.log('Click event attached to background image in sidebar.');
-    }, 500); // Delay to ensure ACF loads fully
+      sidebarImage.dataset.focusAttached = "true";
+    }, 500);
   };
 
-  function trackBlockSelection() {
-    let previousBlock = null;
-
+  const trackHeroBlockSelection = () => {
     subscribe(() => {
       const selectedBlock = select('core/block-editor').getSelectedBlock();
-      
-      // Add cleanup on block deselection
-      if (previousBlock && previousBlock.name === 'acf/dgwltd-hero' && 
-          (!selectedBlock || selectedBlock.name !== 'acf/dgwltd-hero')) {
-        const focusDot = document.querySelector('.focus-dot');
-        if (focusDot) {
-          focusDot.style.display = 'none';
-        }
-      }
-      
-      if (selectedBlock && selectedBlock.name === 'acf/dgwltd-hero') { 
-        if (selectedBlock !== previousBlock) {
-          console.log('Hero block selected:', selectedBlock);
-          acfUpdateFocusPosition();
-          // Show the focus dot again if it was hidden
-          const focusDot = document.querySelector('.focus-dot');
-          if (focusDot) {
-            focusDot.style.display = 'block';
-          }
-        }
+      if (!selectedBlock || selectedBlock.name !== 'acf/dgwltd-hero') {
+        const dot = document.querySelector('.focus-dot');
+        if (dot) dot.style.display = 'none';
+        lastSelectedClientId = null;
+        return;
       }
 
-      previousBlock = selectedBlock;
+      if (selectedBlock.clientId !== lastSelectedClientId) {
+        lastSelectedClientId = selectedBlock.clientId;
+        setupFocalPointEditor(selectedBlock);
+      }
     });
-  }
+  };
 
-  function whenEditorIsReady() {
+  const whenEditorReady = () => {
     return new Promise((resolve) => {
       const unsubscribe = subscribe(() => {
         if (select('core/block-editor').getBlockCount() > 0) {
@@ -164,14 +117,11 @@
         }
       });
     });
-  }
+  };
 
-  document.addEventListener("DOMContentLoaded", function() {
-    acf.add_action('ready', function() {
-      whenEditorIsReady().then(() => {
-        trackBlockSelection(); 
-      });
+  document.addEventListener('DOMContentLoaded', () => {
+    acf.add_action('ready', () => {
+      whenEditorReady().then(trackHeroBlockSelection);
     });
   });
-
 })();

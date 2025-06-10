@@ -109,7 +109,6 @@ class DGWLTD_PLUGIN_ADMIN {
 	 *
 	 */
 	public function dgwltd_enqueue_variations_scripts() {
-
 		$asset_file = include plugin_dir_path(__DIR__) .
 			 "dist/dgwltd-plugin-variations.asset.php";
 		 wp_enqueue_script(
@@ -119,7 +118,22 @@ class DGWLTD_PLUGIN_ADMIN {
 			 $asset_file["version"],
 			 true
 		 );
-		
+	}
+/**
+	 * Register the JavaScript for blocks feature api 
+	 *
+	 */
+
+	public function dgwltd_enqueue_feature_api_scripts() {
+		$asset_file = include plugin_dir_path(__DIR__) .
+			 "dist/dgwltd-plugin-feature-api.asset.php";
+		 wp_enqueue_script(
+			 'dgwltd-plugin-feature-api',
+			 DGWLTD_PLUGIN_PLUGIN_URL . "dist/dgwltd-plugin-feature-api.js",
+			 $asset_file["dependencies"],
+			 $asset_file["version"],
+			 true
+		 );
 	}
 
 
