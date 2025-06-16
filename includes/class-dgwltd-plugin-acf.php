@@ -11,14 +11,6 @@
  */
 class DGWLTD_PLUGIN_ACF {
 
-	public function dgwltd_register_wp_block_scripts() {
-
-		//If we need to have to manually wp_register_script for a file before the block.json 
-		//We don't need to here as we are using @wordpress/scripts build process and viewScript in block.json is enough
-		// wp_register_script( 'script', DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/block-name/script.js' );
-
-	}
-
 	public function dgwltd_register_wp_blocks() {
 
 		register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/accordion/block.json' );
@@ -34,24 +26,6 @@ class DGWLTD_PLUGIN_ACF {
 		//Native
 		register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/picker/block.json' );
 
-	}
-
-	// Get blocks list and update some database options so it's more performant
-	public function dgwltd_acf_get_blocks() {
-		// Check for options.
-		$blocks  = get_option( 'dgwltd_acf_blocks' );
-		$version = get_option( 'dgwltd_acf_blocks_version' );
-	
-		if ( empty( $blocks ) || version_compare( DGWLTD_PLUGIN_VERSION, $version ) || ( function_exists( 'wp_get_environment_type' ) && 'production' !== wp_get_environment_type() ) ) {
-			$blocks = scandir( DGWLTD_PLUGIN_PLUGIN_BLOCKS );
-			$blocks = array_values( array_diff( $blocks, array( '..', '.', '.DS_Store' ) ) );
-	
-			// Update our options.
-			update_option( 'dgwltd_acf_blocks', $blocks );
-			update_option( 'dgwltd_acf_blocks_version', DGWLTD_PLUGIN_VERSION );
-		}
-	
-		return $blocks;
 	}
 
 	// Register options page

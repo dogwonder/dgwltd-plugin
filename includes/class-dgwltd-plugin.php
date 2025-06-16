@@ -80,7 +80,7 @@ class Dgwltd_Site {
 		$this->define_acf_hooks();
 		$this->define_block_hooks();
 		$this->define_site_rules();
-		$this->define_feature_api();
+		// $this->define_feature_api();
 
 	}
 
@@ -143,7 +143,7 @@ class Dgwltd_Site {
 		/**
 		 * The class responsible for defining all actions that occur for building out the feature API
 		 */
-		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-feature-api.php';
+		// require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-feature-api.php';
 
 		$this->loader = new DGWLTD_PLUGIN_Loader();
 
@@ -196,19 +196,16 @@ class Dgwltd_Site {
 
 		$plugin_acf = new DGWLTD_PLUGIN_ACF();
 
-		// $this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_block_scripts');
-		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_wp_blocks' );
-		// $this->loader->add_action( 'init', $plugin_acf, 'dgwltd_acf_get_blocks' );
 		$this->loader->add_action( 'init', $plugin_acf, 'dgwltd_register_options_page' );
-
+		$this->loader->add_action( 'acf/init', $plugin_acf, 'dgwltd_register_wp_blocks' );
 		$this->loader->add_filter( 'acf/json/load_paths', $plugin_acf, 'dgwltd_acf_json_load_paths' );
 		$this->loader->add_filter( 'acf/settings/save_json/type=acf-field-group', $plugin_acf, 'dgwltd_acf_json_save_path_for_field_groups' );
 		$this->loader->add_filter( 'acf/settings/save_json/type=acf-ui-options-page', $plugin_acf, 'dgwltd_acf_json_save_path_for_option_pages' );
 		$this->loader->add_filter( 'acf/settings/save_json/type=acf-post-type', $plugin_acf, 'dgwltd_acf_json_save_path_for_post_types' );
 		$this->loader->add_filter( 'acf/settings/save_json/type=acf-taxonomy', $plugin_acf, 'dgwltd_acf_json_save_path_for_taxonomies' );
 		$this->loader->add_filter( 'acf/json/save_file_name', $plugin_acf, 'dgwltd_acf_json_filename', 10, 3 );
-
 		$this->loader->add_filter('acf/prepare_field/name=featured_card_id', $plugin_acf, 'dgwltd_acf_field_wrapper_class');
+
 
 	}
 
