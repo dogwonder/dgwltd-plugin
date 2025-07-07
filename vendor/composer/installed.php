@@ -3,7 +3,7 @@
         'name' => 'dgwltd/dgwltd',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '6f43e8858d907a587691570e6dcd2c54b900bdeb',
+        'reference' => 'ef36529f32685a5f63a6bd2bfc4a5c003d0e521d',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'automattic/wp-feature-api' => array(
-            'pretty_version' => '0.1.5',
-            'version' => '0.1.5.0',
-            'reference' => '6cfb3d642aed1862df8a3b58de6aa90d1d93f3e4',
+            'pretty_version' => '0.1.6',
+            'version' => '0.1.6.0',
+            'reference' => '8b73cb5a125da4efeb947faa83da3d396719bd95',
             'type' => 'library',
             'install_path' => __DIR__ . '/../automattic/wp-feature-api',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'dgwltd/dgwltd' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '6f43e8858d907a587691570e6dcd2c54b900bdeb',
+            'reference' => 'ef36529f32685a5f63a6bd2bfc4a5c003d0e521d',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

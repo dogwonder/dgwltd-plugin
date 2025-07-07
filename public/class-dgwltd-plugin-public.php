@@ -354,7 +354,7 @@ class DGWLTD_PLUGIN_PUBLIC {
 				'has_description' => true,
 				'grid_classes' => "",
 				'heading_level' => "h2",
-				'thumbnail_size' => "dgwltd-medium-card"
+				'thumbnail_size' => "dgwltd-medium-crop"
 			],
 			'news-summary-card' => [ 
 				'has_kicker' => false, 

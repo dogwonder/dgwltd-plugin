@@ -27,8 +27,6 @@ class WP_Feature_API_Init {
 		if ( defined( 'WP_FEATURE_API_LOAD_DEMO' ) && WP_FEATURE_API_LOAD_DEMO ) {
 			self::load_agent_demo();
 		}
-
-		do_action( 'wp_feature_api_init' );
 	}
 
 	/**
@@ -41,8 +39,16 @@ class WP_Feature_API_Init {
 		if ( ! is_admin() ) {
 			return;
 		}
+		// Check for the file before requiring it.
+		if ( ! file_exists( WP_FEATURE_API_PLUGIN_DIR . 'build/index.asset.php' ) ) {
+			if ( WP_DEBUG ) {
+				wp_trigger_error( '', 'Assets file not found, please run the build for the WordPress Feature API plugin.' );
+			}
+			return;
+		}
 		$assets = require WP_FEATURE_API_PLUGIN_DIR . 'build/index.asset.php';
 		wp_enqueue_script( 'wp-features', WP_FEATURE_API_PLUGIN_URL . 'build/index.js', $assets['dependencies'], $assets['version'], true );
+
 	}
 
 	/**
@@ -53,6 +59,9 @@ class WP_Feature_API_Init {
 	 */
 	public static function register_rest_routes() {
 		$controller = new WP_REST_Feature_Controller();
+
+		do_action( 'wp_feature_api_init' );
+
 		$controller->register_routes();
 	}
 

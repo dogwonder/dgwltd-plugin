@@ -18,7 +18,7 @@ $cards_count = 0;
 $has_description = true;
 $has_image = $has_kicker = $has_author = $has_meta = $has_date = false;
 $heading_level = "h2";
-$thumbnail_size = "dgwltd-medium-card";
+$thumbnail_size = "dgwltd-medium-crop";
 
 //Post type
 $post_type = get_post_type();

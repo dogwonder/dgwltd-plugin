@@ -1,17 +1,8 @@
 <?php
 /**
- * Define the WordPress Feature API.
- *
- * Loads and defines the Feature API for the plugin
- *
- * @since      1.0.0
- * @package    Dgwltd_Site
- * @subpackage Dgwltd_Site/includes
- * @author     Rich Holman <dogwonder@gmail.com>
+ * Register features with the Feature API
  */
 class DGWLTD_FEATURE_API {
-
-    //IDEAS: https://www.pootlepress.com/2025/05/5-incredible-things-coming-to-wordpress-through-the-features-api/
 
     /**
      * Load the WP Feature API
@@ -40,203 +31,469 @@ class DGWLTD_FEATURE_API {
         }
     }
 
-
-    /**
-     * Register features with the WP Feature API
-     */
     public function dgwltd_register_features() {
 
+        //   AI/LLM Prompts You Can Now Use
+        //     - "Insert a banner titled 'Welcome' with blue overlay at the beginning of post 123"
+        //     - "Add a banner with this image URL as background to the current post"
+        //     - "Analyze post 456 and tell me the best places to add visual breaks"
+        //     - "Create a monochrome banner after the second heading in this post"
+
         // Check if Feature API is available
-        if (!function_exists('wp_register_feature')) {
-            error_log('Feature API not available when attempting to register block features');
+        if ( !function_exists( 'wp_register_feature' ) ) {
+            error_log( 'Feature API not available when attempting to register block features' );
             return;
         }
 
-        // wp_register_feature('dgwltd-plugin/banner', [
-        //     'id' => 'dgwltd-plugin/banner',
-        //     'name'        => 'DGW.ltd Banner',
-        //     'description' => 'Insert a banner block',
-        //     'type'        => 'tool',
-        //     'categories'  => [ 'dgwltd', 'editor', 'blocks', 'patterns' ],
-
-        //     'input_schema'  => [
-        //         'type'       => 'object',
-        //         'properties' => [
-        //             'lede'    => [ 'type' => 'string' ],
-        //             'title'   => [ 'type' => 'string' ],
-        //             'content' => [ 'type' => 'string' ],
-        //         ],
-        //         'required'   => [ 'title' ],
-        //     ],
-
-        //     'output_schema' => [
-        //         'type'       => 'object',
-        //         'properties' => [
-        //             'success'        => [ 'type' => 'boolean' ],
-        //             'blockType'      => [ 'type' => 'string' ],
-        //         ],
-        //         'required'   => [ 'success', 'blockType' ],
-        //     ],
-
-        //     'callback' => function (array $context, WP_Feature $feature) {
-    
-        //             if (empty($context['title'])) {
-        //                 throw new Exception('Title is required for banner block');
-        //             }
-
-        //             try {
-        //                 // Create block HTML server-side
-        //                 $block_content = '';
-                        
-        //                 // Add lede if provided
-        //                 if (!empty($context['lede'])) {
-        //                     $block_content .= '<!-- wp:heading {"level":3} -->';
-        //                     $block_content .= '<h3>' . esc_html($context['lede']) . '</h3>';
-        //                     $block_content .= '<!-- /wp:heading -->';
-        //                 }
-                        
-        //                 // Add title (required)
-        //                 $block_content .= '<!-- wp:heading {"level":2} -->';
-        //                 $block_content .= '<h2>' . esc_html($context['title']) . '</h2>';
-        //                 $block_content .= '<!-- /wp:heading -->';
-                        
-        //                 // Add content if provided
-        //                 if (!empty($context['content'])) {
-        //                     $block_content .= '<!-- wp:paragraph -->';
-        //                     $block_content .= '<p>' . wp_kses_post($context['content']) . '</p>';
-        //                     $block_content .= '<!-- /wp:paragraph -->';
-        //                 }
-
-        //                 return array(
-        //                     'success' => true,
-        //                     'blockType' => 'content-pattern',
-        //                     'blockContent' => $block_content,
-        //                     'message' => 'Content pattern created successfully'
-        //                 );
-
-        //             } catch (Exception $e) {
-        //                 return array(
-        //                     'success' => false,
-        //                     'error' => $e->getMessage()
-        //                 );
-        //             }
-        //         },
-        //     ]
-        // );
-
-        
-        // You see that we're borrowing the terminology from MCP for the `type` of feature. Tools are generally actionable and have effects, whereas resources are generally passive and are used to provide more context. Think of it as the difference between GET and POST requests.
-        
-        // Resources are used to provide more context. Because of this, resources are often registered server-side, because they can expose data over the REST API.
-
-        // Tool to get all block information
-        wp_register_feature('dgwltd-plugin/blocks-info', [
-                'id' => 'dgwltd-plugin/blocks-info',
-                'name' => 'DGW.ltd Blocks Information',
-                'description' => 'Get information about all available DGW.ltd blocks and variations',
-                'type' => 'resource',
-                'categories' => ['dgwltd', 'blocks', 'information'],
-                'input_schema' => [
-                    'type' => ['type' => 'string', 'description' => 'Filter by block type (block or block-variation)'],
-                    'category' => ['type' => 'string', 'description' => 'Filter by block category (content, navigation, embed, etc.)']
-                ],
-                'output_schema' => [
-                    'total' => ['type' => 'number'],
-                    'blocks' => ['type' => 'object']
-                ],
-                'callback' => array($this, 'dgwltd_blocks_info_callback'),
-        ]
-    );
-    
-    }
-
-    /**
-     * Callback for the blocks info tool
-     */
-    public function dgwltd_blocks_info_callback($input) {
-            $blocks = array(
-                'accordion' => array(
-                    'name' => 'DGW.ltd Accordion',
-                    'description' => 'Expandable accordion component based on GOV.UK accordion pattern.',
-                    'category' => 'content',
-                    'type' => 'block'
-                ),
-                'banner' => array(
-                    'name' => 'DGW.ltd Banner',
-                    'description' => 'Text and background image component similar to hero but less prominent.',
-                    'category' => 'content',
-                    'type' => 'block'
-                ),
-                'breadcrumbs' => array(
-                    'name' => 'DGW.ltd Breadcrumbs',
-                    'description' => 'Navigation breadcrumbs based on GOV.UK breadcrumbs pattern.',
-                    'category' => 'navigation',
-                    'type' => 'block'
-                ),
-                'cards' => array(
-                    'name' => 'DGW.ltd Cards',
-                    'description' => 'Grid of featured cards with title, excerpt and featured image.',
-                    'category' => 'content',
-                    'type' => 'block'
-                ),
-                'embed' => array(
-                    'name' => 'DGW.ltd Embed',
-                    'description' => 'Lightweight embed component for YouTube and Vimeo videos.',
-                    'category' => 'embed',
-                    'type' => 'block'
-                ),
-                'promo-card' => array(
-                    'name' => 'DGW.ltd Promo Card',
-                    'description' => 'Offset image and content block for promotional content.',
-                    'category' => 'content',
-                    'type' => 'block'
-                ),
-                'hero-section' => array(
-                    'name' => 'DGW.ltd Hero Section',
-                    'description' => 'Hero component with large image/video as background and focal point selector.',
-                    'category' => 'content',
-                    'type' => 'block'
-                ),
-                'cover-variation' => array(
-                    'name' => 'DGW.ltd Cover',
-                    'description' => 'Extended cover block with H1 and paragraph text.',
-                    'category' => 'content',
-                    'type' => 'block-variation',
-                    'extends' => 'core/cover'
-                ),
-                'details-accordion-variation' => array(
-                    'name' => 'DGW.ltd Details Accordion',
-                    'description' => 'Paragraph block followed by 4 details blocks.',
-                    'category' => 'content',
-                    'type' => 'block-variation',
-                    'extends' => 'core/details'
-                ),
-                'code-variation' => array(
-                    'name' => 'DGW.ltd Code',
-                    'description' => 'Code block with block styles for syntax highlighting via Prism.css',
-                    'category' => 'content',
-                    'type' => 'block-variation',
-                    'extends' => 'core/code'
+        try {
+            // DGW.ltd Banner Block Insertion Feature
+            wp_register_feature( 
+                array(                            
+                    'id' => 'dgwltd-plugin/insert-banner',           
+                    'name' => 'Insert DGW.ltd Banner Block',                
+                    'description' => __('Insert a banner block with content, background image, and styling options into a post or page', 'dgwltd-plugin'),
+                    'type' => 'tool',
+                    'categories' => array( 'dgwltd', 'editor', 'blocks', 'content-creation' ),
+                    'input_schema' => array(
+                        'type' => 'object',
+                        'properties' => array(
+                            'post_id' => array(
+                                'type' => 'integer',
+                                'description' => 'ID of the post or page to insert the banner into. If not provided, will create a new post.',
+                            ),
+                            'post_type' => array(
+                                'type' => 'string',
+                                'description' => 'Type of content to create if post_id is not provided',
+                                'enum' => array('post', 'page'),
+                                'default' => 'post'
+                            ),
+                            'position' => array(
+                                'type' => 'string',
+                                'description' => 'Where to insert the block: "beginning", "end", or "after_block_index"',
+                                'enum' => array('beginning', 'end', 'after_block_index'),
+                                'default' => 'end'
+                            ),
+                            'block_index' => array(
+                                'type' => 'integer',
+                                'description' => 'Block index to insert after (only used with position "after_block_index")',
+                            ),
+                            'lede' => array(
+                                'type' => 'string',
+                                'description' => 'Lede text (H3 heading) for the banner',
+                            ),
+                            'title' => array(
+                                'type' => 'string',
+                                'description' => 'Main title text (H2 heading) for the banner',
+                            ),
+                            'content' => array(
+                                'type' => 'string',
+                                'description' => 'Paragraph content for the banner',
+                            ),
+                            'background_image_url' => array(
+                                'type' => 'string',
+                                'description' => 'URL of background image for the banner',
+                                'format' => 'uri'
+                            ),
+                            'background_image_mobile_url' => array(
+                                'type' => 'string',
+                                'description' => 'URL of mobile background image for the banner',
+                                'format' => 'uri'
+                            ),
+                            'overlay_color' => array(
+                                'type' => 'string',
+                                'description' => 'Hex color for image overlay (e.g., #000000)',
+                                'pattern' => '^#[0-9A-Fa-f]{6}$'
+                            ),
+                            'overlay_opacity' => array(
+                                'type' => 'integer',
+                                'description' => 'Overlay opacity percentage (0-100)',
+                                'minimum' => 0,
+                                'maximum' => 100,
+                                'default' => 70
+                            ),
+                            'block_style' => array(
+                                'type' => 'string',
+                                'description' => 'Block style variant',
+                                'enum' => array('default', 'monochrome'),
+                                'default' => 'default'
+                            ),
+                            'alignment' => array(
+                                'type' => 'string',
+                                'description' => 'Block alignment',
+                                'enum' => array('none', 'wide', 'full'),
+                                'default' => 'full'
+                            )
+                        ),
+                        'required' => array( 'title' ),
+                    ),
+                    
+                    'output_schema' => array(
+                        'type' => 'object',
+                        'properties' => array(
+                            'success' => array( 'type' => 'boolean' ),
+                            'post_id' => array( 'type' => 'integer' ),
+                            'block_type' => array( 'type' => 'string' ),
+                            'block_position' => array( 'type' => 'integer' ),
+                            'message' => array( 'type' => 'string' ),
+                            'edit_url' => array( 'type' => 'string' ),
+                            'view_url' => array( 'type' => 'string' ),
+                        ),
+                        'required' => array( 'success', 'message' ),
+                    ),
+                    'callback' => array( $this, 'insert_banner_block' ),
+                    'permissions_callback' => array( $this, 'check_banner_permissions' ),
                 )
             );
 
-            // Filter blocks if requested
-            if (isset($input['type']) && !empty($input['type'])) {
-                $blocks = array_filter($blocks, function($block) use ($input) {
-                    return $block['type'] === $input['type'];
-                });
+            // DGW.ltd Content Analysis Feature
+            wp_register_feature(
+                array(
+                    'id' => 'dgwltd-plugin/analyze-content',
+                    'name' => 'Analyze Post Content',
+                    'description' => __('Analyze the content structure of a post or page and suggest where to insert blocks', 'dgwltd-plugin'),
+                    'type' => 'resource',
+                    'categories' => array( 'dgwltd', 'content-analysis', 'editor' ),
+                    'input_schema' => array(
+                        'type' => 'object',
+                        'properties' => array(
+                            'post_id' => array(
+                                'type' => 'integer',
+                                'description' => 'ID of the post or page to analyze',
+                            ),
+                        ),
+                        'required' => array( 'post_id' ),
+                    ),
+                    'output_schema' => array(
+                        'type' => 'object',
+                        'properties' => array(
+                            'post_id' => array( 'type' => 'integer' ),
+                            'title' => array( 'type' => 'string' ),
+                            'block_count' => array( 'type' => 'integer' ),
+                            'blocks' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'type' => 'object',
+                                    'properties' => array(
+                                        'index' => array( 'type' => 'integer' ),
+                                        'type' => array( 'type' => 'string' ),
+                                        'content_preview' => array( 'type' => 'string' ),
+                                    )
+                                )
+                            ),
+                            'suggestions' => array(
+                                'type' => 'array',
+                                'items' => array(
+                                    'type' => 'object',
+                                    'properties' => array(
+                                        'position' => array( 'type' => 'string' ),
+                                        'reason' => array( 'type' => 'string' ),
+                                        'block_index' => array( 'type' => 'integer' ),
+                                    )
+                                )
+                            ),
+                        ),
+                    ),
+                    'callback' => array( $this, 'analyze_post_content' ),
+                    'permissions_callback' => array( $this, 'check_content_permissions' ),
+                )
+            );
+
+            error_log( 'DGW.ltd features registered successfully' );
+
+        } catch ( Exception $e ) {
+            error_log( 'Error registering features: ' . $e->getMessage() );
+        }
+    }
+
+    /**
+     * Insert a banner block into a post
+     */
+    public function insert_banner_block( $params ) {
+        try {
+            // Get or create post
+            $post_id = isset( $params['post_id'] ) ? intval( $params['post_id'] ) : null;
+            
+            if ( ! $post_id ) {
+                // Create new post or page
+                $post_type = $params['post_type'] ?? 'post';
+                $post_title = $params['title'] ?? ( $post_type === 'page' ? 'New Page with Banner' : 'New Post with Banner' );
+                
+                $post_data = array(
+                    'post_title' => $post_title,
+                    'post_status' => 'draft',
+                    'post_type' => $post_type,
+                );
+                $post_id = wp_insert_post( $post_data );
+                
+                if ( is_wp_error( $post_id ) ) {
+                    return array(
+                        'success' => false,
+                        'message' => 'Failed to create new ' . $post_type . ': ' . $post_id->get_error_message(),
+                    );
+                }
             }
 
-            if (isset($input['category']) && !empty($input['category'])) {
-                $blocks = array_filter($blocks, function($block) use ($input) {
-                    return $block['category'] === $input['category'];
-                });
+            // Get current post content
+            $post = get_post( $post_id );
+            if ( ! $post ) {
+                return array(
+                    'success' => false,
+                    'message' => 'Page/Post not found with ID: ' . $post_id,
+                );
             }
 
+            // Parse existing blocks
+            $blocks = parse_blocks( $post->post_content );
+
+            // Handle image uploads
+            $background_image_id = null;
+            $background_image_mobile_id = null;
+
+            if ( ! empty( $params['background_image_url'] ) ) {
+                $background_image_id = $this->upload_image_from_url( $params['background_image_url'] );
+            }
+
+            if ( ! empty( $params['background_image_mobile_url'] ) ) {
+                $background_image_mobile_id = $this->upload_image_from_url( $params['background_image_mobile_url'] );
+            }
+
+            // Create banner block structure
+            $banner_inner_blocks = array();
+            
+            // Add lede if provided
+            if ( ! empty( $params['lede'] ) ) {
+                $banner_inner_blocks[] = array(
+                    'blockName' => 'core/heading',
+                    'attrs' => array( 'level' => 3 ),
+                    'innerBlocks' => array(),
+                    'innerHTML' => '<h3 class="wp-block-heading">' . esc_html( $params['lede'] ) . '</h3>',
+                    'innerContent' => array( '<h3 class="wp-block-heading">' . esc_html( $params['lede'] ) . '</h3>' ),
+                );
+            }
+
+            // Add title
+            if ( ! empty( $params['title'] ) ) {
+                $banner_inner_blocks[] = array(
+                    'blockName' => 'core/heading',
+                    'attrs' => array( 'level' => 2 ),
+                    'innerBlocks' => array(),
+                    'innerHTML' => '<h2 class="wp-block-heading">' . esc_html( $params['title'] ) . '</h2>',
+                    'innerContent' => array( '<h2 class="wp-block-heading">' . esc_html( $params['title'] ) . '</h2>' ),
+                );
+            }
+
+            // Add content
+            if ( ! empty( $params['content'] ) ) {
+                $banner_inner_blocks[] = array(
+                    'blockName' => 'core/paragraph',
+                    'attrs' => array(),
+                    'innerBlocks' => array(),
+                    'innerHTML' => '<p>' . esc_html( $params['content'] ) . '</p>',
+                    'innerContent' => array( '<p>' . esc_html( $params['content'] ) . '</p>' ),
+                );
+            }
+
+            // Create banner block
+            $banner_block = array(
+                'blockName' => 'acf/dgwltd-banner',
+                'attrs' => array(
+                    'id' => uniqid( 'block_' ),
+                    'name' => 'acf/dgwltd-banner',
+                    'data' => array(
+                        'background_image' => $background_image_id,
+                        'background_image_mobile' => $background_image_mobile_id,
+                        'overlay' => $params['overlay_color'] ?? '',
+                        'overlay_opacity' => $params['overlay_opacity'] ?? 70,
+                    ),
+                    'align' => $params['alignment'] ?? 'full',
+                    'className' => $params['block_style'] !== 'default' ? 'is-style-' . $params['block_style'] : '',
+                ),
+                'innerBlocks' => $banner_inner_blocks,
+                'innerHTML' => '',
+                'innerContent' => array( null ),
+            );
+
+            // Insert block at specified position
+            $position = $params['position'] ?? 'end';
+            $block_index = null;
+
+            switch ( $position ) {
+                case 'beginning':
+                    array_unshift( $blocks, $banner_block );
+                    $block_index = 0;
+                    break;
+                    
+                case 'after_block_index':
+                    $insert_after = intval( $params['block_index'] ?? 0 );
+                    if ( $insert_after >= 0 && $insert_after < count( $blocks ) ) {
+                        array_splice( $blocks, $insert_after + 1, 0, array( $banner_block ) );
+                        $block_index = $insert_after + 1;
+                    } else {
+                        $blocks[] = $banner_block;
+                        $block_index = count( $blocks ) - 1;
+                    }
+                    break;
+                    
+                default: // 'end'
+                    $blocks[] = $banner_block;
+                    $block_index = count( $blocks ) - 1;
+                    break;
+            }
+
+            // Serialize blocks back to content
+            $new_content = serialize_blocks( $blocks );
+
+            // Update post
+            $update_result = wp_update_post( array(
+                'ID' => $post_id,
+                'post_content' => $new_content,
+            ) );
+
+            if ( is_wp_error( $update_result ) ) {
+                return array(
+                    'success' => false,
+                    'message' => 'Failed to update post: ' . $update_result->get_error_message(),
+                );
+            }
+
+            $post_type_label = $post->post_type === 'page' ? 'page' : 'post';
+            
             return array(
-                'total' => count($blocks),
-                'blocks' => $blocks
+                'success' => true,
+                'post_id' => $post_id,
+                'post_type' => $post->post_type,
+                'block_type' => 'acf/dgwltd-banner',
+                'block_position' => $block_index,
+                'message' => 'Banner block inserted successfully into ' . $post_type_label . ' at position ' . $block_index,
+                'edit_url' => admin_url( 'post.php?post=' . $post_id . '&action=edit' ),
+                'view_url' => get_permalink( $post_id ),
+            );
+
+        } catch ( Exception $e ) {
+            return array(
+                'success' => false,
+                'message' => 'Error inserting banner block: ' . $e->getMessage(),
             );
         }
+    }
+
+    /**
+     * Analyze post content structure
+     */
+    public function analyze_post_content( $params ) {
+        $post_id = intval( $params['post_id'] );
+        $post = get_post( $post_id );
+
+        if ( ! $post ) {
+            return new WP_Error( 'post_not_found', 'Post not found' );
+        }
+
+        $blocks = parse_blocks( $post->post_content );
+        $analysis = array(
+            'post_id' => $post_id,
+            'post_type' => $post->post_type,
+            'title' => $post->post_title,
+            'block_count' => count( $blocks ),
+            'blocks' => array(),
+            'suggestions' => array(),
+        );
+
+        // Analyze each block
+        foreach ( $blocks as $index => $block ) {
+            $content_preview = '';
+            if ( ! empty( $block['innerHTML'] ) ) {
+                $content_preview = wp_trim_words( wp_strip_all_tags( $block['innerHTML'] ), 10 );
+            }
+
+            $analysis['blocks'][] = array(
+                'index' => $index,
+                'type' => $block['blockName'] ?? 'unknown',
+                'content_preview' => $content_preview,
+            );
+        }
+
+        // Generate suggestions
+        $content_type = $post->post_type === 'page' ? 'page' : 'post';
+        
+        if ( empty( $blocks ) ) {
+            $analysis['suggestions'][] = array(
+                'position' => 'beginning',
+                'reason' => ucfirst( $content_type ) . ' is empty - banner would work well as opening content',
+                'block_index' => null,
+            );
+        } else {
+            // Suggest after headings
+            foreach ( $blocks as $index => $block ) {
+                if ( $block['blockName'] === 'core/heading' ) {
+                    $analysis['suggestions'][] = array(
+                        'position' => 'after_block_index',
+                        'reason' => 'After heading block - good for visual break',
+                        'block_index' => $index,
+                    );
+                }
+            }
+
+            // Always suggest at the end
+            $analysis['suggestions'][] = array(
+                'position' => 'end',
+                'reason' => 'At the end - good for call-to-action banner',
+                'block_index' => null,
+            );
+        }
+
+        return $analysis;
+    }
+
+    /**
+     * Upload image from URL
+     */
+    private function upload_image_from_url( $url ) {
+        require_once( ABSPATH . 'wp-admin/includes/media.php' );
+        require_once( ABSPATH . 'wp-admin/includes/file.php' );
+        require_once( ABSPATH . 'wp-admin/includes/image.php' );
+
+        $attachment_id = media_sideload_image( $url, 0, null, 'id' );
+
+        if ( is_wp_error( $attachment_id ) ) {
+            error_log( 'Failed to upload image: ' . $attachment_id->get_error_message() );
+            return null;
+        }
+
+        return $attachment_id;
+    }
+
+    /**
+     * Check permissions for banner insertion
+     */
+    public function check_banner_permissions( $params ) {
+        // Check if user can edit posts
+        if ( ! current_user_can( 'edit_posts' ) ) {
+            return false;
+        }
+
+        // If post_id is provided, check if user can edit that specific post
+        if ( isset( $params['post_id'] ) ) {
+            return current_user_can( 'edit_post', $params['post_id'] );
+        }
+
+        // For new posts/pages, check appropriate capability
+        $post_type = $params['post_type'] ?? 'post';
+        
+        if ( $post_type === 'page' ) {
+            return current_user_can( 'publish_pages' );
+        } else {
+            return current_user_can( 'publish_posts' );
+        }
+    }
+
+    /**
+     * Check permissions for content analysis
+     */
+    public function check_content_permissions( $params ) {
+        if ( isset( $params['post_id'] ) ) {
+            return current_user_can( 'edit_post', $params['post_id'] );
+        }
+        return current_user_can( 'edit_posts' );
+    }
 
 }

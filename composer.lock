@@ -1,9 +1,14 @@
 {
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "42009d32a874b57d265cfaf7aad55455",
     "packages": [
         {
             "name": "automattic/wp-feature-api",
             "version": "0.1.6",
-            "version_normalized": "0.1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Automattic/wp-feature-api.git",
@@ -30,9 +35,7 @@
             "suggest": {
                 "ext-dom": "*"
             },
-            "time": "2025-06-10T19:51:09+00:00",
             "type": "library",
-            "installation-source": "dist",
             "autoload": {
                 "classmap": [
                     "includes/"
@@ -60,9 +63,16 @@
                 "issues": "https://github.com/Automattic/wp-feature-api/issues",
                 "source": "https://github.com/Automattic/wp-feature-api/tree/0.1.6"
             },
-            "install-path": "../automattic/wp-feature-api"
+            "time": "2025-06-10T19:51:09+00:00"
         }
     ],
-    "dev": true,
-    "dev-package-names": []
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {},
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {},
+    "platform-dev": {},
+    "plugin-api-version": "2.6.0"
 }
