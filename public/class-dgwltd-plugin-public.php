@@ -274,6 +274,7 @@ class DGWLTD_PLUGIN_PUBLIC {
 
 		$block_class = null;
 		$block_style = null;
+		$block_variation = null;
 		$block_align = null;
 		$block_align_text = null;
 
@@ -311,9 +312,15 @@ class DGWLTD_PLUGIN_PUBLIC {
 			$block_style .= 'color: ' . $block['style']['color']['text'] . ';';
 		}
 
+		if ( isset( $block['styles'] ) && ! empty( $block['styles'] ) ) {
+			$block_variation = $block['styles'] ?? 'default';
+		}	
+
+
 		return array(
 			'class' => $block_class,
 			'style' => $block_style,
+			'variation' => $block_variation
 		);
 
 	}
