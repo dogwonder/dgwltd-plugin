@@ -17,7 +17,7 @@ class DGWLTD_FEATURE_API {
      */
     public function dgwltd_wp_feature_api_init() {
         // Check if the file exists
-        $feature_api_path = DGWLTD_PLUGIN_PLUGIN_DIR . 'vendor/automattic/wp-feature-api/wp-feature-api.php';
+        $feature_api_path = DGWLTD_PLUGIN_DIR . 'vendor/automattic/wp-feature-api/wp-feature-api.php';
         
         if (file_exists($feature_api_path)) {
             // Include the main plugin file - it automatically registers itself with the version manager

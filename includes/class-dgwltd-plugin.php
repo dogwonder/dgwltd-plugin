@@ -106,44 +106,44 @@ class Dgwltd_Site {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-loader.php';
+		require_once DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-i18n.php';
+		require_once DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'admin/class-dgwltd-plugin-admin.php';
+		require_once DGWLTD_PLUGIN_DIR . 'admin/class-dgwltd-plugin-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'public/class-dgwltd-plugin-public.php';
+		require_once DGWLTD_PLUGIN_DIR . 'public/class-dgwltd-plugin-public.php';
 
 		/**
 		 * The class responsible for defining all custom ACF functionality
 		 */
-		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-acf.php';
+		require_once DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-acf.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the custom blocks
 		 */
-		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-blocks.php';
+		require_once DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-blocks.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the custom rules
 		 */
-		require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-rules.php';
+		require_once DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-rules.php';
 
 		/**
 		 * The class responsible for defining all actions that occur for building out the feature API
 		 */
-		// require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-feature-api.php';
+		// require_once DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-feature-api.php';
 
 		$this->loader = new DGWLTD_PLUGIN_Loader();
 

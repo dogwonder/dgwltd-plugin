@@ -76,7 +76,7 @@ class DGWLTD_PLUGIN_PUBLIC {
 			 "dist/dgwltd-plugin-theme.asset.php";
 		 wp_enqueue_script(
 			 $this->dgwltd_plugin,
-			 DGWLTD_PLUGIN_PLUGIN_URL . "dist/dgwltd-plugin-theme.js",
+			 DGWLTD_PLUGIN_URL . "dist/dgwltd-plugin-theme.js",
 			 $asset_file["dependencies"],
 			 $asset_file["version"],
 			 true

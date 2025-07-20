@@ -13,18 +13,18 @@ class DGWLTD_PLUGIN_ACF {
 
 	public function dgwltd_register_wp_blocks() {
 
-		register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/accordion/block.json' );
-		register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/banner/block.json' );
-		register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/breadcrumbs/block.json' );
-		register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/cards/block.json' );
-    	register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/cards/query/block.json' );
-		register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/embed/block.json' );
-		register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/hero/block.json' );
-		register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/promo-card/block.json' );
+		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/accordion/block.json' );
+		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/banner/block.json' );
+		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/breadcrumbs/block.json' );
+		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/cards/block.json' );
+    	register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/cards/query/block.json' );
+		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/embed/block.json' );
+		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/hero/block.json' );
+		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/promo-card/block.json' );
 	
 
 		//Native
-		register_block_type( DGWLTD_PLUGIN_PLUGIN_BLOCKS . 'build/picker/block.json' );
+		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/picker/block.json' );
 
 	}
 
@@ -55,10 +55,10 @@ class DGWLTD_PLUGIN_ACF {
 	 * @since 0.1.1
 	 */
 	public function dgwltd_acf_json_load_paths( $paths ) {
-		$paths[] = DGWLTD_PLUGIN_PLUGIN_DIR . 'src/acf-json/field-groups';
-		$paths[] = DGWLTD_PLUGIN_PLUGIN_DIR . 'src/acf-json/options-pages';
-		$paths[] = DGWLTD_PLUGIN_PLUGIN_DIR . 'src/acf-json/post-types';
-		$paths[] = DGWLTD_PLUGIN_PLUGIN_DIR . 'src/acf-json/taxonomies';
+		$paths[] = DGWLTD_PLUGIN_DIR . 'src/acf-json/field-groups';
+		$paths[] = DGWLTD_PLUGIN_DIR . 'src/acf-json/options-pages';
+		$paths[] = DGWLTD_PLUGIN_DIR . 'src/acf-json/post-types';
+		$paths[] = DGWLTD_PLUGIN_DIR . 'src/acf-json/taxonomies';
 		return $paths;
 	}
 	/**
@@ -72,7 +72,7 @@ class DGWLTD_PLUGIN_ACF {
 	 * @since 0.1.1
 	 */
 	public function dgwltd_acf_json_save_path_for_post_types() {
-		return DGWLTD_PLUGIN_PLUGIN_DIR . 'src/acf-json/post-types';
+		return DGWLTD_PLUGIN_DIR . 'src/acf-json/post-types';
 	}
 
 	/**
@@ -86,7 +86,7 @@ class DGWLTD_PLUGIN_ACF {
 	 * @since 0.1.1
 	 */
 	public function dgwltd_acf_json_save_path_for_field_groups() {
-		return DGWLTD_PLUGIN_PLUGIN_DIR . 'src/acf-json/field-groups';
+		return DGWLTD_PLUGIN_DIR . 'src/acf-json/field-groups';
 	}
 
 	/**
@@ -100,7 +100,7 @@ class DGWLTD_PLUGIN_ACF {
 	 * @since 0.1.1
 	 */
 	public function dgwltd_acf_json_save_path_for_taxonomies() {
-		return DGWLTD_PLUGIN_PLUGIN_DIR . 'src/acf-json/taxonomies';
+		return DGWLTD_PLUGIN_DIR . 'src/acf-json/taxonomies';
 	}
 
 	/**
@@ -114,7 +114,7 @@ class DGWLTD_PLUGIN_ACF {
 	 * @since 0.1.1
 	 */
 	public function dgwltd_acf_json_save_path_for_option_pages() {
-		return DGWLTD_PLUGIN_PLUGIN_DIR . 'src/acf-json/options-pages';
+		return DGWLTD_PLUGIN_DIR . 'src/acf-json/options-pages';
 	}
 
 	/**

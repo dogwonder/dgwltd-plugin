@@ -35,16 +35,16 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Plugin constants
  */
 define( 'DGWLTD_PLUGIN_VERSION', '1.0.102' );
-define( 'DGWLTD_PLUGIN_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
-define( 'DGWLTD_PLUGIN_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
-define( 'DGWLTD_PLUGIN_PLUGIN_BLOCKS', DGWLTD_PLUGIN_PLUGIN_DIR . 'src/blocks/' );
+define( 'DGWLTD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
+define( 'DGWLTD_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+define( 'DGWLTD_PLUGIN_BLOCKS', DGWLTD_PLUGIN_DIR . 'src/blocks/' );
 
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-dgwltd-plugin-activator.php
  */
 function activate_dgwltd_plugin() {
-	require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-activator.php';
+	require_once DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-activator.php';
 	DGWLTD_PLUGIN_Activator::activate();
 }
 
@@ -53,7 +53,7 @@ function activate_dgwltd_plugin() {
  * This action is documented in includes/class-dgwltd-plugin-deactivator.php
  */
 function deactivate_dgwltd_plugin() {
-	require_once DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin-deactivator.php';
+	require_once DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-deactivator.php';
 	DGWLTD_PLUGIN_Deactivator::deactivate();
 }
 
@@ -64,7 +64,7 @@ register_deactivation_hook( __FILE__, 'deactivate_dgwltd_plugin' );
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require DGWLTD_PLUGIN_PLUGIN_DIR . 'includes/class-dgwltd-plugin.php';
+require DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin.php';
 
 /**
  * Begins execution of the plugin.

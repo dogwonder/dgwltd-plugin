@@ -22,6 +22,9 @@ import { animate, scroll } from "motion";
 window.Alpine = Alpine;
 Alpine.start();
 
+//Import cally https://wicky.nillia.ms/cally/
+// import "cally";
+
 // CSS selector
 animate(
     ".logo",

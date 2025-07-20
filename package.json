@@ -1,6 +1,6 @@
 {
   "name": "dgwltd",
-  "version": "1.0.183",
+  "version": "1.0.188",
   "description": "## Requirements",
   "main": "gulpfile.js",
   "author": "",
@@ -42,6 +42,7 @@
     "@wordpress/scripts": "^30.19.0",
     "alpinejs": "^3.14.9",
     "autoprefixer": "^10.4.21",
+    "cally": "^0.8.0",
     "concat": "^1.0.3",
     "concurrently": "^9.2.0",
     "cssnano": "^7.0.7",
