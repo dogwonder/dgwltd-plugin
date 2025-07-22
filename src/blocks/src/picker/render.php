@@ -13,7 +13,6 @@ $content_type = $attributes['contentType'] ?? 'post';
 $posts = $attributes['selectedPosts'];
 $post_ids = wp_list_pluck( $posts, 'id' );
 
-
 $query_args = [
     'post_type' => 'any',
     'post__in' => $post_ids,

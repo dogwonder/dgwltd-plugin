@@ -67,11 +67,41 @@ class DGWLTD_PLUGIN_PUBLIC {
 
 	/**
 	 * Register the JavaScript for the public-facing side of the site.
-	 *
+	 * Only loads when plugin blocks are present for optimal performance.
 	 */
-
 	 public function dgwltd_enqueue_theme_scripts()
 	 {
+		 // Check if any of our custom blocks are present on this page
+		 global $post;
+		 
+		 if ( ! $post || ! has_blocks( $post->post_content ) ) {
+			 return;
+		 }
+		 
+		 $plugin_blocks = [
+			 'acf/dgwltd-accordion',
+			 'acf/dgwltd-banner', 
+			 'acf/dgwltd-breadcrumbs',
+			 'acf/dgwltd-cards',
+			 'acf/dgwltd-embed',
+			 'acf/dgwltd-hero',
+			 'acf/dgwltd-picker',
+			 'acf/dgwltd-promo-card'
+		 ];
+		 
+		 $needs_scripts = false;
+		 foreach ( $plugin_blocks as $block_name ) {
+			 if ( has_block( $block_name, $post ) ) {
+				 $needs_scripts = true;
+				 break;
+			 }
+		 }
+		 
+		 // Only load if we actually have plugin blocks on this page
+		 if ( ! $needs_scripts ) {
+			 return;
+		 }
+		 
 		 $asset_file = include plugin_dir_path(__DIR__) .
 			 "dist/dgwltd-plugin-theme.asset.php";
 		 wp_enqueue_script(
@@ -168,6 +198,21 @@ class DGWLTD_PLUGIN_PUBLIC {
 	}
 
 	public static function dgwltd_image_to_base64_data_uri( $imagePath ) {
+		// Get file modification time for cache key (for cache invalidation when image changes)
+		$file_mod_time = '';
+		if ( ! filter_var( $imagePath, FILTER_VALIDATE_URL ) && file_exists( $imagePath ) ) {
+			$file_mod_time = filemtime( $imagePath );
+		}
+		
+		// Create cache key based on image path and modification time
+		$cache_key = 'dgwltd_b64_' . md5( $imagePath . $file_mod_time );
+		
+		// Try to get cached result first
+		$cached_result = get_transient( $cache_key );
+		if ( $cached_result !== false ) {
+			return $cached_result;
+		}
+
 		// Ensure the WordPress Filesystem API is available
 		if ( ! function_exists( 'WP_Filesystem' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -257,6 +302,9 @@ class DGWLTD_PLUGIN_PUBLIC {
 	
 		// Construct the data URI
 		$dataURI = "data:{$mimeType};base64,{$base64Data}";
+		
+		// Cache the result for 24 hours (DAY_IN_SECONDS)
+		set_transient( $cache_key, $dataURI, DAY_IN_SECONDS );
 	
 		return $dataURI;
 	}

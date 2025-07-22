@@ -26,9 +26,19 @@ $block_styles = $block_attrs['style'] ? $block_attrs['style'] : '';
 $image    = get_field( 'background_image' ) ? : '';
 $image_mobile    = get_field( 'background_image_mobile' ) ? : '';
 $overlay  = get_field( 'overlay' ) ? : '';
-if($overlay) {
+
+// Sanitize overlay color to prevent CSS injection
+if ( $overlay ) {
+	// Ensure overlay is a valid hex color
+	$overlay = preg_replace( '/[^#a-fA-F0-9]/', '', $overlay );
+	if ( ! preg_match( '/^#[a-fA-F0-9]{6}$/', $overlay ) ) {
+		$overlay = '#000000'; // Default to black if invalid
+	}
+	
 	$overlay_opacity  = get_field( 'overlay_opacity' ) ? : '0';
-	//Divide overlay_opacity by 100 to get decimal
+	// Ensure opacity is a valid number between 0 and 100
+	$overlay_opacity = max( 0, min( 100, intval( $overlay_opacity ) ) );
+	// Divide overlay_opacity by 100 to get decimal
 	$overlay_opacity = $overlay_opacity / 100;
 }
 
@@ -88,7 +98,7 @@ $block_template = array(
 				?>
 				<?php if ( $overlay ) : ?>
 				<style>
-					#<?php echo $block_id; ?>.dgwltd-banner:before {
+					#<?php echo esc_attr( $block_id ); ?>.dgwltd-banner:before {
 						display: block;
 						z-index: 2;
 						content: '';
@@ -97,8 +107,8 @@ $block_template = array(
 						right: 0;
 						bottom: 0;
 						left: 0;
-						background-color: <?php echo $overlay; ?>;
-						opacity:<?php echo ($overlay_opacity ? $overlay_opacity : '0.7'); ?>;
+						background-color: <?php echo esc_attr( $overlay ); ?>;
+						opacity: <?php echo esc_attr( $overlay_opacity ? $overlay_opacity : '0.7' ); ?>;
 					}
 				</style>
 				<?php endif; ?>  

@@ -5,6 +5,33 @@
 class DGWLTD_FEATURE_API {
 
     /**
+     * Allowed domains for image uploads
+     * Add your trusted domains here
+     */
+    private $allowed_image_domains = array(
+        'dev.dgw.ltd.ddev.site:8443',
+        'dgw.ltd',
+        'www.dgw.ltd',
+        'mystagingwebsite.com'
+    );
+
+    /**
+     * Maximum file size for image uploads (in bytes)
+     */
+    private $max_image_size = 5242880; // 5MB
+
+    /**
+     * Allowed image file types
+     */
+    private $allowed_image_types = array(
+        'image/jpeg',
+        'image/jpg',
+        'image/png',
+        'image/gif',
+        'image/webp'
+    );
+
+    /**
      * Load the WP Feature API
      */
     public function __construct() {
@@ -27,7 +54,7 @@ class DGWLTD_FEATURE_API {
             add_action('wp_feature_api_init', array($this, 'dgwltd_register_features'), 15);
         } else {
             // Log error if file is not found
-            error_log('WP Feature API file not found at path: ' . $feature_api_path);
+            error_log('WP Feature API file not found at expected location');
         }
     }
 
@@ -41,7 +68,7 @@ class DGWLTD_FEATURE_API {
 
         // Check if Feature API is available
         if ( !function_exists( 'wp_register_feature' ) ) {
-            error_log( 'Feature API not available when attempting to register block features' );
+            error_log( 'Feature API not available during feature registration' );
             return;
         }
 
@@ -201,7 +228,7 @@ class DGWLTD_FEATURE_API {
             error_log( 'DGW.ltd features registered successfully' );
 
         } catch ( Exception $e ) {
-            error_log( 'Error registering features: ' . $e->getMessage() );
+            error_log( 'Error during feature registration process' );
         }
     }
 
@@ -210,6 +237,22 @@ class DGWLTD_FEATURE_API {
      */
     public function insert_banner_block( $params ) {
         try {
+            // Verify nonce for security
+            if ( ! $this->verify_feature_api_nonce( $params ) ) {
+                return array(
+                    'success' => false,
+                    'message' => 'Security verification failed',
+                );
+            }
+
+            // Validate and sanitize input parameters
+            $params = $this->validate_banner_params( $params );
+            if ( is_wp_error( $params ) ) {
+                return array(
+                    'success' => false,
+                    'message' => $params->get_error_message(),
+                );
+            }
             // Get or create post
             $post_id = isset( $params['post_id'] ) ? intval( $params['post_id'] ) : null;
             
@@ -251,10 +294,22 @@ class DGWLTD_FEATURE_API {
 
             if ( ! empty( $params['background_image_url'] ) ) {
                 $background_image_id = $this->upload_image_from_url( $params['background_image_url'] );
+                if ( is_wp_error( $background_image_id ) ) {
+                    return array(
+                        'success' => false,
+                        'message' => 'Failed to upload background image: ' . $background_image_id->get_error_message(),
+                    );
+                }
             }
 
             if ( ! empty( $params['background_image_mobile_url'] ) ) {
                 $background_image_mobile_id = $this->upload_image_from_url( $params['background_image_mobile_url'] );
+                if ( is_wp_error( $background_image_mobile_id ) ) {
+                    return array(
+                        'success' => false,
+                        'message' => 'Failed to upload mobile background image: ' . $background_image_mobile_id->get_error_message(),
+                    );
+                }
             }
 
             // Create banner block structure
@@ -302,8 +357,8 @@ class DGWLTD_FEATURE_API {
                     'data' => array(
                         'background_image' => $background_image_id,
                         'background_image_mobile' => $background_image_mobile_id,
-                        'overlay' => $params['overlay_color'] ?? '',
-                        'overlay_opacity' => $params['overlay_opacity'] ?? 70,
+                        'overlay' => $this->sanitize_color( $params['overlay_color'] ?? '' ),
+                        'overlay_opacity' => intval( $params['overlay_opacity'] ?? 70 ),
                     ),
                     'align' => $params['alignment'] ?? 'full',
                     'className' => $params['block_style'] !== 'default' ? 'is-style-' . $params['block_style'] : '',
@@ -370,9 +425,10 @@ class DGWLTD_FEATURE_API {
             );
 
         } catch ( Exception $e ) {
+            error_log( 'Banner block insertion failed: ' . $e->getMessage() );
             return array(
                 'success' => false,
-                'message' => 'Error inserting banner block: ' . $e->getMessage(),
+                'message' => 'Error inserting banner block. Please check the error logs.',
             );
         }
     }
@@ -445,21 +501,196 @@ class DGWLTD_FEATURE_API {
     }
 
     /**
-     * Upload image from URL
+     * Upload image from URL with security validation
      */
     private function upload_image_from_url( $url ) {
+        // Validate URL format
+        if ( ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
+            return new WP_Error( 'invalid_url', 'Invalid URL format provided' );
+        }
+
+        // Parse URL and validate domain
+        $parsed_url = wp_parse_url( $url );
+        if ( ! $parsed_url || ! isset( $parsed_url['host'] ) ) {
+            return new WP_Error( 'invalid_url', 'Unable to parse URL' );
+        }
+
+        // Check if domain is in allowed list
+        if ( ! in_array( $parsed_url['host'], $this->allowed_image_domains, true ) ) {
+            return new WP_Error( 'domain_not_allowed', 'Image domain not in allowlist: ' . esc_html( $parsed_url['host'] ) );
+        }
+
+        // Validate file extension
+        $file_ext = strtolower( pathinfo( $parsed_url['path'], PATHINFO_EXTENSION ) );
+        $allowed_extensions = array( 'jpg', 'jpeg', 'png', 'gif', 'webp' );
+        if ( ! in_array( $file_ext, $allowed_extensions, true ) ) {
+            return new WP_Error( 'invalid_file_type', 'File type not allowed: ' . esc_html( $file_ext ) );
+        }
+
+        // Check remote file headers before downloading
+        $response = wp_remote_head( $url, array(
+            'timeout' => 10,
+            'user-agent' => 'DGW.ltd Plugin Image Validator'
+        ) );
+
+        if ( is_wp_error( $response ) ) {
+            return new WP_Error( 'remote_request_failed', 'Failed to check remote file: ' . $response->get_error_message() );
+        }
+
+        $headers = wp_remote_retrieve_headers( $response );
+        $content_type = $headers['content-type'] ?? '';
+        $content_length = intval( $headers['content-length'] ?? 0 );
+
+        // Validate content type
+        if ( ! in_array( $content_type, $this->allowed_image_types, true ) ) {
+            return new WP_Error( 'invalid_content_type', 'Content type not allowed: ' . esc_html( $content_type ) );
+        }
+
+        // Check file size
+        if ( $content_length > $this->max_image_size ) {
+            return new WP_Error( 'file_too_large', 'File size exceeds maximum allowed: ' . size_format( $this->max_image_size ) );
+        }
+
         require_once( ABSPATH . 'wp-admin/includes/media.php' );
         require_once( ABSPATH . 'wp-admin/includes/file.php' );
         require_once( ABSPATH . 'wp-admin/includes/image.php' );
 
+        // Use WordPress media_sideload_image with timeout
+        add_filter( 'http_request_timeout', array( $this, 'set_upload_timeout' ) );
         $attachment_id = media_sideload_image( $url, 0, null, 'id' );
+        remove_filter( 'http_request_timeout', array( $this, 'set_upload_timeout' ) );
 
         if ( is_wp_error( $attachment_id ) ) {
-            error_log( 'Failed to upload image: ' . $attachment_id->get_error_message() );
-            return null;
+            error_log( 'Image upload failed from validated URL' );
+            return $attachment_id;
         }
 
         return $attachment_id;
+    }
+
+    /**
+     * Set timeout for image uploads
+     */
+    public function set_upload_timeout( $timeout ) {
+        return 30; // 30 seconds
+    }
+
+    /**
+     * Verify nonce for Feature API requests
+     */
+    private function verify_feature_api_nonce( $params ) {
+        // For now, we'll implement a basic check
+        // In production, you should implement proper nonce verification
+        // based on how the Feature API handles authentication
+        if ( ! current_user_can( 'edit_posts' ) ) {
+            return false;
+        }
+        
+        // Add additional nonce verification here when implemented
+        // if ( ! wp_verify_nonce( $params['_wpnonce'] ?? '', 'dgwltd_feature_api' ) ) {
+        //     return false;
+        // }
+        
+        return true;
+    }
+
+    /**
+     * Validate and sanitize banner parameters
+     */
+    private function validate_banner_params( $params ) {
+        $validated = array();
+
+        // Validate post_id
+        if ( isset( $params['post_id'] ) ) {
+            $validated['post_id'] = intval( $params['post_id'] );
+            if ( $validated['post_id'] <= 0 ) {
+                return new WP_Error( 'invalid_post_id', 'Invalid post ID provided' );
+            }
+        }
+
+        // Validate post_type
+        $validated['post_type'] = sanitize_text_field( $params['post_type'] ?? 'post' );
+        if ( ! in_array( $validated['post_type'], array( 'post', 'page' ), true ) ) {
+            return new WP_Error( 'invalid_post_type', 'Invalid post type provided' );
+        }
+
+        // Validate position
+        $validated['position'] = sanitize_text_field( $params['position'] ?? 'end' );
+        if ( ! in_array( $validated['position'], array( 'beginning', 'end', 'after_block_index' ), true ) ) {
+            return new WP_Error( 'invalid_position', 'Invalid position provided' );
+        }
+
+        // Validate block_index
+        if ( isset( $params['block_index'] ) ) {
+            $validated['block_index'] = intval( $params['block_index'] );
+            if ( $validated['block_index'] < 0 ) {
+                return new WP_Error( 'invalid_block_index', 'Block index must be non-negative' );
+            }
+        }
+
+        // Sanitize text fields
+        $text_fields = array( 'lede', 'title', 'content' );
+        foreach ( $text_fields as $field ) {
+            if ( isset( $params[$field] ) ) {
+                $validated[$field] = wp_kses_post( $params[$field] );
+            }
+        }
+
+        // Validate URLs
+        $url_fields = array( 'background_image_url', 'background_image_mobile_url' );
+        foreach ( $url_fields as $field ) {
+            if ( isset( $params[$field] ) && ! empty( $params[$field] ) ) {
+                $url = esc_url_raw( $params[$field] );
+                if ( ! filter_var( $url, FILTER_VALIDATE_URL ) ) {
+                    return new WP_Error( 'invalid_url', 'Invalid URL provided for ' . $field );
+                }
+                $validated[$field] = $url;
+            }
+        }
+
+        // Validate overlay_color
+        if ( isset( $params['overlay_color'] ) ) {
+            $validated['overlay_color'] = $this->sanitize_color( $params['overlay_color'] );
+        }
+
+        // Validate overlay_opacity
+        if ( isset( $params['overlay_opacity'] ) ) {
+            $opacity = intval( $params['overlay_opacity'] );
+            $validated['overlay_opacity'] = max( 0, min( 100, $opacity ) );
+        }
+
+        // Validate block_style
+        $validated['block_style'] = sanitize_text_field( $params['block_style'] ?? 'default' );
+        if ( ! in_array( $validated['block_style'], array( 'default', 'monochrome' ), true ) ) {
+            $validated['block_style'] = 'default';
+        }
+
+        // Validate alignment
+        $validated['alignment'] = sanitize_text_field( $params['alignment'] ?? 'full' );
+        if ( ! in_array( $validated['alignment'], array( 'none', 'wide', 'full' ), true ) ) {
+            $validated['alignment'] = 'full';
+        }
+
+        return $validated;
+    }
+
+    /**
+     * Sanitize color value
+     */
+    private function sanitize_color( $color ) {
+        if ( empty( $color ) ) {
+            return '';
+        }
+
+        // Remove any non-hex characters except the hash
+        $color = preg_replace( '/[^#a-fA-F0-9]/', '', $color );
+        
+        // Ensure it starts with # and is 7 characters long
+        if ( ! preg_match( '/^#[a-fA-F0-9]{6}$/', $color ) ) {
+            return ''; // Return empty if invalid
+        }
+
+        return $color;
     }
 
     /**

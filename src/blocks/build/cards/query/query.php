@@ -164,6 +164,27 @@ $cards_query = new WP_Query($post_args);
 //Count the number of posts
 if ($cards_query->have_posts()):
     $cards_count = $cards_query->post_count;
+    
+    // Pre-load metadata to avoid N+1 queries
+    $post_ids = wp_list_pluck($cards_query->posts, 'ID');
+    update_object_term_cache($post_ids, get_post_types());
+    update_postmeta_cache($post_ids);
+    
+    // Pre-load ACF field groups and cache field data
+    if (function_exists('acf_get_field_groups')) {
+        $field_groups = acf_get_field_groups();
+        foreach ($post_ids as $post_id) {
+            foreach ($field_groups as $field_group) {
+                $fields = acf_get_fields($field_group);
+                if ($fields) {
+                    foreach ($fields as $field) {
+                        acf_get_value($post_id, $field);
+                    }
+                }
+            }
+        }
+    }
+
 endif;
 
 // Card index

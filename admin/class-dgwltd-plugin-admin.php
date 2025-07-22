@@ -56,20 +56,15 @@ class DGWLTD_PLUGIN_ADMIN {
 
 	/**
 	 * Register the stylesheets for the admin area.
-	 *
+	 * Only loads on block editor pages for optimal performance.
 	 */
 	public function dgwltd_enqueue_admin_styles() {
 
-		/**
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in DGWLTD_PLUGIN_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The DGWLTD_PLUGIN_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		// Only load admin styles in block editor context
+		$screen = get_current_screen();
+		if ( ! $screen || ! $screen->is_block_editor() ) {
+			return;
+		}
 
 		wp_enqueue_style( $this->dgwltd_plugin, plugin_dir_url( __FILE__ ) . 'css/dgwltd-plugin-editor.css', array(), $this->version, 'all' );
 
