@@ -80,7 +80,6 @@ class Dgwltd_Site {
 		$this->define_acf_hooks();
 		$this->define_block_hooks();
 		$this->define_site_rules();
-		// $this->define_feature_api();
 
 	}
 
@@ -139,11 +138,6 @@ class Dgwltd_Site {
 		 * The class responsible for defining all actions that occur for building out the custom rules
 		 */
 		require_once DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-rules.php';
-
-		/**
-		 * The class responsible for defining all actions that occur for building out the feature API
-		 */
-		// require_once DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-feature-api.php';
 
 		$this->loader = new DGWLTD_PLUGIN_Loader();
 

@@ -3,7 +3,5 @@
   "type": "wordpress-plugin",
   "description": "Blocks plugin",
   "license": "MIT",
-  "require": {
-    "automattic/wp-feature-api": "^0.1.5"
-  }
+  "require": {}
 }
