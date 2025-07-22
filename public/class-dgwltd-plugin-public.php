@@ -197,59 +197,107 @@ class DGWLTD_PLUGIN_PUBLIC {
 		}
 	}
 
-	public static function dgwltd_image_to_base64_data_uri( $imagePath ) {
-		// Get file modification time for cache key (for cache invalidation when image changes)
-		$file_mod_time = '';
-		if ( ! filter_var( $imagePath, FILTER_VALIDATE_URL ) && file_exists( $imagePath ) ) {
-			$file_mod_time = filemtime( $imagePath );
+	public static function dgwltd_image_to_base64_data_uri( $imagePath, $options = array() ) {
+		// Default options for LQIP
+		$defaults = array(
+			'width' => 40,
+			'quality' => 40,
+			'format' => 'jpeg',
+		);
+		
+		$options = wp_parse_args( $options, $defaults );
+		
+		// Get the image data
+		$image_data = self::dgwltd_get_image_data( $imagePath );
+		if ( ! $image_data ) {
+			return false;
 		}
 		
-		// Create cache key based on image path and modification time
-		$cache_key = 'dgwltd_b64_' . md5( $imagePath . $file_mod_time );
-		
-		// Try to get cached result first
-		$cached_result = get_transient( $cache_key );
-		if ( $cached_result !== false ) {
-			return $cached_result;
+		// Create image resource
+		$image = imagecreatefromstring( $image_data['data'] );
+		if ( ! $image ) {
+			return false;
 		}
+		
+		// Get dimensions and calculate new size
+		$orig_width = imagesx( $image );
+		$orig_height = imagesy( $image );
+		$ratio = $orig_height / $orig_width;
+		$new_width = $options['width'];
+		$new_height = round( $new_width * $ratio );
+		
+		// Create resized image
+		$resized = imagecreatetruecolor( $new_width, $new_height );
+		
+		// White background
+		$white = imagecolorallocate( $resized, 255, 255, 255 );
+		imagefilledrectangle( $resized, 0, 0, $new_width, $new_height, $white );
+		
+		// Resize
+		imagecopyresampled(
+			$resized, $image,
+			0, 0, 0, 0,
+			$new_width, $new_height,
+			$orig_width, $orig_height
+		);
+		
+		// Output
+		ob_start();
+		imagejpeg( $resized, null, $options['quality'] );
+		$image_output = ob_get_clean();
+		
+		// Clean up
+		imagedestroy( $image );
+		imagedestroy( $resized );
+		
+		// Return data URI
+		return "data:image/jpeg;base64," . base64_encode( $image_output );
+	}
 
+	/**
+	 * Helper function to get image data from local file or URL
+	 */
+	private static function dgwltd_get_image_data( $imagePath ) {
 		// Ensure the WordPress Filesystem API is available
 		if ( ! function_exists( 'WP_Filesystem' ) ) {
 			require_once ABSPATH . 'wp-admin/includes/file.php';
 		}
-	
+
 		// Initialize the Filesystem API
 		global $wp_filesystem;
 		if ( ! WP_Filesystem() ) {
 			error_log( 'Failed to initialize WordPress Filesystem API.' );
 			return false;
 		}
-	
+
 		// Determine if the path is a URL or a local file
 		if ( filter_var( $imagePath, FILTER_VALIDATE_URL ) ) {
 			// It's a remote URL; use wp_remote_get
-			$response = wp_remote_get( $imagePath );
-	
+			$response = wp_remote_get( $imagePath, array(
+				'timeout' => 15,
+				'sslverify' => true,
+			) );
+
 			if ( is_wp_error( $response ) ) {
 				error_log( 'wp_remote_get failed: ' . $response->get_error_message() );
 				return false;
 			}
-	
+
 			$http_code = wp_remote_retrieve_response_code( $response );
 			if ( $http_code !== 200 ) {
 				error_log( "wp_remote_get returned HTTP code {$http_code} for URL: {$imagePath}" );
 				return false;
 			}
-	
+
 			$fileData = wp_remote_retrieve_body( $response );
 			if ( empty( $fileData ) ) {
 				error_log( "Empty response body from URL: {$imagePath}" );
 				return false;
 			}
-	
+
 			// Attempt to get MIME type from headers
 			$mimeType = wp_remote_retrieve_header( $response, 'content-type' );
-	
+
 			if ( empty( $mimeType ) ) {
 				// Fallback to using FileInfo if MIME type is not provided
 				$finfo = finfo_open( FILEINFO_MIME_TYPE );
@@ -264,21 +312,21 @@ class DGWLTD_PLUGIN_PUBLIC {
 				error_log( "File does not exist: {$imagePath}" );
 				return false;
 			}
-	
+
 			if ( ! $wp_filesystem->is_readable( $imagePath ) ) {
 				error_log( "File is not readable: {$imagePath}" );
 				return false;
 			}
-	
+
 			// Use WordPress's wp_check_filetype function to get the MIME type
 			$filetype = wp_check_filetype( basename( $imagePath ) );
 			$mimeType = $filetype['type'];
-	
+
 			if ( empty( $mimeType ) ) {
 				error_log( "Unable to determine MIME type for file: {$imagePath}" );
 				return false;
 			}
-	
+
 			// Get the file contents using WordPress Filesystem API
 			$fileData = $wp_filesystem->get_contents( $imagePath );
 			if ( $fileData === false ) {
@@ -286,28 +334,19 @@ class DGWLTD_PLUGIN_PUBLIC {
 				return false;
 			}
 		}
-	
+
 		// Ensure the MIME type is an image
 		if ( strpos( $mimeType, 'image/' ) !== 0 ) {
 			error_log( "File is not an image: {$imagePath}" );
 			return false;
 		}
-	
-		// Encode the data to Base64
-		$base64Data = base64_encode( $fileData );
-		if ( $base64Data === false ) {
-			error_log( "Base64 encoding failed for file: {$imagePath}" );
-			return false;
-		}
-	
-		// Construct the data URI
-		$dataURI = "data:{$mimeType};base64,{$base64Data}";
 		
-		// Cache the result for 24 hours (DAY_IN_SECONDS)
-		set_transient( $cache_key, $dataURI, DAY_IN_SECONDS );
-	
-		return $dataURI;
+		return array(
+			'data' => $fileData,
+			'mime' => $mimeType,
+		);
 	}
+
 
 	/**
 	 * Get an ACF block's color settings.
