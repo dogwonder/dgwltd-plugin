@@ -10,7 +10,8 @@
 
 // Cards
 global $post;
-$paged = get_query_var("paged") ? get_query_var("paged") : 1;
+//If is_front_page()
+$paged = max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) );
 
 // Define default values
 $grid_classes = "";
@@ -125,7 +126,6 @@ if ($display_pagination) {
     $numberposts = $post_per_page;
 }
 
-//Exclude sticky posts from the query
 $post_args = [
     "post_type" => $query_post_type,
     "posts_per_page" => $numberposts,
