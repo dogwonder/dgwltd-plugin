@@ -198,61 +198,25 @@ class DGWLTD_PLUGIN_PUBLIC {
 	}
 
 	public static function dgwltd_image_to_base64_data_uri( $imagePath, $options = array() ) {
+    
+		// Use helper function to get image data
+		$imageData = self::dgwltd_get_image_data( $imagePath );
 		
-		// Default options for LQIP
-		$defaults = array(
-			'width' => 20,
-			'quality' => 40,
-			'format' => 'jpeg',
-		);
-		
-		$options = wp_parse_args( $options, $defaults );
-		
-		// Get the image data
-		$image_data = self::dgwltd_get_image_data( $imagePath );
-		if ( ! $image_data ) {
+		if ( $imageData === false ) {
+			error_log( "Failed to get image data for: {$imagePath}" );
 			return false;
 		}
 		
-		// Create image resource
-		$image = imagecreatefromstring( $image_data['data'] );
-		if ( ! $image ) {
-			return false;
-		}
+		// Extract data and MIME type from our helper function
+		$data = $imageData['data'];
+		$mime = $imageData['mime'];
 		
-		// Get dimensions and calculate new size
-		$orig_width = imagesx( $image );
-		$orig_height = imagesy( $image );
-		$ratio = $orig_height / $orig_width;
-		$new_width = $options['width'];
-		$new_height = round( $new_width * $ratio );
-		
-		// Create resized image
-		$resized = imagecreatetruecolor( $new_width, $new_height );
-		
-		// White background
-		$white = imagecolorallocate( $resized, 255, 255, 255 );
-		imagefilledrectangle( $resized, 0, 0, $new_width, $new_height, $white );
-		
-		// Resize
-		imagecopyresampled(
-			$resized, $image,
-			0, 0, 0, 0,
-			$new_width, $new_height,
-			$orig_width, $orig_height
+		// Return the base64 data URI
+		return sprintf(
+			'data:%s;base64,%s',
+			$mime,
+			base64_encode( $data )
 		);
-		
-		// Output
-		ob_start();
-		imagejpeg( $resized, null, $options['quality'] );
-		$image_output = ob_get_clean();
-		
-		// Clean up
-		imagedestroy( $image );
-		imagedestroy( $resized );
-		
-		// Return data URI
-		return "data:image/jpeg;base64," . base64_encode( $image_output );
 	}
 
 	/**
