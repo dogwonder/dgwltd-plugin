@@ -38,7 +38,7 @@ class DGWLTD_PLUGIN_RULES {
 		// First disable color settings for everyone. This will override
 		// any settings that might have been supplied by the theme.
 		$default_settings = array(
-			'version'  => 2,
+			'version'  => 3,
 			'settings' => array(
 				'color' => array(
 					'custom' => false
@@ -51,7 +51,7 @@ class DGWLTD_PLUGIN_RULES {
 		// If the current user has the correct permissions, enable color settings.
 		if ( current_user_can( 'edit_theme_options' ) ) {
 			$administrator_settings = array(
-				'version'  => 2,
+				'version'  => 3,
 				'settings' => array(
 					'color' => array(
 						'custom' => true

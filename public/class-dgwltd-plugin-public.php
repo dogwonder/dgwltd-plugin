@@ -198,6 +198,7 @@ class DGWLTD_PLUGIN_PUBLIC {
 	}
 
 	public static function dgwltd_image_to_base64_data_uri( $imagePath, $options = array() ) {
+		
 		// Default options for LQIP
 		$defaults = array(
 			'width' => 20,

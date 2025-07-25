@@ -174,7 +174,6 @@ class Dgwltd_Site {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_styles' );
 		// $this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'dgwltd_enqueue_admin_scripts' );
 		$this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'dgwltd_enqueue_variations_scripts' );
-		// $this->loader->add_action( 'enqueue_block_editor_assets', $plugin_admin, 'dgwltd_enqueue_feature_api_scripts' );
 		
 	}
 
@@ -273,18 +272,6 @@ class Dgwltd_Site {
 		 $this->loader->add_filter( 'register_block_type_args', $plugin_rules, 'dgwltd_restrict_heading_levels', 10, 2 );
 
 		
-	}
-
-	/**
-	 * Register the WordPress Feature API
-	 *
-	 * @since     1.0.0
-	 * @return    void
-	 */
-	private function define_feature_api() {
-
-		$feature_api = new DGWLTD_FEATURE_API();
-
 	}
 
 
