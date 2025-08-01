@@ -22,6 +22,27 @@
             "ui_on_text": "",
             "ui_off_text": "",
             "translations": "copy_once"
+        },
+        {
+            "key": "field_688c8b042ba07",
+            "label": "Custom meta",
+            "name": "custom_meta",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 1,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         }
     ],
     "location": [
@@ -49,9 +70,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 1,
-    "show_in_graphql": 1,
-    "graphql_field_name": "pageSettings",
-    "map_graphql_types_from_location_rules": 0,
-    "graphql_types": "",
-    "modified": 1734348589
+    "modified": 1754041418
 }

@@ -101,17 +101,22 @@ class DGWLTD_PLUGIN_PUBLIC {
 		 if ( ! $needs_scripts ) {
 			 return;
 		 }
-		 
-		 $asset_file = include plugin_dir_path(__DIR__) .
-			 "dist/dgwltd-plugin-theme.asset.php";
-		 wp_enqueue_script(
-			 $this->dgwltd_plugin,
-			 DGWLTD_PLUGIN_URL . "dist/dgwltd-plugin-theme.js",
-			 $asset_file["dependencies"],
-			 $asset_file["version"],
-			 true
-		 );
+
+		$asset_file_path = plugin_dir_path( __DIR__ ) . 'dist/dgwltd-plugin-theme.asset.php';
+		if ( file_exists( $asset_file_path ) ) {
+			$asset_file = include $asset_file_path;
+			wp_enqueue_script(
+				$this->dgwltd_plugin . '-theme',
+				DGWLTD_PLUGIN_URL . 'dist/dgwltd-plugin-theme.js',
+				$asset_file["dependencies"],
+				$asset_file["version"],
+				true
+			);
+		 }
+	 
 	 }
+
+	 
 
 	/**
 	 * Add type=module to script tags

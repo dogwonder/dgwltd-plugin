@@ -85,6 +85,32 @@ registerBlockVariation(
 	}
 );
 
+/**
+ * Register a paragraph block variation with meta binding
+ */
+// registerBlockVariation( 'core/paragraph', {
+// 	name: 'show-my-data',
+// 	title: __( 'Show My Data', 'block-binding-shortcut' ),
+// 	description: __(
+// 		'Display custom meta data in a paragraph',
+// 		'block-binding-shortcut'
+// 	),
+//     attributes: {
+// 		metadata: {
+// 			bindings: {
+// 				content: {
+// 					source: 'acf/field',
+// 					args: {
+// 						key: 'custom_meta',
+// 					},
+// 				},
+// 			},
+// 		},
+// 	},
+//     isActive: [ 'metadata.bindings.content.args.key' ],
+// 	scope: [ 'inserter', 'transform' ],
+// } );
+
 
 //Register a block style
 const styles = [

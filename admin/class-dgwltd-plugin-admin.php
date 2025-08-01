@@ -104,8 +104,7 @@ class DGWLTD_PLUGIN_ADMIN {
 	 *
 	 */
 	public function dgwltd_enqueue_variations_scripts() {
-		$asset_file = include plugin_dir_path(__DIR__) .
-			 "dist/dgwltd-plugin-variations.asset.php";
+		$asset_file = include plugin_dir_path(__DIR__) . 'dist/dgwltd-plugin-variations.asset.php';
 		 wp_enqueue_script(
 			 $this->dgwltd_plugin,
 			 DGWLTD_PLUGIN_URL . "dist/dgwltd-plugin-variations.js",
