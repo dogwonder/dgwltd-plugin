@@ -4,7 +4,6 @@
     "description": "Hero block",
     "style": "file:./hero.css",
     "viewScript": "file:./hero.js",
-    "editorScript": "file:./hero-edit.js",
     "category": "theme",
     "icon": "tide",
     "apiVersion": 3,

@@ -115,24 +115,6 @@
                     "acfe_field_group_condition": 0
                 },
                 {
-                    "key": "field_63c030ab9f01c",
-                    "label": "Mastodon",
-                    "name": "mastodon_link",
-                    "aria-label": "",
-                    "type": "url",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "show_in_graphql": 1,
-                    "default_value": "",
-                    "placeholder": ""
-                },
-                {
                     "key": "field_62729597e4b40",
                     "label": "Tiktok link",
                     "name": "tiktok_link",
@@ -191,5 +173,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1739200741
+    "modified": 1755013967
 }
