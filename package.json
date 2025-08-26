@@ -38,6 +38,7 @@
     "@wordpress/env": "^10.26.0",
     "@wordpress/i18n": "^5.26.0",
     "@wordpress/icons": "^10.26.0",
+    "@wordpress/primitives": "^4.28.0",
     "@wordpress/scripts": "^30.19.0",
     "alpinejs": "^3.14.9",
     "autoprefixer": "^10.4.21",

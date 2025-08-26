@@ -1,28 +1,6 @@
 
 import { registerBlockVariation, registerBlockStyle } from '@wordpress/blocks';
-import domReady from '@wordpress/dom-ready';
-
-const heroIcon = wp.element.createElement(
-	wp.primitives.SVG,
-	{ xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 576 512" },
-	wp.element.createElement(
-		wp.primitives.Path,
-		{
-			d: "M512 64l0 224L64 288 64 64l448 0zM64 0C28.7 0 0 28.7 0 64L0 288c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L64 0zM0 448l0 32c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-32c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32zm192-32c-17.7 0-32 14.3-32 32l0 32c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-32c0-17.7-14.3-32-32-32l-32 0zm128 32l0 32c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-32c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32zm192-32c-17.7 0-32 14.3-32 32l0 32c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-32c0-17.7-14.3-32-32-32l-32 0z",
-		}
-	)
-);
-
-const accordionIcon = wp.element.createElement(
-	wp.primitives.SVG,
-	{ xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 448 512" },
-	wp.element.createElement(
-		wp.primitives.Path,
-		{
-			d: "M0 64l448 0 0 64L0 128 0 64zM0 224l448 0 0 64L0 288l0-64zM448 384l0 64L0 448l0-64 448 0z",
-		}
-	)
-);
+import {SVG, Path} from '@wordpress/primitives';
 
 registerBlockVariation(
 	'core/cover',
@@ -33,7 +11,11 @@ registerBlockVariation(
 			align: 'full',
             className: 'dgwltd-block-cover',
 		}, 
-        icon: heroIcon, 
+        icon: (
+			<SVG role="img" viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
+				<Path d="M512 64l0 224L64 288 64 64l448 0zM64 0C28.7 0 0 28.7 0 64L0 288c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-224c0-35.3-28.7-64-64-64L64 0zM0 448l0 32c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-32c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32zm192-32c-17.7 0-32 14.3-32 32l0 32c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-32c0-17.7-14.3-32-32-32l-32 0zm128 32l0 32c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-32c0-17.7-14.3-32-32-32l-32 0c-17.7 0-32 14.3-32 32zm192-32c-17.7 0-32 14.3-32 32l0 32c0 17.7 14.3 32 32 32l32 0c17.7 0 32-14.3 32-32l0-32c0-17.7-14.3-32-32-32l-32 0z"/>
+			</SVG>
+		), 
         innerBlocks: [
 			[
 				'core/heading',
@@ -58,7 +40,11 @@ registerBlockVariation(
 	{
 		name: 'dgwltd-accordion',
 		title: 'DGW.ltd Details Accordion',
-		icon: accordionIcon,
+		icon: (
+			<SVG role="img" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+				<Path d="M0 64l448 0 0 64L0 128 0 64zM0 224l448 0 0 64L0 288l0-64zM448 384l0 64L0 448l0-64 448 0z"/>
+			</SVG>
+		), 
 		attributes: {
             className: 'dgwltd-block-accordion',
 		}, 
