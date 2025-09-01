@@ -54,7 +54,7 @@ $block_classes_arr  = array( $class_name );
 			<?php 
 			if ( $show_home ) : ?>
 			<li class="govuk-breadcrumbs__list-item">
-				<a class="govuk-breadcrumbs__link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'dgwltd' ); ?></a>
+				<a class="govuk-breadcrumbs__link" href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php esc_html_e( 'Home', 'dgwltd-plugin' ); ?></a>
 			</li>
 			<?php endif; ?>
 
@@ -84,9 +84,9 @@ $block_classes_arr  = array( $class_name );
 			<?php if ( ! is_front_page() ) : ?>
 				<li class="govuk-breadcrumbs__list-item" aria-current="page">
 				<?php if ( is_search() ) : ?>
-					<?php esc_html_e( 'Search results', 'dgwltd' ); ?>    
+					<?php esc_html_e( 'Search results', 'dgwltd-plugin' ); ?>    
 				<?php elseif ( is_404() ) : ?>
-					<?php esc_html_e( '404, page not found', 'dgwltd' ); ?>
+					<?php esc_html_e( '404, page not found', 'dgwltd-plugin' ); ?>
 				<?php elseif ( is_category() ) : ?>
 					<?php single_cat_title(); ?>
 				<?php elseif ( is_tag() ) : ?>

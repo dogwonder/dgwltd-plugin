@@ -231,7 +231,7 @@ if ($block_type == "picker"): ?>
       ?>
 		<p class="dgwltd-cards__no-results"><?php esc_html_e(
       "No posts found.",
-      "cfc"
+      "dgwltd-plugin"
   ); ?></p>
 	<?php
  endif; ?>
