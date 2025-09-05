@@ -1,1 +1,6 @@
-<?php return array('dependencies' => array(), 'version' => 'c1b293504bcf84c0a3f7');
+<?php
+//Read more about this approach https://gladdy.uk/blog/2022/07/24/creating-a-portable-slider-block-with-acf/
+return array(
+	'dependencies' => array(),
+	'version'      => '1.0.1',
+);

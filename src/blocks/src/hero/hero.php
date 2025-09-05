@@ -66,7 +66,8 @@ $block_template = array(
 	array(
 		'core/paragraph',
 		array(
-			'placeholder' => 'Add content...',
+			'placeholder' => 'Add content...', 
+			'fontSize' => 'lg'
 		),
 	),
 );

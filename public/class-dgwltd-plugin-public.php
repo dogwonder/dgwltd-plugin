@@ -102,12 +102,12 @@ class DGWLTD_PLUGIN_PUBLIC {
 			 return;
 		 }
 
-		$asset_file_path = plugin_dir_path( __DIR__ ) . 'dist/dgwltd-plugin-theme.asset.php';
+		$asset_file_path = DGWLTD_PLUGIN_BLOCKS . 'build/dgwltd-plugin-theme.asset.php';
 		if ( file_exists( $asset_file_path ) ) {
 			$asset_file = include $asset_file_path;
 			wp_enqueue_script(
 				$this->dgwltd_plugin . '-theme',
-				DGWLTD_PLUGIN_URL . 'dist/dgwltd-plugin-theme.js',
+				DGWLTD_PLUGIN_BLOCKS_URL . 'build/dgwltd-plugin-theme.js',
 				$asset_file["dependencies"],
 				$asset_file["version"],
 				true

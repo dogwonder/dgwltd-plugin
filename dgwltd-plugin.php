@@ -38,6 +38,7 @@ define( 'DGWLTD_PLUGIN_VERSION', '1.0.102' );
 define( 'DGWLTD_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'DGWLTD_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'DGWLTD_PLUGIN_BLOCKS', DGWLTD_PLUGIN_DIR . 'src/blocks/' );
+define( 'DGWLTD_PLUGIN_BLOCKS_URL', DGWLTD_PLUGIN_URL . 'src/blocks/' );
 
 /**
  * The code that runs during plugin activation.

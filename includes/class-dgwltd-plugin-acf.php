@@ -13,6 +13,14 @@ class DGWLTD_PLUGIN_ACF {
 
 	public function dgwltd_register_wp_blocks() {
 
+		//  $build_dir = DGWLTD_PLUGIN_BLOCKS . 'build';
+   		//  $manifest  = DGWLTD_PLUGIN_BLOCKS . 'build/blocks-manifest.php';
+
+		//  if ( function_exists( 'wp_register_block_types_from_metadata_collection' ) ) {
+		// 	wp_register_block_types_from_metadata_collection( $build_dir, $manifest );
+		// 	return;
+		// }
+
 		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/accordion/block.json' );
 		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/banner/block.json' );
 		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/breadcrumbs/block.json' );
@@ -21,9 +29,6 @@ class DGWLTD_PLUGIN_ACF {
 		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/embed/block.json' );
 		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/hero/block.json' );
 		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/promo-card/block.json' );
-	
-
-		//Native
 		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/picker/block.json' );
 
 	}

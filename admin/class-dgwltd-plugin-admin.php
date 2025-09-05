@@ -87,11 +87,10 @@ class DGWLTD_PLUGIN_ADMIN {
 		 * class.
 		 */
 
-		$asset_file = include plugin_dir_path(__DIR__) .
-			 "dist/dgwltd-plugin-editor.asset.php";
+		$asset_file = include DGWLTD_PLUGIN_BLOCKS . 'build/dgwltd-plugin-editor.asset.php';
 		 wp_enqueue_script(
 			 $this->dgwltd_plugin,
-			 DGWLTD_PLUGIN_URL . "dist/dgwltd-plugin-editor.js",
+			 DGWLTD_PLUGIN_BLOCKS_URL . 'build/dgwltd-plugin-editor.js',
 			 $asset_file["dependencies"],
 			 $asset_file["version"],
 			 true
@@ -104,10 +103,10 @@ class DGWLTD_PLUGIN_ADMIN {
 	 *
 	 */
 	public function dgwltd_enqueue_variations_scripts() {
-		$asset_file = include plugin_dir_path(__DIR__) . 'dist/dgwltd-plugin-variations.asset.php';
+		$asset_file = include DGWLTD_PLUGIN_BLOCKS . 'build/dgwltd-plugin-variations.asset.php';
 		 wp_enqueue_script(
 			 $this->dgwltd_plugin,
-			 DGWLTD_PLUGIN_URL . "dist/dgwltd-plugin-variations.js",
+			 DGWLTD_PLUGIN_BLOCKS_URL . 'build/dgwltd-plugin-variations.js',
 			 $asset_file["dependencies"],
 			 $asset_file["version"],
 			 true
