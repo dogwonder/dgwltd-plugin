@@ -23,9 +23,10 @@ $unique_id = wp_unique_id();
 
 // Block Fields
 $image           = get_field( 'background_image' ) ? : '';
-$image_mobile    = get_field( 'background_image_mobile' ) ? : '';
-$has_video        = get_field( 'has_video' ) ? : '';
+$has_video       = get_field( 'has_video' ) ? : '';
 $video           = get_field( 'video', false, false );
+$focus_point_x   = get_field( 'focus_point_x' ) ? : '';
+$focus_point_y    = get_field( 'focus_point_y' ) ? : '';
 
 // Block attributes (set in native block editor)
 $block_attrs  = DGWLTD_PLUGIN_PUBLIC::dgwltd_get_block_attrs( $block ) ? : '';
@@ -70,7 +71,7 @@ $block_template = array(
 			'fontSize' => 'lg'
 		),
 	),
-);
+);	
 ?>
 
 <div id="<?php echo $block_id; ?>" class="<?php echo esc_attr( implode( ' ', $block_classes_arr ) ); ?>"<?php echo ($block_styles ? ' style="' . $block_styles . '"' : ''); ?>>
@@ -78,15 +79,9 @@ $block_template = array(
 			<?php if ( ! empty( $image ) ) : ?>
 				<?php
 				$image_tiny        = $image['sizes']['dgwltd-tiny'];
-				if($image_mobile) {
-					$image_small = $image_mobile['sizes']['dgwltd-medium'];	
-					$image_small_width  = esc_attr( $image_mobile['sizes']['dgwltd-medium-width'] );
-					$image_small_height = esc_attr( $image_mobile['sizes']['dgwltd-medium-height'] );
-				} else {
-					$image_small = $image['sizes']['dgwltd-medium'];
-					$image_small_width  = esc_attr( $image['sizes']['dgwltd-medium-width'] );
-					$image_small_height = esc_attr( $image['sizes']['dgwltd-medium-height'] );
-				}
+				$image_small = $image['sizes']['dgwltd-medium'];
+				$image_small_width  = esc_attr( $image['sizes']['dgwltd-medium-width'] );
+				$image_small_height = esc_attr( $image['sizes']['dgwltd-medium-height'] );
 				$image_large       = $image['sizes']['dgwltd-large'];
 				$image_alt         = esc_attr( $image['alt'] );
 				$image_width       = esc_attr( $image['width'] );
@@ -96,6 +91,13 @@ $block_template = array(
 				?>
 				<link rel="preload" href="<?php echo $image_small; ?>" as="image" media="(max-width: 39.6875em)">
 				<link rel="preload" href="<?php echo $image_large; ?>" as="image" media="(min-width: 40.0625em)">
+				<?php if ( $focus_point_x || $focus_point_y ) : ?>
+					<style>
+					#<?php echo $block_id; ?>.dgwltd-hero .dgwltd-block__background img {
+						object-position: <?php echo $focus_point_x ? $focus_point_x . '%' : '50%'; ?> <?php echo $focus_point_y ? $focus_point_y . '%' : '50%'; ?>;
+					}
+					</style>
+				<?php endif; ?>
 				<?php if ( $overlay ) : ?>
 					<style>
 					#<?php echo $block_id; ?>.dgwltd-hero:before {
