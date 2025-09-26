@@ -71,36 +71,6 @@ class DGWLTD_PLUGIN_PUBLIC {
 	 */
 	 public function dgwltd_enqueue_theme_scripts()
 	 {
-		 // Check if any of our custom blocks are present on this page
-		 global $post;
-		 
-		 if ( ! $post || ! has_blocks( $post->post_content ) ) {
-			 return;
-		 }
-		 
-		 $plugin_blocks = [
-			 'acf/dgwltd-accordion',
-			 'acf/dgwltd-banner', 
-			 'acf/dgwltd-breadcrumbs',
-			 'acf/dgwltd-cards',
-			 'acf/dgwltd-embed',
-			 'acf/dgwltd-hero',
-			 'acf/dgwltd-picker',
-			 'acf/dgwltd-promo-card'
-		 ];
-		 
-		 $needs_scripts = false;
-		 foreach ( $plugin_blocks as $block_name ) {
-			 if ( has_block( $block_name, $post ) ) {
-				 $needs_scripts = true;
-				 break;
-			 }
-		 }
-		 
-		 // Only load if we actually have plugin blocks on this page
-		 if ( ! $needs_scripts ) {
-			 return;
-		 }
 
 		$asset_file_path = DGWLTD_PLUGIN_BLOCKS . 'build/dgwltd-plugin-theme.asset.php';
 		if ( file_exists( $asset_file_path ) ) {
