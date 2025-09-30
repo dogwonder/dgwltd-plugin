@@ -1,8 +1,31 @@
-// Import AlpineJS core 
+// Import AlpineJS core
 import Alpine from 'alpinejs';
+import intersect from '@alpinejs/intersect';
+window.Alpine = Alpine;
+Alpine.plugin(intersect);
 
-//Optional import AlpineJS plugins
-//Import focus from '@alpinejs/focus'
+// Sentinel watcher component
+/*
+.dgwltd-content-wrapper:has(.dgwltd-hero), 
+.dgwltd-content-wrapper:has(.dgwltd-block-cover) {
+  .sentinel {
+    position:absolute;
+    z-index:-1;
+    height: var(--hero-height, 70vh); 
+    pointer-events: none;
+  }
+}
+*/
+
+// Sentinel watcher component
+Alpine.data('sentinelWatcher', () => ({
+  toggleHeader(isPastSentinal) {
+    // console.log('toggleHeader called:', isPastSentinal);
+    document.documentElement.classList.toggle('is-scrolled', isPastSentinal);
+  }
+}));
+
+Alpine.start();
 
 // Import Prism.js
 import 'prismjs';
@@ -19,13 +42,7 @@ import 'prismjs/components/prism-twig';
 //Import motion animation library
 import { animate, scroll } from "motion";
 
-window.Alpine = Alpine;
-Alpine.start();
-
-//Import cally https://wicky.nillia.ms/cally/
-// import "cally";
-
-// CSS selector
+// Motion functions
 animate(
     ".logo",
     { x: 20, rotate: 10 },
@@ -43,3 +60,6 @@ animate(
         }
     )
 })
+
+//Import cally https://wicky.nillia.ms/cally/
+// import "cally";
