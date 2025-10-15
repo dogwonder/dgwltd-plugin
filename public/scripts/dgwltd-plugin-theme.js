@@ -5,19 +5,6 @@ window.Alpine = Alpine;
 Alpine.plugin(intersect);
 
 // Sentinel watcher component
-/*
-.dgwltd-content-wrapper:has(.dgwltd-hero), 
-.dgwltd-content-wrapper:has(.dgwltd-block-cover) {
-  .sentinel {
-    position:absolute;
-    z-index:-1;
-    height: var(--hero-height, 70vh); 
-    pointer-events: none;
-  }
-}
-*/
-
-// Sentinel watcher component
 Alpine.data('sentinelWatcher', () => ({
   toggleHeader(isPastSentinal) {
     // console.log('toggleHeader called:', isPastSentinal);
