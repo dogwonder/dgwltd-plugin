@@ -3,7 +3,7 @@ $base_url = get_pagenum_link(1);
 //If there's only one page, don't continue
 if ( $total_pages > 1 ) :
 ?>
-<nav class="dgwltd-pagination govuk-pagination" aria-label="Pagination">
+<nav class="dgwltd-pagination govuk-pagination flex-center" aria-label="Pagination">
 <ul class="govuk-pagination__list">
 	<?php
  // If current page is not the first one
@@ -35,7 +35,7 @@ if ( $total_pages > 1 ) :
   }
   for ($i = $start_page; $i <= $end_page; $i++) { ?>
 			<li class="govuk-pagination__item<?php echo $paged === $i
-     ? ' govuk-pagination__item--active'
+     ? ' govuk-pagination__item--current'
      : ''; ?>">
 				<a href="<?php echo get_pagenum_link($i); ?>" class="govuk-pagination__link">
 					<?php echo $i; ?>
@@ -57,7 +57,7 @@ if ( $total_pages > 1 ) :
  else:
    for ($i = 1; $i <= $total_pages; $i++): ?>
 		<li class="govuk-pagination__item<?php echo $paged == $i
-    ? ' govuk-pagination__item--active'
+    ? ' govuk-pagination__item--current'
     : ''; ?>">
 			<a href="<?php echo get_pagenum_link($i); ?>" class="govuk-pagination__link">
 				<?php echo $i; ?>
