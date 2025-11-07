@@ -19,11 +19,10 @@ $image_alt = get_post_meta(
     true
 );
 $has_image = has_post_thumbnail($card) ? true : false;
-$is_featured = ( $featured == $card ) ? true : false;
 ?>
 <div class="dgwltd-card <?php echo has_post_thumbnail( $card )
     ? " has-post-thumbnail"
-    : ""; ?> card-<?php echo $card_index; ?><?php echo ( $is_featured ) ? ' is-featured' : ''; ?>" data-url="<?php echo esc_url( get_permalink( $card ) ); ?>"> 
+    : ""; ?> card-<?php echo $card_index; ?>" data-url="<?php echo esc_url( get_permalink( $card ) ); ?>"> 
 	<div class="dgwltd-card__inner">
 
 	<?php if ($has_image): ?>

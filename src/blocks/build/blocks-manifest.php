@@ -83,7 +83,6 @@ return array(
 		'title' => 'DGW.ltd Cards',
 		'description' => 'Cards block',
 		'style' => 'file:./index.css',
-		'editorScript' => 'file:./index.js',
 		'category' => 'theme',
 		'icon' => 'tagcloud',
 		'apiVersion' => 3,
@@ -204,7 +203,6 @@ return array(
 			)
 		),
 		'textdomain' => 'dgwltd-plugin',
-		'editorScript' => 'file:./index.js',
 		'editorStyle' => 'file:./index.css',
 		'style' => 'file:./style-index.css',
 		'render' => 'file:./render.php',

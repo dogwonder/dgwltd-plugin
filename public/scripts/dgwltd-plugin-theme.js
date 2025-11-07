@@ -48,5 +48,11 @@ animate(
     )
 })
 
+//Import webawesome
+// import '@awesome.me/webawesome/dist/components/intersection-observer/intersection-observer.js';
+// import '@awesome.me/webawesome/dist/components/tooltip/tooltip.js';
+// import '@awesome.me/webawesome/dist/components/carousel/carousel.js';
+
+
 //Import cally https://wicky.nillia.ms/cally/
 // import "cally";

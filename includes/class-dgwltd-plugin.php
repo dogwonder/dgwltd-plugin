@@ -195,8 +195,6 @@ class Dgwltd_Site {
 		$this->loader->add_filter( 'acf/settings/save_json/type=acf-ui-options-page', $plugin_acf, 'dgwltd_acf_json_save_path_for_option_pages' );
 		$this->loader->add_filter( 'acf/settings/save_json/type=acf-post-type', $plugin_acf, 'dgwltd_acf_json_save_path_for_post_types' );
 		$this->loader->add_filter( 'acf/settings/save_json/type=acf-taxonomy', $plugin_acf, 'dgwltd_acf_json_save_path_for_taxonomies' );
-		$this->loader->add_filter( 'acf/json/save_file_name', $plugin_acf, 'dgwltd_acf_json_filename', 10, 3 );
-		$this->loader->add_filter('acf/prepare_field/name=featured_card_id', $plugin_acf, 'dgwltd_acf_field_wrapper_class');
 
 
 	}

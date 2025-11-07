@@ -59,13 +59,6 @@ if (!empty($cards_type) && $cards_type !== "default") {
     $grid_classes .= " cards-type--$cards_type";
 }
 
-//Custom fields
-$featured = get_field( 'featured_card' ) ? : '';
-$has_featured = get_field("has_featured") ? : ''; 
-if (!empty($has_featured)) {
-    $grid_classes .= " has-featured";
-}
-
 // Additional logic if needed
 switch ($post_type) {
     
