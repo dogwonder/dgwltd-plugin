@@ -34,43 +34,6 @@ registerBlockVariation(
 	}
 );
 
-// Register a group block variation
-registerBlockVariation(
-	'core/group',
-	{
-		name: 'dgwltd-accordion',
-		title: 'DGW.ltd Details Accordion',
-		icon: (
-			<SVG role="img" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
-				<Path d="M0 64l448 0 0 64L0 128 0 64zM0 224l448 0 0 64L0 288l0-64zM448 384l0 64L0 448l0-64 448 0z"/>
-			</SVG>
-		), 
-		attributes: {
-            className: 'dgwltd-block-accordion',
-		}, 
-		innerBlocks: [
-			[
-				'core/paragraph', 
-				{
-					content: 'Show all sections'
-				}
-			], 
-			[
-				'core/details'
-			], 
-			[
-				'core/details'
-			], 
-			[
-				'core/details'
-			], 
-			[
-				'core/details'
-			]
-		]
-	}
-);
-
 /**
  * Register a paragraph block variation with meta binding
  */

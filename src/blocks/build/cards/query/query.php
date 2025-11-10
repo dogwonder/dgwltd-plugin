@@ -32,8 +32,33 @@ $cards_type = get_field("cards_type") ?: "default";
 
 // print_r($cards_type);
 
-//Picker params
+// NOTE: If picker field is empty in admin preview but works on frontend,
+// it's likely due to WP CLI updates corrupting ACF field references.
+// This happens when using 'wp post meta update' instead of update_field().
+// Uncomment the code below to fix preview rendering as a temporary workaround.
+//
+// Proper fix: Use update_field() in WP CLI scripts and rebuild field references
+// See: https://www.advancedcustomfields.com/resources/update_field/
+
+/*
+if ($is_preview && isset($block['data']['picker']) && !empty($block['data']['picker'])) {
+    // In preview mode, picker contains post IDs - convert to post objects
+    $picker_ids = $block['data']['picker'];
+    $picker = array();
+    foreach ($picker_ids as $post_id) {
+        $post_obj = get_post($post_id);
+        if ($post_obj) {
+            $picker[] = $post_obj;
+        }
+    }
+} else {
+    $picker = get_field("picker") ?: "";
+}
+*/
+
+// Current code (works for frontend and normal admin saves):
 $picker = get_field("picker") ?: "";
+
 if ($picker) {
     $cards_count = count($picker) ? count($picker) : "";
 }

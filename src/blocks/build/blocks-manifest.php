@@ -1,25 +1,6 @@
 <?php
 // This file is generated. Do not modify it manually.
 return array(
-	'accordion' => array(
-		'name' => 'acf/dgwltd-accordion',
-		'title' => 'DGW.ltd Accordion',
-		'description' => 'Show and hide sections block',
-		'style' => 'file:./accordion.css',
-		'category' => 'theme',
-		'icon' => 'menu',
-		'apiVersion' => 3,
-		'supports' => array(
-			'jsx' => true,
-			'align' => false,
-			'anchor' => true
-		),
-		'acf' => array(
-			'mode' => 'edit',
-			'renderTemplate' => 'accordion.php'
-		),
-		'align' => 'full'
-	),
 	'banner' => array(
 		'name' => 'acf/dgwltd-banner',
 		'title' => 'DGW.ltd Banner',

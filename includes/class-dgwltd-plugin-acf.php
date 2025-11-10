@@ -21,7 +21,6 @@ class DGWLTD_PLUGIN_ACF {
 		// 	return;
 		// }
 
-		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/accordion/block.json' );
 		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/banner/block.json' );
 		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/breadcrumbs/block.json' );
 		register_block_type( DGWLTD_PLUGIN_BLOCKS . 'build/cards/block.json' );
