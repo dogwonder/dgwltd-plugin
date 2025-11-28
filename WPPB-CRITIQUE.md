@@ -231,6 +231,7 @@ require DGWLTD_PLUGIN_DIR . 'public/class-dgwltd-plugin-public.php';
 require DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-acf.php';
 require DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-blocks.php';
 require DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-rules.php';
+require DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin-taxonomy.php';
 require DGWLTD_PLUGIN_DIR . 'includes/class-dgwltd-plugin.php';
 ```
 
