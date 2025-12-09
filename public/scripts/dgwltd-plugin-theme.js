@@ -1,15 +1,25 @@
 // Import AlpineJS core
 import Alpine from 'alpinejs';
-import intersect from '@alpinejs/intersect';
 window.Alpine = Alpine;
-Alpine.plugin(intersect);
 
 // Sentinel watcher component
 Alpine.data('sentinelWatcher', () => ({
-  toggleHeader(isPastSentinal) {
-    // console.log('toggleHeader called:', isPastSentinal);
-    document.documentElement.classList.toggle('is-scrolled', isPastSentinal);
-  }
+  init() {
+    const sentinel = document.getElementById('sentinel');
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const isPastHeader = entry.boundingClientRect.top < 0 && !entry.isIntersecting;
+        document.documentElement.classList.toggle('is-scrolled', isPastHeader);
+      },
+      {
+        root: null,
+        threshold: 0,
+        rootMargin: '0px 0px -1px 0px',
+      }
+    );
+    observer.observe(sentinel);
+  },
 }));
 
 Alpine.start();

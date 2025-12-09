@@ -212,11 +212,8 @@ return array(
 			)
 		),
 		'acf' => array(
-			'blockVersion' => 3,
 			'mode' => 'preview',
-			'renderTemplate' => 'promo-card.php',
-			'hideFieldsInSidebar' => true,
-			'autoInlineEditing' => true
+			'renderTemplate' => 'promo-card.php'
 		),
 		'styles' => array(
 			array(
